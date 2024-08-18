@@ -9,5 +9,4 @@ enum CacheKeys {
   logged_in,
   login_email,
   login_password,
-  // fcm,
 }

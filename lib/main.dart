@@ -90,7 +90,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                       .map((language) => Locale(language.name))
                       .toList(),
                   locale: Locale(Provider.of<LanguageProvider>(context).lang),
-                  home: ZoomDrawerAnimation(),
+                  home: AuthScreen(),
                 );
               },
             ),

@@ -1,6 +1,7 @@
 {
     "welcomeBack": "مرحبًا بعودتك!",
     "createAnAccount": "إنشاء حساب",
+    "createAccount": "إنشاء حساب",
     "pleaseEnterYourFirstName": "يرجى إدخال اسمك الأول",
     "pleaseEnterYourLastName": "يرجى إدخال اسمك الأخير",
     "firstName": "الاسم الأول",
@@ -47,5 +48,9 @@
     "searchProduct": "البحث عن اي منتج",
     "unknownCategory": "فئة غير معروفة",
     "loading":"يحمل",
-    "noProductFoundWithThisName": "لا يوجد منتج بهذا الاسم"
+    "noProductFoundWithThisName": "لا يوجد منتج بهذا الاسم",
+    "searchCategory":"البحث عن اي فئة",
+    "emailAlreadyInUse": "البريد الإلكتروني مسجل بالفعل",
+    "operationFailed": " فشل العملية"
+
     }

@@ -37,4 +37,67 @@ Future<List<dynamic>> getProducts({int offset = 0, int limit = 10}) async {
       throw Exception('Failed to load products');
     }
   }
+  Future<Map<String, dynamic>> loginUser(String email, String password) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/auth/login'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({
+        'email': email,
+        'password': password,
+      }),
+    );
+
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return data; // Access and refresh tokens
+    } else {
+      throw Exception('Failed to login');
+    }
+  }
+    Future<Map<String, dynamic>> registerUser(String name, String email, String password) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/users/'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({
+        'name': name,
+        'email': email,
+        'password': password,
+        'avatar': 'https://picsum.photos/800',
+      }),
+    );
+
+    if (response.statusCode == 201) {
+      final data = json.decode(response.body);
+      return data;
+    } else {
+      throw Exception('Failed to register user');
+    }
+  }
+Future<bool> isEmailAvailable(String email) async {
+  try {
+    final response = await http.post(
+      Uri.parse('$baseUrl/users/is-available'),
+      headers: {'Content-Type': 'application/json'},
+      body: json.encode({'email': email}),
+    );
+
+    // Handle status codes 200 and 201
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final data = json.decode(response.body);
+      print('API Response: $data'); // Debugging line
+
+      if (data.containsKey('isAvailable')) {
+        return data['isAvailable'];
+      } else {
+        throw Exception('Invalid response format');
+      }
+    } else {
+      throw Exception('Failed to check email availability. Status code: ${response.statusCode}');
+    }
+  } catch (error) {
+    print('Failed to check email availability: $error'); // Debugging line
+    throw Exception('Failed to check email availability');
+  }
+}
+
 }

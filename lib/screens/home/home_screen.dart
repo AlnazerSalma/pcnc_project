@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/ApiService/api_service.dart';
+import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/screens/category/all_categories_screen.dart';
 import 'package:pcnc/screens/category/category_products_screen.dart';
 import 'package:pcnc/widgets/cards/product_card.dart';
 import 'package:pcnc/widgets/customButton.dart';
-import 'package:pcnc/widgets/search_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+
 class _HomeScreenState extends State<HomeScreen> {
   late Future<List<dynamic>> categories;
   late Future<List<dynamic>> products;
-  String searchQuery = '';
 
   @override
   void initState() {
@@ -46,30 +46,15 @@ class _HomeScreenState extends State<HomeScreen> {
           } else {
             final categoryList = snapshot.data![0] as List<dynamic>;
             final productList = snapshot.data![1] as List<dynamic>;
-            final filteredCategories = categoryList.where((category) {
-              if (category is Map<String, dynamic>) {
-                final name = category['name']?.toLowerCase() ?? '';
-                final query = searchQuery.toLowerCase();
-                return name.contains(query);
-              }
-              return false;
-            }).toList();
 
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SearchWidget(
-                    hintText: appLocale.searchProduct,
-                    onChanged: (query) {
-                      setState(() {
-                        searchQuery = query;
-                      });
-                    },
-                  ),
+                  40.height,
                   Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                        EdgeInsets.symmetric(horizontal: 20.w,),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -85,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => AllCategoriesScreen(
+                                 builder: (context) => AllCategoriesScreen(
                                   categories: categoryList,
                                 ),
                               ),
@@ -97,13 +82,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Container(
-                    height: 160.h,
+                    height: 170.h,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: filteredCategories.length,
+                      itemCount: categoryList.length,
                       itemBuilder: (context, index) {
                         final category =
-                            filteredCategories[index] as Map<String, dynamic>;
+                            categoryList[index] as Map<String, dynamic>;
                         final categoryName = category['name'] ?? 'Unknown';
                         final categoryImage = category['image'];
 

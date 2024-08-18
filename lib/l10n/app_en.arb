@@ -1,6 +1,7 @@
 {
-    "welcomeBack": "Welcome Back!",
-    "createAnAccount": "Create an account",
+    "welcomeBack": "Welcome \n Back!",
+    "createAnAccount": "Create an \n account",
+    "createAccount": "Create account",
     "pleaseEnterYourFirstName": "Please enter your first name",
     "pleaseEnterYourLastName": "Please enter your last name",
     "firstName": "First Name",
@@ -13,8 +14,6 @@
     "renterPassword": "Confirm Password",
     "passwordsDoNotMatch": "Passwords do not match",
     "passwordMustBeAtLeast6CharactersLong": "Password must be at least 6 characters long",
-    "phoneNumber": "Phone Number",
-    "pleaseEnterYourPhoneNumber": "Please enter your phone number",
     "forgotPasswordQ": "Forgot password?",
     "login": "Login",
     "signUp": "Sign Up",
@@ -47,6 +46,9 @@
     "searchProduct": "Search any Product.. ",
     "unknownCategory": "Unknown Category",
     "loading":"loading",
-    "noProductFoundWithThisName": "Oops, No product found with this name"
+    "noProductFoundWithThisName": "Oops, No product found with this name",
+    "searchCategory":"Search any category",
+    "emailAlreadyInUse":"Email already in use",
+    "operationFailed": "Operation failed"
 
 }

@@ -1,5 +1,6 @@
 import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/screens/auth/auth.dart';
+import 'package:pcnc/util/color_palette.dart';
 import 'package:pcnc/widgets/build_input_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -97,7 +98,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: Color(0xFF5BCECA).withOpacity(0.5),
+                            color: kbuttoncolorColor.withOpacity(0.8),
                             spreadRadius: 5.r,
                             blurRadius: 7.r,
                             offset: Offset(0, 3),

@@ -20,104 +20,108 @@ class _MenuScreenState extends State<MenuScreen> {
     // Fetch localized strings
     final appLocale = AppLocalizations.of(context)!;
 
-    return Container(
-      width: double.infinity,
-      color: Theme.of(context).colorScheme.primary,
-      child: Align(
-        alignment: AlignmentDirectional.centerStart,
+    return SizedBox(
+      child: SingleChildScrollView(
         child: Container(
-          width: widget.drawerLength,
+          width: double.infinity,
           color: Theme.of(context).colorScheme.primary,
-          child: Column(
-            children: [
-              Container(
-                height: 250,
-                padding: EdgeInsets.all(20),
-                child: Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      UserAvatarDisplay(),
-                      10.height,
-                      Text(
-                        "yourName",
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.surface,
-                        ),
+          child: Align(
+            alignment: AlignmentDirectional.centerStart,
+            child: Container(
+              width: widget.drawerLength,
+              color: Theme.of(context).colorScheme.primary,
+              child: Column(
+                children: [
+                  Container(
+                    height: 250,
+                    padding: EdgeInsets.all(20),
+                    child: Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          UserAvatarDisplay(),
+                          10.height,
+                          Text(
+                            "yourName",
+                            style: TextStyle(
+                              fontSize: 18.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).colorScheme.surface,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.home,
-                  color: Theme.of(context).colorScheme.surface,
-                ),
-                title: Text(
-                  appLocale.home,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.surface,
+                  ListTile(
+                    leading: Icon(
+                      Icons.home,
+                      color: Theme.of(context).colorScheme.surface,
+                    ),
+                    title: Text(
+                      appLocale.home,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.surface,
+                      ),
+                    ),
+                    onTap: () => context.read<PageProvider>().onTapSelectedIndex(0),
                   ),
-                ),
-                onTap: () => context.read<PageProvider>().onTapSelectedIndex(0),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.favorite,
-                  color: Theme.of(context).colorScheme.surface,
-                ),
-                title: Text(
-                  appLocale.favorite,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.surface,
+                  ListTile(
+                    leading: Icon(
+                      Icons.favorite,
+                      color: Theme.of(context).colorScheme.surface,
+                    ),
+                    title: Text(
+                      appLocale.favorite,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.surface,
+                      ),
+                    ),
+                    onTap: () => context.read<PageProvider>().onTapSelectedIndex(1),
                   ),
-                ),
-                onTap: () => context.read<PageProvider>().onTapSelectedIndex(1),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.search,
-                  color: Theme.of(context).colorScheme.surface,
-                ),
-                title: Text(
-                  appLocale.search,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.surface,
+                  ListTile(
+                    leading: Icon(
+                      Icons.search,
+                      color: Theme.of(context).colorScheme.surface,
+                    ),
+                    title: Text(
+                      appLocale.search,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.surface,
+                      ),
+                    ),
+                    onTap: () => context.read<PageProvider>().onTapSelectedIndex(2),
                   ),
-                ),
-                onTap: () => context.read<PageProvider>().onTapSelectedIndex(2),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.settings,
-                  color: Theme.of(context).colorScheme.surface,
-                ),
-                title: Text(
-                  appLocale.settings,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.surface,
+                  ListTile(
+                    leading: Icon(
+                      Icons.settings,
+                      color: Theme.of(context).colorScheme.surface,
+                    ),
+                    title: Text(
+                      appLocale.settings,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.surface,
+                      ),
+                    ),
+                    onTap: () => context.read<PageProvider>().onTapSelectedIndex(3),
                   ),
-                ),
-                onTap: () => context.read<PageProvider>().onTapSelectedIndex(3),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.exit_to_app,
-                  color: Theme.of(context).colorScheme.surface,
-                ),
-                title: Text(
-                  appLocale.exit,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.surface,
+                  ListTile(
+                    leading: Icon(
+                      Icons.exit_to_app,
+                      color: Theme.of(context).colorScheme.surface,
+                    ),
+                    title: Text(
+                      appLocale.exit,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.surface,
+                      ),
+                    ),
+                    onTap: () {},
                   ),
-                ),
-                onTap: () {},
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

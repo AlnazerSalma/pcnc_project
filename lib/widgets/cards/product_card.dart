@@ -1,6 +1,8 @@
+import 'dart:async';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter/services.dart';
 import 'package:pcnc/util/color_palette.dart';
 
 class ProductCard extends StatelessWidget {
@@ -44,35 +46,41 @@ class ProductCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (images.isNotEmpty)
-              ClipRRect(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(12.0)),
-                child: Image.network(
-                  images.first,
-                  width: double.infinity,
-                  height: 120.h,
-                  fit: BoxFit.fill,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Image.asset(
-                      'assets/images/image-not-available.png',
-                      width: double.infinity,
-                      height: 120.h,
-                      fit: BoxFit.fill,
-                    );
-                  },
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) {
-                      return child;
-                    } else {
-                      return Center(
-                        child: CircularProgressIndicator(
-                          value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                                  (loadingProgress.expectedTotalBytes ?? 1)
-                              : null,
-                        ),
+              GestureDetector(
+                onTap: () {
+                  _showFullImage(context, images.first);
+                },
+                child: ClipRRect(
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(12.0)),
+                  child: Image.network(
+                    images.first,
+                    width: double.infinity,
+                    height: 120.h,
+                    fit: BoxFit.fill,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                        'assets/images/image-not-available.png',
+                        width: double.infinity,
+                        height: 120.h,
+                        fit: BoxFit.fill,
                       );
-                    }
-                  },
+                    },
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      } else {
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    (loadingProgress.expectedTotalBytes ?? 1)
+                                : null,
+                          ),
+                        );
+                      }
+                    },
+                  ),
                 ),
               ),
             Padding(
@@ -151,84 +159,179 @@ class ProductCard extends StatelessWidget {
   }
 
   void _showProductDetailsDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0.r),
-        ),
-        content: Container(
-          width: MediaQuery.of(context).size.width * 0.9.w,
-          constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height * 0.6.h,
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0.r),
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (images.isNotEmpty)
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Image.network(
-                      images.first,
-                      width: double.infinity,
-                      height: 200.h,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Image.asset(
-                          'assets/images/image-not-available.png',
-                          width: double.infinity,
-                          height: 200.h,
-                          fit: BoxFit.cover,
-                        );
-                      },
+          content: Container(
+            width: MediaQuery.of(context).size.width * 0.9.w,
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.6.h,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (images.isNotEmpty)
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Image.network(
+                        images.first,
+                        width: double.infinity,
+                        height: 200.h,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            'assets/images/image-not-available.png',
+                            width: double.infinity,
+                            height: 200.h,
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      ),
+                    ),
+                  SizedBox(height: 10.h),
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                SizedBox(height: 10.h),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.bold,
+                  SizedBox(height: 10.h),
+                  Text(
+                    description,
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                    ),
                   ),
-                ),
-                SizedBox(height: 10.h),
-                Text(
-                  description,
-                  style: TextStyle(
-                    fontSize: 16.sp,
+                  SizedBox(height: 10.h),
+                  Text(
+                    '\$${price}',
+                    style: TextStyle(
+                      fontSize: 22.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.secondary,
+                    ),
                   ),
-                ),
-                SizedBox(height: 10.h),
-                Text(
-                  '\$${price}',
-                  style: TextStyle(
-                    fontSize: 22.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.secondary,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(
-              'Close',
-              style: TextStyle(
-                fontSize: 16.sp,
-                color:kbuttoncolorColor,
+                ],
               ),
             ),
           ),
-        ],
-      );
-    },
-  );
-}
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Close',
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  color: kbuttoncolorColor,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showFullImage(BuildContext context, String imageUrl) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          insetPadding: EdgeInsets.all(0),
+          backgroundColor: Colors.transparent,
+          child: FutureBuilder(
+            future: _getImageSize(imageUrl),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Stack(
+                  children: [
+                    // Blurred background
+                    Positioned.fill(
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                        child: Container(
+                          color: Colors.black
+                              .withOpacity(0.5), // Semi-transparent overlay
+                        ),
+                      ),
+                    ),
+                    // Error message
+                    Center(
+                      child: Text(
+                        'Error loading image',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              } else {
+                final imageSize = snapshot.data as Size?;
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Stack(
+                    children: [
+                      // Blurred background
+                      Positioned.fill(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                          child: Container(
+                            color: Colors.black
+                                .withOpacity(0.5), // Semi-transparent overlay
+                          ),
+                        ),
+                      ),
+                      // Image
+                      Center(
+                        child: Image.network(
+                          imageUrl,
+                          width: imageSize?.width ?? double.infinity,
+                          height: imageSize?.height ?? double.infinity,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Future<Size?> _getImageSize(String imageUrl) async {
+    final Completer<Size> completer = Completer();
+    final Image image = Image.network(imageUrl);
+    image.image.resolve(ImageConfiguration()).addListener(
+          ImageStreamListener(
+            (ImageInfo info, bool synchronousCall) {
+              completer.complete(Size(
+                info.image.width.toDouble(),
+                info.image.height.toDouble(),
+              ));
+            },
+            onError: (dynamic error, StackTrace? stackTrace) {
+              completer.completeError(error);
+            },
+          ),
+        );
+    return completer.future;
+  }
 }
