@@ -1,11 +1,8 @@
 import 'package:pcnc/cache/cache_controller.dart';
-import 'package:pcnc/drawer/zoom_drawer.dart';
 import 'package:pcnc/enums.dart';
 import 'package:pcnc/helpers/restart_app.dart';
 import 'package:pcnc/providers/lang_provider.dart';
 import 'package:pcnc/providers/page_provider.dart';
-import 'package:pcnc/screens/auth/auth.dart';
-import 'package:pcnc/screens/home/home_screen.dart';
 import 'package:pcnc/screens/splash.dart';
 import 'package:pcnc/util/theme.dart';
 import 'package:pcnc/providers/theme_provider.dart';
@@ -90,7 +87,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                       .map((language) => Locale(language.name))
                       .toList(),
                   locale: Locale(Provider.of<LanguageProvider>(context).lang),
-                  home: AuthScreen(),
+                  home: const SplashScreen(),
                 );
               },
             ),

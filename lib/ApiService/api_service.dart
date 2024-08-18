@@ -95,9 +95,24 @@ Future<bool> isEmailAvailable(String email) async {
       throw Exception('Failed to check email availability. Status code: ${response.statusCode}');
     }
   } catch (error) {
-    print('Failed to check email availability: $error'); // Debugging line
+    print('Failed to check email availability: $error');
     throw Exception('Failed to check email availability');
   }
 }
+Future<Map<String, dynamic>?> getProfile(String token) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/auth/profile'),
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Failed to load profile');
+    }
+  }
+
 
 }
