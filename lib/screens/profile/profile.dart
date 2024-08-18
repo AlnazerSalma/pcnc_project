@@ -27,105 +27,119 @@ class _ProfileScreenState extends State<ProfileScreen> with NavigatorHelper {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: Size(375, 790));
-        final themeProvider = Provider.of<ThemeProvider>(context);
-        return Consumer<LanguageProvider>(
-          builder: (context, lang, child) {
-            return Scaffold(
-              body: SingleChildScrollView(
-                child: Container(
-                  margin: EdgeInsets.only(bottom: 30.0.h, top: 70.h),
-                  child: Padding(
-                    padding: EdgeInsets.all(20.0.dg),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              ListTileItem(
-                                title: themeProvider.themeDataStyle ==
-                                        ThemeDataStyle.dark
-                                    ? appLocale.darkMode
-                                    : appLocale.lightMode,
-                                icon: themeProvider.themeDataStyle ==
-                                        ThemeDataStyle.dark
-                                    ? Icons.nightlight_round
-                                    : Icons.wb_sunny,
-                                toggle: SwitchThemeWidget(),
-                                // Switch(
-                                //   value: themeProvider.themeDataStyle ==
-                                //       ThemeDataStyle.dark,
-                                //   onChanged: (bool isOn) {
-                                //     themeProvider.changeTheme();
-                                //   },
-                                //   activeColor: Theme.of(context)
-                                //       .colorScheme
-                                //       .onBackground,
-                                //   inactiveTrackColor: kGrey2,
-                                // ),
-                              ),
-                              20.height,
-                              ListTileItem(
-                                title: appLocale.language,
-                                icon: Icons.language,
-                                onTap: () => _showLanguages(lang),
-                                toggle: Text(
-                                  lang.languageName(
-                                      locale: AppLanguages.values.firstWhere(
-                                          (_) => _.name == lang.lang)),
-                                  style: TextStyle(
-                                      color: Theme.of(context).colorScheme.surface, fontSize: 12.sp),
-                                ),
-                              ),
-                              20.height,
-                              InkWell(
-                                onTap: () async {},
-                                child: Container(
-                                  width: 325.w,
-                                  height: 61.h,
-                                  decoration: ShapeDecoration(
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(24.r),
-                                    ),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0.dg),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Icon(
-                                          Icons.exit_to_app,
-                                          color: Theme.of(context).colorScheme.surface,
-                                          size: 25.dm,
-                                        ),
-                                        10.width,
-                                        Text(
-                                          appLocale.logout,
-                                          style: TextStyle(
-                                            color: Theme.of(context).colorScheme.surface,
-                                            fontSize: 16.sp,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    return Consumer<LanguageProvider>(
+      builder: (context, lang, child) {
+        return Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              appLocale.profile,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18.sp,
+              ),
+            ),
+            backgroundColor: Theme.of(context).colorScheme.background,
+            foregroundColor: Theme.of(context).colorScheme.surface,
+          ),
+          body: SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.only(bottom: 30.0.h, top: 70.h),
+              child: Padding(
+                padding: EdgeInsets.all(20.0.dg),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          ListTileItem(
+                            title: themeProvider.themeDataStyle ==
+                                    ThemeDataStyle.dark
+                                ? appLocale.darkMode
+                                : appLocale.lightMode,
+                            icon: themeProvider.themeDataStyle ==
+                                    ThemeDataStyle.dark
+                                ? Icons.nightlight_round
+                                : Icons.wb_sunny,
+                            toggle: SwitchThemeWidget(),
+                            // Switch(
+                            //   value: themeProvider.themeDataStyle ==
+                            //       ThemeDataStyle.dark,
+                            //   onChanged: (bool isOn) {
+                            //     themeProvider.changeTheme();
+                            //   },
+                            //   activeColor: Theme.of(context)
+                            //       .colorScheme
+                            //       .onBackground,
+                            //   inactiveTrackColor: kGrey2,
+                            // ),
                           ),
-                        ),
-                      ],
+                          20.height,
+                          ListTileItem(
+                            title: appLocale.language,
+                            icon: Icons.language,
+                            onTap: () => _showLanguages(lang),
+                            toggle: Text(
+                              lang.languageName(
+                                  locale: AppLanguages.values
+                                      .firstWhere((_) => _.name == lang.lang)),
+                              style: TextStyle(
+                                  color: Theme.of(context).colorScheme.surface,
+                                  fontSize: 12.sp),
+                            ),
+                          ),
+                          20.height,
+                          InkWell(
+                            onTap: () async {},
+                            child: Container(
+                              width: 325.w,
+                              height: 61.h,
+                              decoration: ShapeDecoration(
+                                color: Theme.of(context).colorScheme.primary,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(24.r),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(8.0.dg),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Icons.exit_to_app,
+                                      color:
+                                          Theme.of(context).colorScheme.surface,
+                                      size: 25.dm,
+                                    ),
+                                    10.width,
+                                    Text(
+                                      appLocale.logout,
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .surface,
+                                        fontSize: 16.sp,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
-              backgroundColor: Theme.of(context).colorScheme.background,
-            );
-          },
+            ),
+          ),
+          backgroundColor: Theme.of(context).colorScheme.background,
+        );
+      },
     );
   }
 
@@ -135,14 +149,10 @@ class _ProfileScreenState extends State<ProfileScreen> with NavigatorHelper {
       backgroundColor: Colors.transparent,
       builder: (context) {
         return BackdropFilter(
-          filter:
-              ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
           child: Container(
             decoration: BoxDecoration(
-              color: Theme.of(context)
-                  .colorScheme
-                  .primary
-                  .withOpacity(0.9),
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.9),
               borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
             ),
             child: StatefulBuilder(
