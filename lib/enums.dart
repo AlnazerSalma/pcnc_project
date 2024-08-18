@@ -8,5 +8,5 @@ enum CacheKeys {
   token,
   logged_in,
   login_email,
-  login_password,
+  login_password, userName,
 }

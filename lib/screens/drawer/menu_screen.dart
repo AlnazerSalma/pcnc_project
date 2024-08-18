@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pcnc/ApiService/api_service.dart';
 import 'package:pcnc/cache/cache_controller.dart';
+import 'package:pcnc/enums.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/providers/page_provider.dart';
 import 'package:pcnc/screens/auth/auth.dart';
@@ -55,76 +57,89 @@ class _MenuScreenState extends State<MenuScreen> {
                   ),
                 ),
               ),
-              ListTile(
-                leading: Icon(
-                  Icons.home,
-                  color: Theme.of(context).colorScheme.surface,
-                ),
-                title: Text(
-                  appLocale.home,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.surface,
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ListTile(
+                        leading: Icon(
+                          Icons.home,
+                          color: Theme.of(context).colorScheme.surface,
+                        ),
+                        title: Text(
+                          appLocale.home,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                        ),
+                        onTap: () =>
+                            context.read<PageProvider>().onTapSelectedIndex(0),
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.favorite,
+                          color: Theme.of(context).colorScheme.surface,
+                        ),
+                        title: Text(
+                          appLocale.favorite,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                        ),
+                        onTap: () =>
+                            context.read<PageProvider>().onTapSelectedIndex(1),
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.search,
+                          color: Theme.of(context).colorScheme.surface,
+                        ),
+                        title: Text(
+                          appLocale.search,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                        ),
+                        onTap: () =>
+                            context.read<PageProvider>().onTapSelectedIndex(2),
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.settings,
+                          color: Theme.of(context).colorScheme.surface,
+                        ),
+                        title: Text(
+                          appLocale.settings,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                        ),
+                        onTap: () =>
+                            context.read<PageProvider>().onTapSelectedIndex(3),
+                      ),
+                      ListTile(
+                        leading: Icon(
+                          Icons.exit_to_app,
+                          color: Theme.of(context).colorScheme.surface,
+                        ),
+                        title: Text(
+                          appLocale.exit,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.surface,
+                          ),
+                        ),
+                        onTap: () async {
+                          await CacheController().logout();
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const AuthScreen()),
+                            (Route<dynamic> route) => false,
+                          );
+                        },
+                      ),
+                    ],
                   ),
                 ),
-                onTap: () => context.read<PageProvider>().onTapSelectedIndex(0),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.favorite,
-                  color: Theme.of(context).colorScheme.surface,
-                ),
-                title: Text(
-                  appLocale.favorite,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
-                ),
-                onTap: () => context.read<PageProvider>().onTapSelectedIndex(1),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.search,
-                  color: Theme.of(context).colorScheme.surface,
-                ),
-                title: Text(
-                  appLocale.search,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
-                ),
-                onTap: () => context.read<PageProvider>().onTapSelectedIndex(2),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.settings,
-                  color: Theme.of(context).colorScheme.surface,
-                ),
-                title: Text(
-                  appLocale.settings,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
-                ),
-                onTap: () => context.read<PageProvider>().onTapSelectedIndex(3),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.exit_to_app,
-                  color: Theme.of(context).colorScheme.surface,
-                ),
-                title: Text(
-                  appLocale.exit,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
-                ),
-                onTap: () async {
-                  await CacheController().logout();
-                  Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => const AuthScreen()),
-                    (Route<dynamic> route) => false,
-                  );
-                },
               ),
             ],
           ),

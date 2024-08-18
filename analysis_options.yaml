@@ -10,6 +10,7 @@
 analyzer:
   errors:
     override_on_non_overriding_member: ignore
+    unused_element: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:

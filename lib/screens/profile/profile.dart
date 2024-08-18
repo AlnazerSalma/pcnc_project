@@ -1,13 +1,13 @@
-import 'dart:io';
+import 'package:pcnc/cache/cache_controller.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/helpers/navigator_helper.dart';
 import 'package:pcnc/providers/lang_provider.dart';
+import 'package:pcnc/screens/auth/auth.dart';
 import 'package:pcnc/widgets/profile/list_tile_item.dart';
 import 'package:pcnc/widgets/profile/theme_switch.dart';
 import 'package:pcnc/util/theme.dart';
 import 'package:pcnc/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:pcnc/util/color_palette.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -92,42 +92,18 @@ class _ProfileScreenState extends State<ProfileScreen> with NavigatorHelper {
                             ),
                           ),
                           20.height,
-                          InkWell(
-                            onTap: () async {},
-                            child: Container(
-                              width: 325.w,
-                              height: 61.h,
-                              decoration: ShapeDecoration(
-                                color: Theme.of(context).colorScheme.primary,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(24.r),
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.all(8.0.dg),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(
-                                      Icons.exit_to_app,
-                                      color:
-                                          Theme.of(context).colorScheme.surface,
-                                      size: 25.dm,
-                                    ),
-                                    10.width,
-                                    Text(
-                                      appLocale.logout,
-                                      style: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .surface,
-                                        fontSize: 16.sp,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                          ListTileItem(
+                            title: appLocale.logout,
+                            icon: Icons.exit_to_app,
+                            onTap: () async {
+                              await CacheController().logout();
+                              Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => const AuthScreen()),
+                                (Route<dynamic> route) => false,
+                              );
+                            },
+                            toggle: SizedBox.shrink(),
                           ),
                         ],
                       ),
