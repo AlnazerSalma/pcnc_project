@@ -51,6 +51,7 @@
     "emailAlreadyInUse":"Email already in use",
     "operationFailed": "Operation failed",
     "cart":"Cart",
-    "yourCartIsEmpty":"Your cart is empty"
+    "yourCartIsEmpty":"Your cart is empty",
+    "totalPrice":"total price"
 
 }

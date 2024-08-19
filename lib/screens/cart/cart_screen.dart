@@ -10,7 +10,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     return Scaffold(
-     appBar: AppBar(
+      appBar: AppBar(
         centerTitle: true,
         title: Text(
           appLocale.cart,
@@ -35,22 +35,57 @@ class CartScreen extends StatelessWidget {
             );
           }
 
-          return ListView.builder(
-            itemCount: cartItems.length,
-            itemBuilder: (context, index) {
-              final item = cartItems[index];
-              return CartItemCard(
-                id: item['id'],
-                title: item['title'],
-                price: item['price'],
-                description: item['description'],
-                imageUrl: item['images'].isNotEmpty ? item['images'].first : '',
-              );
-            },
+          // Calculate total price
+          final totalPrice = cartItems.fold<double>(0.0, (sum, item) {
+            final price = double.tryParse(item['price']) ?? 0.0;
+            final quantity = item['quantity'] ?? 1;
+            return sum + (price * quantity);
+          });
+
+          return Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: cartItems.length,
+                  itemBuilder: (context, index) {
+                    final item = cartItems[index];
+                    return CartItemCard(
+                      id: item['id'],
+                      title: item['title'],
+                      price: item['price'],
+                      description: item['description'],
+                      imageUrl: item['images'].isNotEmpty ? item['images'].first : '',
+                    );
+                  },
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(16.w),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      appLocale.totalPrice,
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '\$${totalPrice.toStringAsFixed(2)}',
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.secondary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           );
         },
       ),
     );
   }
 }
-

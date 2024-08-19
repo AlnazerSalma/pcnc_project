@@ -53,6 +53,7 @@
     "emailAlreadyInUse": "البريد الإلكتروني مسجل بالفعل",
     "operationFailed": " فشل العملية",
     "cart":"سلة الشراء",
-    "yourCartIsEmpty":"سلة الشراء فارغة"
+    "yourCartIsEmpty":"سلة الشراء فارغة",
+    "totalPrice":"السعر النهائي"
 
     }
