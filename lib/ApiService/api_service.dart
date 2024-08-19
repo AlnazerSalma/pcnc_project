@@ -54,25 +54,53 @@ Future<List<dynamic>> getProducts({int offset = 0, int limit = 10}) async {
       throw Exception('Failed to login');
     }
   }
-    Future<Map<String, dynamic>> registerUser(String name, String email, String password) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/users/'),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({
-        'name': name,
-        'email': email,
-        'password': password,
-        'avatar': 'https://picsum.photos/800',
-      }),
-    );
+  //   Future<Map<String, dynamic>> registerUser(String name, String email, String password) async {
+  //   final response = await http.post(
+  //     Uri.parse('$baseUrl/users/'),
+  //     headers: {'Content-Type': 'application/json'},
+  //     body: json.encode({
+  //       'name': name,
+  //       'email': email,
+  //       'password': password,
+  //       'avatar': 'https://picsum.photos/800',
+  //     }),
+  //   );
 
-    if (response.statusCode == 201) {
-      final data = json.decode(response.body);
-      return data;
-    } else {
-      throw Exception('Failed to register user');
-    }
+  //   if (response.statusCode == 201) {
+  //     final data = json.decode(response.body);
+  //     return data;
+  //   } else {
+  //     throw Exception('Failed to register user');
+  //   }
+  // }
+  Future<Map<String, dynamic>> registerUser(String name, String email, String password) async {
+  // Check if password contains only letters and numbers
+  final passwordRegExp = RegExp(r'^[a-zA-Z0-9]+$');
+  if (!passwordRegExp.hasMatch(password)) {
+    throw Exception('Password must contain only letters and numbers.');
   }
+
+  final response = await http.post(
+    Uri.parse('$baseUrl/users/'),
+    headers: {'Content-Type': 'application/json'},
+    body: json.encode({
+      'name': name,
+      'email': email,
+      'password': password,
+      'avatar': 'https://picsum.photos/800',
+    }),
+  );
+
+  if (response.statusCode == 201) {
+    final data = json.decode(response.body);
+    return data; // Registration successful
+  } else {
+    final responseBody = json.decode(response.body);
+    print('Failed to register user: ${responseBody}');
+    throw Exception('Failed to register user: ${responseBody['message']}');
+  }
+}
+
 Future<bool> isEmailAvailable(String email) async {
   try {
     final response = await http.post(
@@ -99,20 +127,21 @@ Future<bool> isEmailAvailable(String email) async {
     throw Exception('Failed to check email availability');
   }
 }
-Future<Map<String, dynamic>?> getProfile(String token) async {
-    final response = await http.get(
-      Uri.parse('$baseUrl/auth/profile'),
-      headers: {
-        'Authorization': 'Bearer $token',
-      },
-    );
+Future<Map<String, dynamic>> getProfile(String token) async {
+  final response = await http.get(
+    Uri.parse('$baseUrl/auth/profile'),
+    headers: {
+      'Authorization': 'Bearer $token',
+    },
+  );
 
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      throw Exception('Failed to load profile');
-    }
+  if (response.statusCode == 200) {
+    return json.decode(response.body);
+  } else {
+    throw Exception('Failed to load profile');
   }
+}
+
 
 
 }

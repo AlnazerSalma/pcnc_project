@@ -5,6 +5,7 @@ import 'package:pcnc/cache/cache_controller.dart';
 import 'package:pcnc/drawer/zoom_drawer.dart';
 import 'package:pcnc/enums.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
+import 'package:pcnc/providers/favorites_provider.dart';
 import 'package:pcnc/util/color_palette.dart';
 import 'package:pcnc/widgets/Buttons/signin_signup.dart';
 import 'package:pcnc/screens/auth/Forgot_Password_Screen.dart';
@@ -12,6 +13,7 @@ import 'package:pcnc/widgets/text_form_field.dart';
 import 'package:pcnc/helpers/navigator_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/widgets/custom_snackbar.dart';
+import 'package:provider/provider.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -127,6 +129,47 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
       }
     }
   }
+  // Future<void> _submit() async {
+  //   if (_form.currentState!.validate()) {
+  //     _form.currentState!.save();
+
+  //     if (!_isLogin && _enteredPassword != _reenteredPassword) {
+  //       setState(() {
+  //         _emailError = '';
+  //       });
+  //       CustomSnackBar.show(context, appLocale.passwordsDoNotMatch,
+  //           isError: true);
+  //       return;
+  //     }
+
+  //     try {
+  //       final apiService = ApiService();
+  //       if (_isLogin) {
+  //         final response = await apiService.loginUser(
+  //           _enteredUsernameOrEmail,
+  //           _enteredPassword,
+  //         );
+  //         final token = response['access_token'];
+  //         await CacheController().setter(key: CacheKeys.token, value: token);
+
+  //         // Initialize FavoritesProvider with the token
+  //         final favoritesProvider = Provider.of<FavoritesProvider>(context, listen: false);
+  //         await favoritesProvider.initialize(token);
+
+  //         _navigateToHome();
+  //       } else {
+  //         final response = await apiService.registerUser(
+  //           _enteredUsernameOrEmail,
+  //           _enteredEmail,
+  //           _enteredPassword,
+  //         );
+  //         print('Registration successful: ${response['id']}');
+  //         _navigateToLogin();
+  //       }
+  //     } catch (error) {
+  //       print('Operation failed: $error');
+  //       CustomSnackBar.show(context, appLocale.operationFailed, isError: true);
+  //     }}}
 
   Future<void> _navigateToHome() async {
     jumpTo(context, to: ZoomDrawerAnimation());
