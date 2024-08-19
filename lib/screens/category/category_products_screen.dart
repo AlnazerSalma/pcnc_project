@@ -142,6 +142,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
                     itemCount: filteredProducts.length,
                     itemBuilder: (context, index) {
                       final product = filteredProducts[index];
+                      final productId = product['id'] ?? 0;
                       final productTitle = product['title'] ?? 'Unknown';
                       final productPrice =
                           product['price']?.toString() ?? '0.0';
@@ -151,6 +152,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
                           List<String>.from(product['images'] ?? []);
 
                       return ProductCard(
+                        id: productId,
                         title: productTitle,
                         price: productPrice,
                         description: productDescription,

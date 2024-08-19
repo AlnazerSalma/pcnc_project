@@ -94,6 +94,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       itemBuilder: (context, index) {
                         final product = filteredProducts[index];
                         return ProductCard(
+                          id: product['id'] ?? 0,
                           title: product['title'] ?? 'No Title',
                           price: product['price']?.toString() ?? '0.00',
                           description:

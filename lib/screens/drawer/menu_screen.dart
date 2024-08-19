@@ -35,27 +35,8 @@ class _MenuScreenState extends State<MenuScreen> {
           child: Column(
             children: [
               Container(
-                height: 270,
-                padding: EdgeInsets.all(20),
-                child: Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      20.height,
-                      UserAvatarDisplay(),
-                      10.height,
-                      Text(
-                        "name",
-                        style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.surface,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                height: 200.h,
+                padding: EdgeInsets.all(20.dg),
               ),
               Expanded(
                 child: SingleChildScrollView(

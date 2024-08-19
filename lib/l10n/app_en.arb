@@ -49,6 +49,8 @@
     "noProductFoundWithThisName": "Oops, No product found with this name",
     "searchCategory":"Search any category",
     "emailAlreadyInUse":"Email already in use",
-    "operationFailed": "Operation failed"
+    "operationFailed": "Operation failed",
+    "cart":"Cart",
+    "yourCartIsEmpty":"Your cart is empty"
 
 }

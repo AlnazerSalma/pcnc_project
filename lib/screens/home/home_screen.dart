@@ -185,6 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       final product =
                           productList[index] as Map<String, dynamic>;
                       return ProductCard(
+                        id:  product['id'] ?? 0,
                         title: product['title'] ?? 'No Title',
                         price: product['price']?.toString() ?? '0.00',
                         description: product['description'] ?? 'No Description',

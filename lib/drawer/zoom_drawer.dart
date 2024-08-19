@@ -95,7 +95,7 @@ class _ZoomDrawerAnimationState extends State<ZoomDrawerAnimation>
       case 0:
         return HomeScreen();
       case 1:
-        return FavoriteScreen();
+        return FavoritesScreen();
       case 2:
         return SettingsScreen();
       case 3:

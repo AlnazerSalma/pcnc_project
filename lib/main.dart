@@ -1,6 +1,8 @@
 import 'package:pcnc/cache/cache_controller.dart';
 import 'package:pcnc/enums.dart';
 import 'package:pcnc/helpers/restart_app.dart';
+import 'package:pcnc/providers/cart_provider.dart';
+import 'package:pcnc/providers/favorites_provider.dart';
 import 'package:pcnc/providers/lang_provider.dart';
 import 'package:pcnc/providers/page_provider.dart';
 import 'package:pcnc/screens/splash.dart';
@@ -75,6 +77,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             providers: [
               ChangeNotifierProvider(create: (_) => LanguageProvider()),
               ChangeNotifierProvider(create: (context) => PageProvider()),
+              ChangeNotifierProvider(create: (_) => FavoritesProvider()),
+              ChangeNotifierProvider(create: (_) => CartProvider()),
             ],
             child: Consumer<ThemeProvider>(
               builder: (context, themeProvider, child) {
@@ -82,7 +86,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                   title: 'Drago',
                   debugShowCheckedModeBanner: false,
                   theme: themeProvider.themeDataStyle,
-                  localizationsDelegates: AppLocalizations.localizationsDelegates,
+                  localizationsDelegates:
+                      AppLocalizations.localizationsDelegates,
                   supportedLocales: AppLanguages.values
                       .map((language) => Locale(language.name))
                       .toList(),
@@ -97,6 +102,3 @@ class _AppState extends State<App> with WidgetsBindingObserver {
     );
   }
 }
-
-
-

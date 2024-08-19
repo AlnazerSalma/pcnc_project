@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pcnc/screens/cart/cart_screen.dart';
 import 'package:pcnc/screens/favorite/favoriteScreen.dart';
 import 'package:pcnc/screens/home/home_screen.dart';
 import 'package:pcnc/screens/profile/profile.dart';
@@ -30,7 +31,7 @@ class _SelectedScreenState extends State<SelectedScreen> {
     final selectedIndex = context.watch<PageProvider>().selectedIndex;
     final List<Widget> _screens = [
       HomeScreen(),
-      FavoriteScreen(),
+      FavoritesScreen(),
       SearchScreen(),
       SettingsScreen(),
     ];
@@ -84,7 +85,7 @@ class _SelectedScreenState extends State<SelectedScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        onPressed: () {},
+      onPressed: () => widget.jumpTo(context, to: CartScreen()),
         child: Icon(
           Icons.shopping_cart_outlined,
           color: Theme.of(context).colorScheme.surface,

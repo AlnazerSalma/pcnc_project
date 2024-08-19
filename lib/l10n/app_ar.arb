@@ -51,6 +51,8 @@
     "noProductFoundWithThisName": "لا يوجد منتج بهذا الاسم",
     "searchCategory":"البحث عن اي فئة",
     "emailAlreadyInUse": "البريد الإلكتروني مسجل بالفعل",
-    "operationFailed": " فشل العملية"
+    "operationFailed": " فشل العملية",
+    "cart":"سلة الشراء",
+    "yourCartIsEmpty":"سلة الشراء فارغة"
 
     }

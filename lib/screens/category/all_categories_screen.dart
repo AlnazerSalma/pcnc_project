@@ -4,7 +4,7 @@ import 'package:pcnc/screens/category/category_products_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/util/color_palette.dart';
 import 'package:pcnc/widgets/cards/category_card.dart';
-import 'package:pcnc/widgets/search_widget.dart'; // Ensure this is imported
+import 'package:pcnc/widgets/search_widget.dart';
 
 class AllCategoriesScreen extends StatefulWidget {
   final List<dynamic> categories;
@@ -21,8 +21,6 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-
-    // Filter categories based on search query
     final filteredCategories = widget.categories.where((category) {
       final name =
           (category['name'] ?? appLocale.unknownCategory).toLowerCase();

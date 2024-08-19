@@ -3,15 +3,20 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pcnc/providers/cart_provider.dart';
+import 'package:pcnc/providers/favorites_provider.dart';
 import 'package:pcnc/util/color_palette.dart';
+import 'package:provider/provider.dart';
 
 class ProductCard extends StatelessWidget {
+  final int id;
   final String title;
   final String price;
   final String description;
   final List<String> images;
 
   ProductCard({
+    required this.id,
     required this.title,
     required this.price,
     required this.description,
@@ -123,13 +128,30 @@ class ProductCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      IconButton(
-                        icon: Icon(
-                          Icons.favorite_border,
-                          color: Theme.of(context).colorScheme.surface,
-                          size: 20.dg,
-                        ),
-                        onPressed: () {},
+                      Consumer<FavoritesProvider>(
+                        builder: (context, favoritesProvider, child) {
+                          final isFavorite = favoritesProvider.isFavorite(id);
+                          return IconButton(
+                            icon: Icon(
+                              isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
+                              color: isFavorite
+                                  ? kRed
+                                  : Theme.of(context).colorScheme.surface,
+                              size: 20.w,
+                            ),
+                            onPressed: () {
+                              favoritesProvider.toggleFavorite({
+                                'id': id,
+                                'title': title,
+                                'price': price,
+                                'description': description,
+                                'images': images,
+                              });
+                            },
+                          );
+                        },
                       ),
                       IconButton(
                         icon: Icon(
@@ -141,13 +163,35 @@ class ProductCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.shopping_cart_outlined,
-                      color: Theme.of(context).colorScheme.surface,
-                      size: 20.dg,
-                    ),
-                    onPressed: () {},
+                  Consumer<CartProvider>(
+                    builder: (context, cartProvider, child) {
+                      final isInCart = cartProvider.isInCart(id);
+
+                      return IconButton(
+                        icon: Icon(
+                          isInCart
+                              ? Icons.shopping_cart
+                              : Icons.shopping_cart_outlined,
+                          color: isInCart
+                              ? kblueColor
+                              : Theme.of(context).colorScheme.surface,
+                          size: 20.w,
+                        ),
+                        onPressed: () {
+                          if (isInCart) {
+                            cartProvider.removeFromCart(id);
+                          } else {
+                            cartProvider.addToCart({
+                              'id': id,
+                              'title': title,
+                              'price': price,
+                              'description': description,
+                              'images': images,
+                            });
+                          }
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
@@ -255,17 +299,14 @@ class ProductCard extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return Stack(
                   children: [
-                    // Blurred background
                     Positioned.fill(
                       child: BackdropFilter(
                         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                         child: Container(
-                          color: Colors.black
-                              .withOpacity(0.5), // Semi-transparent overlay
+                          color: Colors.black.withOpacity(0.5),
                         ),
                       ),
                     ),
-                    // Error message
                     Center(
                       child: Text(
                         'Error loading image',
@@ -286,17 +327,14 @@ class ProductCard extends StatelessWidget {
                   },
                   child: Stack(
                     children: [
-                      // Blurred background
                       Positioned.fill(
                         child: BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                           child: Container(
-                            color: Colors.black
-                                .withOpacity(0.5), // Semi-transparent overlay
+                            color: Colors.black.withOpacity(0.5),
                           ),
                         ),
                       ),
-                      // Image
                       Center(
                         child: Image.network(
                           imageUrl,
