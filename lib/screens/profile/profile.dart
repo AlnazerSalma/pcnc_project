@@ -91,20 +91,6 @@ class _ProfileScreenState extends State<ProfileScreen> with NavigatorHelper {
                                   fontSize: 12.sp),
                             ),
                           ),
-                          20.height,
-                          ListTileItem(
-                            title: appLocale.logout,
-                            icon: Icons.exit_to_app,
-                            onTap: () async {
-                              await CacheController().logout();
-                              Navigator.of(context).pushAndRemoveUntil(
-                                MaterialPageRoute(
-                                    builder: (context) => const AuthScreen()),
-                                (Route<dynamic> route) => false,
-                              );
-                            },
-                            toggle: SizedBox.shrink(),
-                          ),
                         ],
                       ),
                     ),
