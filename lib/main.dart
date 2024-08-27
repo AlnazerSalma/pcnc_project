@@ -83,7 +83,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             child: Consumer<ThemeProvider>(
               builder: (context, themeProvider, child) {
                 return MaterialApp(
-                  title: 'Drago',
+                  title: 'pcnc',
                   debugShowCheckedModeBanner: false,
                   theme: themeProvider.themeDataStyle,
                   localizationsDelegates:

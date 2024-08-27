@@ -1,8 +1,6 @@
-import 'package:pcnc/cache/cache_controller.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/helpers/navigator_helper.dart';
 import 'package:pcnc/providers/lang_provider.dart';
-import 'package:pcnc/screens/auth/auth.dart';
 import 'package:pcnc/widgets/profile/list_tile_item.dart';
 import 'package:pcnc/widgets/profile/theme_switch.dart';
 import 'package:pcnc/util/theme.dart';
