@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
+import 'package:pcnc/util/font_sizes.dart';
 
 class CategoryCardWidget extends StatelessWidget {
   final String name;
@@ -76,7 +77,7 @@ class CategoryCardWidget extends StatelessWidget {
             Text(
               name,
               style: TextStyle(
-                fontSize: 14.sp,
+                fontSize: textMedium.sp,
                 fontWeight:FontWeight.bold,
                 color: Theme.of(context).colorScheme.surface, 
               ),

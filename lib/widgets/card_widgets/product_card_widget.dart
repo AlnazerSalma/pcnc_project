@@ -3,9 +3,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/providers/cart_provider.dart';
 import 'package:pcnc/providers/favorites_provider.dart';
 import 'package:pcnc/util/color_palette.dart';
+import 'package:pcnc/util/font_sizes.dart';
 import 'package:provider/provider.dart';
 
 class ProductCardWidget extends StatelessWidget {
@@ -94,7 +96,7 @@ class ProductCardWidget extends StatelessWidget {
                 title,
                 maxLines: 2,
                 style: TextStyle(
-                  fontSize: 14.sp,
+                  fontSize: textMedium.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -106,7 +108,7 @@ class ProductCardWidget extends StatelessWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                  fontSize: 12.sp,
+                  fontSize: textSmall.sp,
                 ),
               ),
             ),
@@ -115,7 +117,7 @@ class ProductCardWidget extends StatelessWidget {
               child: Text(
                 '\$${price}',
                 style: TextStyle(
-                  fontSize: 18.sp,
+                  fontSize: textExtraLarge.sp,
                   color: Theme.of(context).colorScheme.surface,
                   fontWeight: FontWeight.bold,
                 ),
@@ -237,26 +239,26 @@ class ProductCardWidget extends StatelessWidget {
                         },
                       ),
                     ),
-                  SizedBox(height: 10.h),
+                  10.height,
                   Text(
                     title,
                     style: TextStyle(
-                      fontSize: 20.sp,
+                      fontSize: textXExtraLarge.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10.h),
+                  10.height,
                   Text(
                     description,
                     style: TextStyle(
-                      fontSize: 16.sp,
+                      fontSize: textMedium.sp,
                     ),
                   ),
-                  SizedBox(height: 10.h),
+                  10.height,
                   Text(
                     '\$${price}',
                     style: TextStyle(
-                      fontSize: 22.sp,
+                      fontSize: textXExtraLarge.sp,
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.secondary,
                     ),
@@ -273,7 +275,7 @@ class ProductCardWidget extends StatelessWidget {
               child: Text(
                 'Close',
                 style: TextStyle(
-                  fontSize: 16.sp,
+                  fontSize: textMedium.sp,
                   color: kbuttoncolorColor,
                 ),
               ),
@@ -312,7 +314,7 @@ class ProductCardWidget extends StatelessWidget {
                         'Error loading image',
                         style: TextStyle(
                           color: Colors.red,
-                          fontSize: 18.sp,
+                          fontSize: textExtraLarge.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pcnc/util/font_sizes.dart';
 import 'package:pcnc/widgets/card_widgets/cart_card_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:pcnc/providers/cart_provider.dart';
@@ -16,7 +17,7 @@ class CartScreen extends StatelessWidget {
           appLocale.cart,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 18.sp,
+            fontSize: textExtraLarge.sp,
           ),
         ),
         backgroundColor: Theme.of(context).colorScheme.background,
@@ -30,7 +31,7 @@ class CartScreen extends StatelessWidget {
             return Center(
               child: Text(
                 appLocale.yourCartIsEmpty,
-                style: TextStyle(fontSize: 18.sp),
+                style: TextStyle(fontSize: textExtraLarge.sp),
               ),
             );
           }
@@ -67,14 +68,14 @@ class CartScreen extends StatelessWidget {
                     Text(
                       appLocale.totalPrice,
                       style: TextStyle(
-                        fontSize: 18.sp,
+                        fontSize: textExtraLarge.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       '\$${totalPrice.toStringAsFixed(2)}',
                       style: TextStyle(
-                        fontSize: 18.sp,
+                        fontSize: textExtraLarge.sp,
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.secondary,
                       ),

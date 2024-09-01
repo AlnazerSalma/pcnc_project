@@ -6,7 +6,5 @@ enum CacheKeys {
   theme,
   language,
   token,
-  logged_in,
-  login_email,
-  login_password, userName,
+
 }

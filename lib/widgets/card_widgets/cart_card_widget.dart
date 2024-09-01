@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/util/color_palette.dart';
+import 'package:pcnc/util/font_sizes.dart';
 import 'package:provider/provider.dart';
 import 'package:pcnc/providers/cart_provider.dart';
 
@@ -79,19 +80,19 @@ class CartCardWidget extends StatelessWidget {
                     Text(
                       title,
                       style: TextStyle(
-                        fontSize: 14.sp,
+                        fontSize: textMedium.sp,
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.surface,
                       ),
                       overflow: TextOverflow
-                          .visible, // Ensure the text is fully visible
+                          .visible,
                       softWrap:
-                          true, // Allow the text to wrap onto multiple lines if needed
+                          true,
                     ),
                     Text(
                       '\$${price}',
                       style: TextStyle(
-                        fontSize: 16.sp,
+                        fontSize: textMedium.sp,
                         color: Theme.of(context).colorScheme.surface,
                       ),
                       overflow: TextOverflow.ellipsis,
@@ -121,7 +122,7 @@ class CartCardWidget extends StatelessWidget {
                       Text(
                         '${cartProvider.getItemQuantity(id)}',
                         style: TextStyle(
-                            fontSize: 16.sp,
+                            fontSize: textMedium.sp,
                             color: Theme.of(context).colorScheme.surface),
                       ),
                       4.width,

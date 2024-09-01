@@ -1,5 +1,7 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/util/color_palette.dart';
 import 'package:flutter/material.dart';
+import 'package:pcnc/util/font_sizes.dart';
 
 class SignInSignUpButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -17,7 +19,7 @@ class SignInSignUpButton extends StatelessWidget {
     this.height = 50.0,
     this.color = const Color(0xFFF89939),
     this.textColor = kWhiteColor,
-    this.fontSize = 18.0,
+    this.fontSize = textExtraLarge,
     Key? key,
   }) : super(key: key);
 
@@ -42,7 +44,7 @@ class SignInSignUpButton extends StatelessWidget {
                 text,
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: textColor,
-                      fontSize: fontSize,
+                      fontSize: fontSize.sp,
                     ),
               ),
             ),

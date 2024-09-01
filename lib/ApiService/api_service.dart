@@ -93,7 +93,7 @@ Future<List<dynamic>> getProducts({int offset = 0, int limit = 10}) async {
 
   if (response.statusCode == 201) {
     final data = json.decode(response.body);
-    return data; // Registration successful
+    return data;
   } else {
     final responseBody = json.decode(response.body);
     print('Failed to register user: ${responseBody}');
@@ -108,11 +108,9 @@ Future<bool> isEmailAvailable(String email) async {
       headers: {'Content-Type': 'application/json'},
       body: json.encode({'email': email}),
     );
-
-    // Handle status codes 200 and 201
     if (response.statusCode == 200 || response.statusCode == 201) {
       final data = json.decode(response.body);
-      print('API Response: $data'); // Debugging line
+      print('API Response: $data');
 
       if (data.containsKey('isAvailable')) {
         return data['isAvailable'];

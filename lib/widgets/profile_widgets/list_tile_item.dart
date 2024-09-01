@@ -2,6 +2,7 @@ import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/util/color_palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pcnc/util/font_sizes.dart';
 
 class ListTileItem extends StatefulWidget {
   final String title;
@@ -50,7 +51,7 @@ class _ListTileItemState extends State<ListTileItem> {
                 widget.title,
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.surface,
-                  fontSize: 16.sp,
+                  fontSize: textMedium.sp,
                 ),
               ),
               const Spacer(),

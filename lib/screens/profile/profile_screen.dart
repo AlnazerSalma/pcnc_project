@@ -1,6 +1,7 @@
 import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/helpers/navigator_helper.dart';
 import 'package:pcnc/providers/lang_provider.dart';
+import 'package:pcnc/util/font_sizes.dart';
 import 'package:pcnc/widgets/profile_widgets/list_tile_item.dart';
 import 'package:pcnc/widgets/profile_widgets/switch_theme_widget.dart';
 import 'package:pcnc/util/theme.dart';
@@ -35,7 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> with NavigatorHelper {
               appLocale.profile,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 18.sp,
+                fontSize: textExtraLarge.sp,
               ),
             ),
             backgroundColor: Theme.of(context).colorScheme.background,
@@ -86,7 +87,7 @@ class _ProfileScreenState extends State<ProfileScreen> with NavigatorHelper {
                                       .firstWhere((_) => _.name == lang.lang)),
                               style: TextStyle(
                                   color: Theme.of(context).colorScheme.surface,
-                                  fontSize: 12.sp),
+                                  fontSize: textSmall.sp),
                             ),
                           ),
                         ],
@@ -170,7 +171,7 @@ class _ProfileScreenState extends State<ProfileScreen> with NavigatorHelper {
             lang.languageName(locale: language),
             style: TextStyle(
               color: Theme.of(context).colorScheme.surface,
-              fontSize: 18.sp,
+              fontSize: textExtraLarge.sp,
             ),
           ),
         ],

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/util/Input_decoration_util.dart';
+import 'package:pcnc/util/font_sizes.dart';
 
 class CustomFormFieldWidget extends StatefulWidget {
   final void Function(String?)? onSaved;
@@ -39,7 +40,7 @@ class _CustomTextFormFieldState extends State<CustomFormFieldWidget> {
       cursorColor: Theme.of(context).colorScheme.surface,
       style: TextStyle(
         color: Theme.of(context).colorScheme.surface,
-        fontSize: 16.sp,
+        fontSize: textMedium.sp,
       ),
       textAlign: TextAlign.start,
       keyboardType: widget.keyboardType,

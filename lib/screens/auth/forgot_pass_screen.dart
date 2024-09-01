@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/util/Input_decoration_util.dart';
+import 'package:pcnc/util/font_sizes.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -26,7 +27,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         title: Text(
           appLocale.forgotPasswordQ,
           style: TextStyle(
-              color: Theme.of(context).colorScheme.surface, fontSize: 18.sp),
+              color: Theme.of(context).colorScheme.surface, fontSize: textExtraLarge.sp),
         ),
         backgroundColor: Theme.of(context).colorScheme.background,
         foregroundColor: Theme.of(context).colorScheme.surface,
@@ -46,7 +47,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   appLocale.enterYourEmailAddress,
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.surface,
-                    fontSize: 16.sp,
+                    fontSize: textMedium.sp,
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.left,
@@ -70,7 +71,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 '• ${appLocale.weWillSendYouMessageToSetOrResetYourNewPassword}',
                 style: TextStyle(
                     color: Theme.of(context).colorScheme.surface,
-                    fontSize: 10.sp),
+                    fontSize: textTiny.sp),
               ),
               40.height,
               Row(
@@ -82,7 +83,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                       appLocale.sendCode,
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.surface,
-                        fontSize: 16.sp,
+                        fontSize: textMedium.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

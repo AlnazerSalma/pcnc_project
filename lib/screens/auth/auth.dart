@@ -7,6 +7,7 @@ import 'package:pcnc/enums.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/screens/auth/forgot_pass_screen.dart';
 import 'package:pcnc/util/color_palette.dart';
+import 'package:pcnc/util/font_sizes.dart';
 import 'package:pcnc/widgets/button_widgets/signin_signup_widget.dart';
 import 'package:pcnc/widgets/form_field_widgets/form_field_widget.dart';
 import 'package:pcnc/helpers/navigator_helper.dart';
@@ -171,35 +172,6 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
                   ),
                 ),
                 20.height,
-                                // if (!_isLogin) ...[
-                //   CustomFormFieldWidget(
-                //     onSaved: (value) => _enteredUsernameOrEmail = value!,
-                //     validator: (value) {
-                //       if (value == null || value.trim().isEmpty) {
-                //         return appLocale.pleaseEnterYourUsername;
-                //       }
-                //       return null;
-                //     },
-                //     labelText: appLocale.username,
-                //     icon: Icons.person,
-                //   ),
-                //   20.height,
-                //   CustomFormFieldWidget(
-                //     onSaved: (value) => _enteredEmail = value!,
-                //     validator: (value) {
-                //       if (value == null ||
-                //           value.trim().isEmpty ||
-                //           !value.contains('@')) {
-                //         return appLocale.pleaseEnterValidEmailAddress;
-                //       }
-                //       return null;
-                //     },
-                //     labelText: appLocale.emailAddress,
-                //     icon: Icons.email,
-                //     keyboardType: TextInputType.emailAddress,
-                //   ),
-                //   20.height,
-                // ],
                 if (!_isLogin) ...[
                   CustomFormFieldWidget(
                     onSaved: (value) => _enteredUsernameOrEmail = value!,
@@ -285,7 +257,7 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
                           style: TextStyle(
                             color: kRed,
                             fontWeight: FontWeight.bold,
-                            fontSize: 12.sp,
+                            fontSize: textSmall.sp,
                           ),
                         ),
                       ),
@@ -300,7 +272,7 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
                         text: appLocale.byClickingThe,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               color: Theme.of(context).colorScheme.surface,
-                              fontSize: 14.sp,
+                              fontSize: textMedium.sp,
                             ),
                         children: <TextSpan>[
                           TextSpan(
@@ -310,7 +282,7 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
                                 .bodyMedium!
                                 .copyWith(
                                   color: kRed,
-                                  fontSize: 13.sp,
+                                  fontSize: textSmall.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
@@ -328,7 +300,7 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
                   height: 50.0,
                   color: kbuttoncolorColor,
                   textColor: kWhiteColor,
-                  fontSize: 18.0,
+                  fontSize: textExtraLarge.sp,
                 ),
                 10.height,
                 Column(
@@ -357,7 +329,7 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
                                 .bodyMedium!
                                 .copyWith(
                                   color: Theme.of(context).colorScheme.surface,
-                                  fontSize: 12.sp,
+                                  fontSize: textSmall.sp,
                                 ),
                             children: [
                               TextSpan(
@@ -369,7 +341,7 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
                                     .bodyMedium!
                                     .copyWith(
                                       color: kRed,
-                                      fontSize: 12.sp,
+                                      fontSize: textSmall.sp,
                                       fontWeight: FontWeight.bold,
                                     ),
                               ),

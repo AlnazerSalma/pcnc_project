@@ -5,6 +5,7 @@ import 'package:pcnc/ApiService/api_service.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/screens/category/all_categories_screen.dart';
 import 'package:pcnc/screens/category/category_products_screen.dart';
+import 'package:pcnc/util/font_sizes.dart';
 import 'package:pcnc/widgets/card_widgets/product_card_widget.dart';
 import 'package:pcnc/widgets/button_widgets/show_all_button_widget.dart';
 
@@ -53,15 +54,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   40.height,
                   Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 20.w,),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.w,
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           appLocale.allCategories,
                           style: TextStyle(
-                            fontSize: 20.sp,
+                            fontSize: textXExtraLarge.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -70,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                 builder: (context) => AllCategoriesScreen(
+                                builder: (context) => AllCategoriesScreen(
                                   categories: categoryList,
                                 ),
                               ),
@@ -158,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Text(
                                   categoryName,
                                   style: TextStyle(
-                                    fontSize: 12.sp,
+                                    fontSize: textSmall.sp,
                                     fontWeight: FontWeight.w600,
                                   ),
                                   textAlign: TextAlign.center,
@@ -185,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       final product =
                           productList[index] as Map<String, dynamic>;
                       return ProductCardWidget(
-                        id:  product['id'] ?? 0,
+                        id: product['id'] ?? 0,
                         title: product['title'] ?? 'No Title',
                         price: product['price']?.toString() ?? '0.00',
                         description: product['description'] ?? 'No Description',
