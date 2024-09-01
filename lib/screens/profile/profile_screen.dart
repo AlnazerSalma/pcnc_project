@@ -1,8 +1,8 @@
 import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/helpers/navigator_helper.dart';
 import 'package:pcnc/providers/lang_provider.dart';
-import 'package:pcnc/widgets/profile/list_tile_item.dart';
-import 'package:pcnc/widgets/profile/theme_switch.dart';
+import 'package:pcnc/widgets/profile_widgets/list_tile_item.dart';
+import 'package:pcnc/widgets/profile_widgets/switch_theme_widget.dart';
 import 'package:pcnc/util/theme.dart';
 import 'package:pcnc/providers/theme_provider.dart';
 import 'package:flutter/material.dart';

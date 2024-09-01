@@ -1,7 +1,7 @@
 import 'package:pcnc/util/color_palette.dart';
 import 'package:flutter/material.dart';
 
-class CustomButton extends StatelessWidget {
+class SignInSignUpButton extends StatelessWidget {
   final VoidCallback onTap;
   final String text;
   final double width;
@@ -10,7 +10,7 @@ class CustomButton extends StatelessWidget {
   final Color textColor;
   final double fontSize;
 
-  const CustomButton({
+  const SignInSignUpButton({
     required this.onTap,
     required this.text,
     this.width = double.infinity,

@@ -5,14 +5,14 @@ import 'package:pcnc/util/color_palette.dart';
 import 'package:provider/provider.dart';
 import 'package:pcnc/providers/cart_provider.dart';
 
-class CartItemCard extends StatelessWidget {
+class CartCardWidget extends StatelessWidget {
   final int id;
   final String title;
   final String price;
   final String description;
   final String imageUrl;
 
-  CartItemCard({
+  CartCardWidget({
     required this.id,
     required this.title,
     required this.price,

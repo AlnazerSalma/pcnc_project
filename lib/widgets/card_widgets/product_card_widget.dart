@@ -8,14 +8,14 @@ import 'package:pcnc/providers/favorites_provider.dart';
 import 'package:pcnc/util/color_palette.dart';
 import 'package:provider/provider.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCardWidget extends StatelessWidget {
   final int id;
   final String title;
   final String price;
   final String description;
   final List<String> images;
 
-  ProductCard({
+  ProductCardWidget({
     required this.id,
     required this.title,
     required this.price,

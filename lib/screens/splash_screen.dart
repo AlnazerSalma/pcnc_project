@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _init() async {
     await Future.delayed(
-        const Duration(seconds: 1)); // Adjust duration as needed
+        const Duration(seconds: 1));
     _checkAuth();
   }
 

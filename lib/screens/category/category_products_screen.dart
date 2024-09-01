@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/util/color_palette.dart';
-import 'package:pcnc/widgets/cards/product_card.dart';
+import 'package:pcnc/widgets/card_widgets/product_card_widget.dart';
 import 'package:pcnc/widgets/search_widget.dart';
 
 class CategoryProductsScreen extends StatefulWidget {
@@ -151,7 +151,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
                       final productImages =
                           List<String>.from(product['images'] ?? []);
 
-                      return ProductCard(
+                      return ProductCardWidget(
                         id: productId,
                         title: productTitle,
                         price: productPrice,

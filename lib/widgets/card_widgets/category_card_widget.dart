@@ -3,12 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
 
-class CategoryCard extends StatelessWidget {
+class CategoryCardWidget extends StatelessWidget {
   final String name;
   final String? imageUrl;
   final VoidCallback onTap;
 
-  CategoryCard({
+  CategoryCardWidget({
     required this.name,
     this.imageUrl,
     required this.onTap,

@@ -6,7 +6,7 @@ import 'package:pcnc/enums.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/providers/page_provider.dart';
 import 'package:pcnc/screens/auth/auth.dart';
-import 'package:pcnc/widgets/profile/UserAvatarDisplay.dart';
+import 'package:pcnc/widgets/profile_widgets/user_avatar.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

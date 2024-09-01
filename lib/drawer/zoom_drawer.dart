@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pcnc/drawer/main_drawer.dart';
-import 'package:pcnc/screens/favorite/favoriteScreen.dart';
+import 'package:pcnc/screens/wishlist/wishlist_screen.dart';
 import 'package:pcnc/screens/home/home_screen.dart';
-import 'package:pcnc/screens/profile/profile.dart';
-import 'package:pcnc/screens/settings/settingsScreen.dart';
+import 'package:pcnc/screens/profile/profile_screen.dart';
+import 'package:pcnc/screens/settings/settings_screen.dart';
 import 'package:pcnc/providers/page_provider.dart';
 import 'package:pcnc/screens/drawer/menu_screen.dart';
-import 'package:pcnc/screens/drawer/selected_screens.dart';
+import 'package:pcnc/screens/drawer/selected_screen.dart';
 import 'package:provider/provider.dart';
 
 class ZoomDrawerAnimation extends StatefulWidget {
@@ -95,7 +95,7 @@ class _ZoomDrawerAnimationState extends State<ZoomDrawerAnimation>
       case 0:
         return HomeScreen();
       case 1:
-        return FavoritesScreen();
+        return wishlistScreen();
       case 2:
         return SettingsScreen();
       case 3:

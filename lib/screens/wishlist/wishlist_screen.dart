@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/providers/favorites_provider.dart';
 import 'package:pcnc/util/color_palette.dart';
-import 'package:pcnc/widgets/cards/product_card.dart';
+import 'package:pcnc/widgets/card_widgets/product_card_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class FavoritesScreen extends StatelessWidget {
+class wishlistScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
@@ -26,7 +26,7 @@ class FavoritesScreen extends StatelessWidget {
         itemCount: favoritesProvider.favorites.length,
         itemBuilder: (context, index) {
           final product = favoritesProvider.favorites[index];
-          return ProductCard(
+          return ProductCardWidget(
             id: product['id'],
             title: product['title'],
             price: product['price'],

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/ApiService/api_service.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
-import 'package:pcnc/widgets/cards/product_card.dart';
+import 'package:pcnc/widgets/card_widgets/product_card_widget.dart';
 import 'package:pcnc/widgets/search_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -93,7 +93,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       itemCount: filteredProducts.length,
                       itemBuilder: (context, index) {
                         final product = filteredProducts[index];
-                        return ProductCard(
+                        return ProductCardWidget(
                           id: product['id'] ?? 0,
                           title: product['title'] ?? 'No Title',
                           price: product['price']?.toString() ?? '0.00',

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pcnc/widgets/cards/cart_item_card.dart';
+import 'package:pcnc/widgets/card_widgets/cart_card_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:pcnc/providers/cart_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -49,7 +49,7 @@ class CartScreen extends StatelessWidget {
                   itemCount: cartItems.length,
                   itemBuilder: (context, index) {
                     final item = cartItems[index];
-                    return CartItemCard(
+                    return CartCardWidget(
                       id: item['id'],
                       title: item['title'],
                       price: item['price'],

@@ -5,8 +5,8 @@ import 'package:pcnc/ApiService/api_service.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/screens/category/all_categories_screen.dart';
 import 'package:pcnc/screens/category/category_products_screen.dart';
-import 'package:pcnc/widgets/cards/product_card.dart';
-import 'package:pcnc/widgets/customButton.dart';
+import 'package:pcnc/widgets/card_widgets/product_card_widget.dart';
+import 'package:pcnc/widgets/button_widgets/show_all_button_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        CustomButton(
+                        ShowAllButtonWidget(
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -184,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: (context, index) {
                       final product =
                           productList[index] as Map<String, dynamic>;
-                      return ProductCard(
+                      return ProductCardWidget(
                         id:  product['id'] ?? 0,
                         title: product['title'] ?? 'No Title',
                         price: product['price']?.toString() ?? '0.00',

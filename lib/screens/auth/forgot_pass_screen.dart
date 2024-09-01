@@ -1,11 +1,9 @@
 import 'package:pcnc/extensions/sized_box_extension.dart';
-import 'package:pcnc/screens/auth/auth.dart';
 import 'package:pcnc/util/color_palette.dart';
-import 'package:pcnc/widgets/build_input_decoration.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pcnc/util/Input_decoration_util.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});

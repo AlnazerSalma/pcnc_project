@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/screens/cart/cart_screen.dart';
-import 'package:pcnc/screens/favorite/favoriteScreen.dart';
+import 'package:pcnc/screens/wishlist/wishlist_screen.dart';
 import 'package:pcnc/screens/home/home_screen.dart';
-import 'package:pcnc/screens/profile/profile.dart';
-import 'package:pcnc/screens/search/search.dart';
-import 'package:pcnc/screens/settings/settingsScreen.dart';
+import 'package:pcnc/screens/profile/profile_screen.dart';
+import 'package:pcnc/screens/search/search_screen.dart';
+import 'package:pcnc/screens/settings/settings_screen.dart';
 import 'package:pcnc/util/color_palette.dart';
-import 'package:pcnc/widgets/bottom_nav_bar.dart';
-import 'package:pcnc/widgets/profile/UserAvatarDisplay.dart';
+import 'package:pcnc/widgets/bottom_nav_bar_widget.dart';
+import 'package:pcnc/widgets/profile_widgets/user_avatar.dart';
 import 'package:pcnc/helpers/navigator_helper.dart';
 import 'package:provider/provider.dart';
 import 'package:pcnc/providers/page_provider.dart';
@@ -31,7 +31,7 @@ class _SelectedScreenState extends State<SelectedScreen> {
     final selectedIndex = context.watch<PageProvider>().selectedIndex;
     final List<Widget> _screens = [
       HomeScreen(),
-      FavoritesScreen(),
+      wishlistScreen(),
       SearchScreen(),
       SettingsScreen(),
     ];
@@ -71,7 +71,7 @@ class _SelectedScreenState extends State<SelectedScreen> {
         ),
         actions: [
           IconButton(
-            icon: UserAvatarDisplay(),
+            icon: UserAvatar(),
             color: kWhiteColor,
             iconSize: 24.sp,
             onPressed: () => widget.jumpTo(context, to: const ProfileScreen()),
@@ -94,7 +94,7 @@ class _SelectedScreenState extends State<SelectedScreen> {
         elevation: 0.0,
         shape: const CircleBorder(),
       ),
-      bottomNavigationBar: BottomNavBar(
+      bottomNavigationBar: BottomNavBarWidget(
         selectedIndex: selectedIndex,
         onItemSelected: (index) {
           context.read<PageProvider>().onTapSelectedIndex(index);

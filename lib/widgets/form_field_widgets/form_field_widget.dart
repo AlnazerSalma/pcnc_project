@@ -1,8 +1,9 @@
-import 'package:pcnc/widgets/build_input_decoration.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pcnc/util/Input_decoration_util.dart';
 
-class CustomTextFormField extends StatefulWidget {
+class CustomFormFieldWidget extends StatefulWidget {
   final void Function(String?)? onSaved;
   final String? Function(String?) validator;
   final String labelText;
@@ -12,7 +13,7 @@ class CustomTextFormField extends StatefulWidget {
   final String? trailingText;
   final TextEditingController? controller;
 
-  const CustomTextFormField({
+  const CustomFormFieldWidget({
     this.onSaved,
     required this.validator,
     required this.labelText,
@@ -25,10 +26,10 @@ class CustomTextFormField extends StatefulWidget {
   });
 
   @override
-  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+  State<CustomFormFieldWidget> createState() => _CustomTextFormFieldState();
 }
 
-class _CustomTextFormFieldState extends State<CustomTextFormField> {
+class _CustomTextFormFieldState extends State<CustomFormFieldWidget> {
   bool hidden = true;
 
   @override
