@@ -5,7 +5,7 @@ import 'package:pcnc/cache/cache_controller.dart';
 import 'package:pcnc/enums.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/providers/page_provider.dart';
-import 'package:pcnc/screens/auth/auth.dart';
+import 'package:pcnc/screens/signin_signup_screens/auth.dart';
 import 'package:pcnc/widgets/profile_widgets/user_avatar.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -54,7 +54,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           ),
                         ),
                         onTap: () =>
-                            context.read<PageProvider>().onTapSelectedIndex(0),
+                            context.read<PageProvider>().onTappedIndex(0),
                       ),
                       ListTile(
                         leading: Icon(
@@ -68,7 +68,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           ),
                         ),
                         onTap: () =>
-                            context.read<PageProvider>().onTapSelectedIndex(1),
+                            context.read<PageProvider>().onTappedIndex(1),
                       ),
                       ListTile(
                         leading: Icon(
@@ -82,7 +82,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           ),
                         ),
                         onTap: () =>
-                            context.read<PageProvider>().onTapSelectedIndex(2),
+                            context.read<PageProvider>().onTappedIndex(2),
                       ),
                       ListTile(
                         leading: Icon(
@@ -96,11 +96,11 @@ class _MenuScreenState extends State<MenuScreen> {
                           ),
                         ),
                         onTap: () =>
-                            context.read<PageProvider>().onTapSelectedIndex(3),
+                            context.read<PageProvider>().onTappedIndex(3),
                       ),
                       ListTile(
                         leading: Icon(
-                          Icons.exit_to_app,
+                          Icons.exit_to_app_rounded,
                           color: Theme.of(context).colorScheme.surface,
                         ),
                         title: Text(

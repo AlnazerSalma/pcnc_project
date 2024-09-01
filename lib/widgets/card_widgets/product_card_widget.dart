@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
 import 'package:pcnc/providers/cart_provider.dart';
-import 'package:pcnc/providers/favorites_provider.dart';
+import 'package:pcnc/providers/wishlist_provider.dart';
 import 'package:pcnc/util/color_palette.dart';
 import 'package:pcnc/util/font_sizes.dart';
 import 'package:provider/provider.dart';
@@ -130,9 +130,9 @@ class ProductCardWidget extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Consumer<FavoritesProvider>(
-                        builder: (context, favoritesProvider, child) {
-                          final isFavorite = favoritesProvider.isFavorite(id);
+                      Consumer<WishListProvider>(
+                        builder: (context, WishListProvider, child) {
+                          final isFavorite = WishListProvider.isFavorite(id);
                           return IconButton(
                             icon: Icon(
                               isFavorite
@@ -144,7 +144,7 @@ class ProductCardWidget extends StatelessWidget {
                               size: 20.w,
                             ),
                             onPressed: () {
-                              favoritesProvider.toggleFavorite({
+                              WishListProvider.toggleFavorite({
                                 'id': id,
                                 'title': title,
                                 'price': price,

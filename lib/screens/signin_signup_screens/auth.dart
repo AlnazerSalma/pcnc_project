@@ -5,7 +5,7 @@ import 'package:pcnc/cache/cache_controller.dart';
 import 'package:pcnc/drawer/zoom_drawer.dart';
 import 'package:pcnc/enums.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
-import 'package:pcnc/screens/auth/forgot_pass_screen.dart';
+import 'package:pcnc/screens/signin_signup_screens/forgot_pass_screen.dart';
 import 'package:pcnc/util/color_palette.dart';
 import 'package:pcnc/util/font_sizes.dart';
 import 'package:pcnc/widgets/button_widgets/signin_signup_widget.dart';
@@ -136,12 +136,11 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
   Future<void> _navigateToLogin() async {
     setState(() {
       _isLogin = true;
-      _form.currentState?.reset();
       _enteredUsernameOrEmail = '';
       _enteredEmail = '';
       _enteredPassword = '';
       _reenteredPassword = '';
-      _emailError = '';
+      // _emailError = '';
     });
   }
 

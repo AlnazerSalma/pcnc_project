@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pcnc/ApiService/api_service.dart';
 
-class FavoritesProvider extends ChangeNotifier {
+class WishListProvider extends ChangeNotifier {
   final List<Map<String, dynamic>> _favorites = [];
   String? _token;
 

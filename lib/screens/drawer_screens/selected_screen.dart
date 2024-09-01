@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/screens/cart/cart_screen.dart';
-import 'package:pcnc/screens/wishlist/wishlist_screen.dart';
-import 'package:pcnc/screens/home/home_screen.dart';
-import 'package:pcnc/screens/profile/profile_screen.dart';
-import 'package:pcnc/screens/search/search_screen.dart';
-import 'package:pcnc/screens/settings/settings_screen.dart';
+import 'package:pcnc/screens/cart_screens/cart_screen.dart';
+import 'package:pcnc/screens/wishlist_screens/wishlist_screen.dart';
+import 'package:pcnc/screens/home_screens/home_screen.dart';
+import 'package:pcnc/screens/profile_screens/profile_screen.dart';
+import 'package:pcnc/screens/search_screens/search_screen.dart';
+import 'package:pcnc/screens/settings_screens/settings_screen.dart';
 import 'package:pcnc/util/color_palette.dart';
 import 'package:pcnc/widgets/bottom_nav_bar_widget.dart';
 import 'package:pcnc/widgets/profile_widgets/user_avatar.dart';
@@ -97,7 +97,7 @@ class _SelectedScreenState extends State<SelectedScreen> {
       bottomNavigationBar: BottomNavBarWidget(
         selectedIndex: selectedIndex,
         onItemSelected: (index) {
-          context.read<PageProvider>().onTapSelectedIndex(index);
+          context.read<PageProvider>().onTappedIndex(index);
         },
       ),
     );

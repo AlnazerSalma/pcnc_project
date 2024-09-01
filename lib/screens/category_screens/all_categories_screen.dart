@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/screens/category/category_products_screen.dart';
+import 'package:pcnc/screens/category_screens/category_products_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/util/color_palette.dart';
 import 'package:pcnc/util/font_sizes.dart';

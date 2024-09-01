@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pcnc/drawer/main_drawer.dart';
-import 'package:pcnc/screens/wishlist/wishlist_screen.dart';
-import 'package:pcnc/screens/home/home_screen.dart';
-import 'package:pcnc/screens/profile/profile_screen.dart';
-import 'package:pcnc/screens/settings/settings_screen.dart';
+import 'package:pcnc/screens/wishlist_screens/wishlist_screen.dart';
+import 'package:pcnc/screens/home_screens/home_screen.dart';
+import 'package:pcnc/screens/profile_screens/profile_screen.dart';
+import 'package:pcnc/screens/settings_screens/settings_screen.dart';
 import 'package:pcnc/providers/page_provider.dart';
-import 'package:pcnc/screens/drawer/menu_screen.dart';
-import 'package:pcnc/screens/drawer/selected_screen.dart';
+import 'package:pcnc/screens/drawer_screens/menu_screen.dart';
+import 'package:pcnc/screens/drawer_screens/selected_screen.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ZoomDrawerAnimation extends StatefulWidget {
   const ZoomDrawerAnimation({super.key});
 
@@ -47,11 +47,11 @@ class _ZoomDrawerAnimationState extends State<ZoomDrawerAnimation>
 
   @override
   Widget build(BuildContext context) {
-    var locale = Localizations.localeOf(context);
-    var isArabic = locale.languageCode == 'ar';
+    var appLocale = AppLocalizations.of(context)!;
+    var textDirection = appLocale.localeName == 'ar' ? TextDirection.rtl : TextDirection.ltr;
 
     return Directionality(
-      textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
+      textDirection: textDirection,
       child: Scaffold(
         body: SafeArea(
           child: Stack(
@@ -63,11 +63,15 @@ class _ZoomDrawerAnimationState extends State<ZoomDrawerAnimation>
                 animation: controller,
                 builder: (context, child) {
                   return Transform(
-                    alignment: isArabic ? const Alignment(0.1, -0.1) : const Alignment(0, -0.1),
+                    alignment: textDirection == TextDirection.rtl
+                        ? const Alignment(0.1, -0.1)
+                        : const Alignment(0, -0.1),
                     transform: Matrix4.identity()
                       ..setEntry(3, 2, 0.001)
                       ..scale(scaleAnimation.value)
-                      ..translate(isArabic ? -slideAnimation.value : slideAnimation.value)
+                      ..translate(textDirection == TextDirection.rtl
+                          ? -slideAnimation.value
+                          : slideAnimation.value)
                       ..rotateZ(rotationAnimation.value),
                     child: MainScreen(
                       borderRadius: borderAnimation.value,

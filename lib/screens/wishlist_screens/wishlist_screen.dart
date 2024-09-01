@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/providers/favorites_provider.dart';
+import 'package:pcnc/providers/wishlist_provider.dart';
 import 'package:pcnc/util/color_palette.dart';
 import 'package:pcnc/widgets/card_widgets/product_card_widget.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +10,7 @@ class wishlistScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-    final favoritesProvider = Provider.of<FavoritesProvider>(context);
+    final favoritesProvider = Provider.of<WishListProvider>(context);
 
     return Scaffold(
       body: GridView.builder(

@@ -3,8 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/ApiService/api_service.dart';
 import 'package:pcnc/extensions/sized_box_extension.dart';
-import 'package:pcnc/screens/category/all_categories_screen.dart';
-import 'package:pcnc/screens/category/category_products_screen.dart';
+import 'package:pcnc/screens/category_screens/all_categories_screen.dart';
+import 'package:pcnc/screens/category_screens/category_products_screen.dart';
+import 'package:pcnc/util/color_palette.dart';
 import 'package:pcnc/util/font_sizes.dart';
 import 'package:pcnc/widgets/card_widgets/product_card_widget.dart';
 import 'package:pcnc/widgets/button_widgets/show_all_button_widget.dart';
@@ -126,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               return Center(
                                                 child: Icon(
                                                   Icons.error,
-                                                  color: Colors.red,
+                                                  color: kRed,
                                                   size: 80.w,
                                                 ),
                                               );

@@ -1,10 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pcnc/bloc/bloc_state_observer.dart';
+import 'package:pcnc/bloc/state_observer_bloc.dart';
 import 'package:pcnc/cache/cache_controller.dart';
 import 'package:pcnc/enums.dart';
 import 'package:pcnc/helpers/restart_app.dart';
 import 'package:pcnc/providers/cart_provider.dart';
-import 'package:pcnc/providers/favorites_provider.dart';
+import 'package:pcnc/providers/wishlist_provider.dart';
 import 'package:pcnc/providers/lang_provider.dart';
 import 'package:pcnc/providers/page_provider.dart';
 import 'package:pcnc/screens/splash_screen.dart';
@@ -21,7 +21,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheController().initSharedPreferences();
-  Bloc.observer = BlocStateObserver();
+  Bloc.observer = StateObserverBloc();
   String? theme = CacheController().getter(key: CacheKeys.theme);
   ThemeData initialThemeMode =
       theme == 'dark' ? ThemeDataStyle.dark : ThemeDataStyle.light;
@@ -80,7 +80,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             providers: [
               ChangeNotifierProvider(create: (_) => LanguageProvider()),
               ChangeNotifierProvider(create: (context) => PageProvider()),
-              ChangeNotifierProvider(create: (_) => FavoritesProvider()),
+              ChangeNotifierProvider(create: (_) => WishListProvider()),
               ChangeNotifierProvider(create: (_) => CartProvider()),
             ],
             child: Consumer<ThemeProvider>(
