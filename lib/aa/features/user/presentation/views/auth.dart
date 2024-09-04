@@ -5,14 +5,14 @@ import 'package:pcnc/aa/core/cache/cache_controller.dart';
 import 'package:pcnc/aa/core/drawer/zoom_drawer.dart';
 import 'package:pcnc/aa/core/enums.dart';
 import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
-import 'package:pcnc/screens/signin_signup_screens/forgot_pass_screen.dart';
+import 'package:pcnc/aa/features/user/presentation/views/forgot_pass_screen.dart';
 import 'package:pcnc/aa/core/constant/color_palette.dart';
 import 'package:pcnc/aa/core/constant/font_sizes.dart';
-import 'package:pcnc/widgets/button_widgets/signin_signup_widget.dart';
-import 'package:pcnc/widgets/form_field_widgets/form_field_widget.dart';
+import 'package:pcnc/aa/features/user/presentation/widget/signin_signup_widget.dart';
+import 'package:pcnc/aa/features/user/presentation/widget/form_field_widget.dart';
 import 'package:pcnc/aa/core/helper/navigator_helper.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pcnc/widgets/custom_snackbar_widget.dart';
+import 'package:pcnc/aa/features/user/presentation/widget/custom_snackbar_widget.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -32,71 +32,14 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
   var _enteredEmail = '';
   var _enteredPassword = '';
   var _reenteredPassword = '';
-  var _emailError = '';
+
   bool hidden = true;
 
-  // Future<void> _submit() async {
-  //   if (_form.currentState!.validate()) {
-  //     _form.currentState!.save();
-
-  //     if (!_isLogin && _enteredPassword != _reenteredPassword) {
-  //       setState(() {
-  //         _emailError = '';
-  //       });
-  //       CustomSnackBar.show(context, appLocale.passwordsDoNotMatch, isError: true);
-  //       return;
-  //     }
-
-  //     try {
-  //       final apiService = ApiService();
-
-  //       if (!_isLogin) {
-  //         // Check if email is already registered
-  //         try {
-  //           final isEmailAvailable = await apiService.isEmailAvailable(_enteredEmail);
-  //           if (!isEmailAvailable) {
-  //             setState(() {
-  //               _emailError = appLocale.emailAlreadyInUse;
-  //             });
-  //             return;
-  //           }
-  //         } catch (error) {
-  //           print('Failed to check email availability: $error');
-  //           CustomSnackBar.show(context, appLocale.operationFailed, isError: true);
-  //           return;
-  //         }
-  //       }
-
-  //       if (_isLogin) {
-  //         final response = await apiService.loginUser(
-  //           _enteredUsernameOrEmail,
-  //           _enteredPassword,
-  //         );
-  //         print('Login successful: ${response['access_token']}');
-  //         _navigateToHome();
-  //       } else {
-  //         final response = await apiService.registerUser(
-  //           _enteredUsernameOrEmail,
-  //           _enteredEmail,
-  //           _enteredPassword,
-  //         );
-  //         print('Registration successful: ${response['id']}');
-  //         _navigateToLogin();
-  //       }
-  //     } catch (error) {
-  //       print('Operation failed: $error');
-  //       CustomSnackBar.show(context, appLocale.operationFailed, isError: true);
-  //     }
-  //   }
-  // }
   Future<void> _submit() async {
     if (_form.currentState!.validate()) {
       _form.currentState!.save();
 
       if (!_isLogin && _enteredPassword != _reenteredPassword) {
-        setState(() {
-          _emailError = '';
-        });
         CustomSnackBarWidget.show(context, appLocale.passwordsDoNotMatch,
             isError: true);
         return;
@@ -314,7 +257,6 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
                           _enteredEmail = '';
                           _enteredPassword = '';
                           _reenteredPassword = '';
-                          _emailError = '';
                         });
                       },
                       child: Center(

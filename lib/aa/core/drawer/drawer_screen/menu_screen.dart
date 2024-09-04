@@ -5,7 +5,7 @@ import 'package:pcnc/aa/core/cache/cache_controller.dart';
 import 'package:pcnc/aa/core/enums.dart';
 import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
 import 'package:pcnc/aa/core/drawer/page_provider.dart';
-import 'package:pcnc/screens/signin_signup_screens/auth.dart';
+import 'package:pcnc/aa/features/user/presentation/views/auth.dart';
 import 'package:pcnc/widgets/profile_widgets/user_avatar.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/aa/core/cache/cache_controller.dart';
-import 'package:pcnc/screens/signin_signup_screens/auth.dart';
+import 'package:pcnc/aa/features/user/presentation/views/auth.dart';
 import 'package:pcnc/aa/core/drawer/zoom_drawer.dart';
 import 'dart:async';
 
