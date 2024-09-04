@@ -1,6 +1,3 @@
-/// FOR RESTARTING APP
-/// CALL IT FROM ANYWHERE USING => RestartWidget.restartApp(context)
-
 import 'package:flutter/material.dart';
 
 class RestartApp extends StatefulWidget {

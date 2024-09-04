@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/util/Input_decoration_util.dart';
-import 'package:pcnc/util/font_sizes.dart';
+import 'package:pcnc/aa/core/util/Input_decoration_util.dart';
+import 'package:pcnc/aa/core/constant/font_sizes.dart';
 
 class CustomFormFieldWidget extends StatefulWidget {
   final void Function(String?)? onSaved;

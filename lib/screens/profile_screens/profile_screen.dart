@@ -1,16 +1,17 @@
-import 'package:pcnc/extensions/sized_box_extension.dart';
-import 'package:pcnc/helpers/navigator_helper.dart';
+import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
+import 'package:pcnc/aa/core/helper/navigator_helper.dart';
+import 'package:pcnc/aa/core/theme/theme_provider.dart';
 import 'package:pcnc/providers/lang_provider.dart';
-import 'package:pcnc/util/font_sizes.dart';
+import 'package:pcnc/aa/core/constant/font_sizes.dart';
 import 'package:pcnc/widgets/profile_widgets/list_tile_item.dart';
 import 'package:pcnc/widgets/profile_widgets/switch_theme_widget.dart';
-import 'package:pcnc/util/theme.dart';
-import 'package:pcnc/providers/theme_provider.dart';
+import 'package:pcnc/aa/core/theme/app_theme.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pcnc/enums.dart';
+import 'package:pcnc/aa/core/enums.dart';
 import 'dart:ui';
 
 class ProfileScreen extends StatefulWidget {
@@ -56,11 +57,11 @@ class _ProfileScreenState extends State<ProfileScreen> with NavigatorHelper {
                         children: [
                           ListTileItem(
                             title: themeProvider.themeDataStyle ==
-                                    ThemeDataStyle.dark
+                                    AppTheme.dark
                                 ? appLocale.darkMode
                                 : appLocale.lightMode,
                             icon: themeProvider.themeDataStyle ==
-                                    ThemeDataStyle.dark
+                                    AppTheme.dark
                                 ? Icons.nightlight_round
                                 : Icons.wb_sunny,
                             toggle: SwitchThemeWidget(),

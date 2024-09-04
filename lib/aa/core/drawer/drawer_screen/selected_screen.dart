@@ -6,12 +6,12 @@ import 'package:pcnc/screens/home_screens/home_screen.dart';
 import 'package:pcnc/screens/profile_screens/profile_screen.dart';
 import 'package:pcnc/screens/search_screens/search_screen.dart';
 import 'package:pcnc/screens/settings_screens/settings_screen.dart';
-import 'package:pcnc/util/color_palette.dart';
+import 'package:pcnc/aa/core/constant/color_palette.dart';
 import 'package:pcnc/widgets/bottom_nav_bar_widget.dart';
 import 'package:pcnc/widgets/profile_widgets/user_avatar.dart';
-import 'package:pcnc/helpers/navigator_helper.dart';
+import 'package:pcnc/aa/core/helper/navigator_helper.dart';
 import 'package:provider/provider.dart';
-import 'package:pcnc/providers/page_provider.dart';
+import 'package:pcnc/aa/core/drawer/page_provider.dart';
 
 class SelectedScreen extends StatefulWidget with NavigatorHelper {
   const SelectedScreen({
@@ -37,6 +37,7 @@ class _SelectedScreenState extends State<SelectedScreen> {
     ];
 
     return Scaffold(
+      // resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
         leading: IconButton(

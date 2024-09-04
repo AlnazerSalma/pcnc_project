@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pcnc/util/font_sizes.dart';
+import 'package:pcnc/aa/core/constant/font_sizes.dart';
 import 'package:pcnc/widgets/card_widgets/cart_card_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:pcnc/providers/cart_provider.dart';

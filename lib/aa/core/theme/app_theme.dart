@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'color_palette.dart';
+import '../constant/color_palette.dart';
 
-class ThemeDataStyle {
+class AppTheme {
   static ThemeData light = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,

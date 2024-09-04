@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/ApiService/api_service.dart';
-import 'package:pcnc/extensions/sized_box_extension.dart';
-import 'package:pcnc/util/font_sizes.dart';
+import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
+import 'package:pcnc/aa/core/constant/font_sizes.dart';
 import 'package:pcnc/widgets/card_widgets/product_card_widget.dart';
 import 'package:pcnc/widgets/search_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -43,74 +43,72 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
 
-    return Scaffold(
-      body: Column(
-        children: [
-          SearchWidget(
-            hintText: appLocale.searchProduct,
-            onChanged: _filterProducts,
-          ),
-          Expanded(
-            child: FutureBuilder<List<dynamic>>(
-              future: products,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else {
-                  if (filteredProducts.isEmpty && searchQuery.isNotEmpty) {
-                    return Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/images/noResultFound.png',
-                            fit: BoxFit.fill,
-                            height: 200.h,
-                          ),
-                          10.height,
-                          Center(
-                            child: Text(
-                              appLocale.noProductFoundWithThisName,
-                              style: TextStyle(
-                                fontSize: textMedium.sp,
-                                color: Theme.of(context).colorScheme.surface,
-                              ),
+    return Column(
+      children: [
+        SearchWidget(
+          hintText: appLocale.searchProduct,
+          onChanged: _filterProducts,
+        ),
+        Expanded(
+          child: FutureBuilder<List<dynamic>>(
+            future: products,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else {
+                if (filteredProducts.isEmpty && searchQuery.isNotEmpty) {
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/noResultFound.png',
+                          fit: BoxFit.fill,
+                          height: 200.h,
+                        ),
+                        10.height,
+                        Center(
+                          child: Text(
+                            appLocale.noProductFoundWithThisName,
+                            style: TextStyle(
+                              fontSize: textMedium.sp,
+                              color: Theme.of(context).colorScheme.surface,
                             ),
                           ),
-                        ],
-                      ),
-                    );
-                  } else {
-                    return GridView.builder(
-                      padding: EdgeInsets.all(8.0),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 7.w,
-                        mainAxisSpacing: 7.h,
-                        childAspectRatio: 0.54,
-                      ),
-                      itemCount: filteredProducts.length,
-                      itemBuilder: (context, index) {
-                        final product = filteredProducts[index];
-                        return ProductCardWidget(
-                          id: product['id'] ?? 0,
-                          title: product['title'] ?? 'No Title',
-                          price: product['price']?.toString() ?? '0.00',
-                          description:
-                              product['description'] ?? 'No Description',
-                          images: List<String>.from(product['images'] ?? []),
-                        );
-                      },
-                    );
-                  }
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  return GridView.builder(
+                    padding: EdgeInsets.all(8.0),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 7.w,
+                      mainAxisSpacing: 7.h,
+                      childAspectRatio: 0.54,
+                    ),
+                    itemCount: filteredProducts.length,
+                    itemBuilder: (context, index) {
+                      final product = filteredProducts[index];
+                      return ProductCardWidget(
+                        id: product['id'] ?? 0,
+                        title: product['title'] ?? 'No Title',
+                        price: product['price']?.toString() ?? '0.00',
+                        description:
+                            product['description'] ?? 'No Description',
+                        images: List<String>.from(product['images'] ?? []),
+                      );
+                    },
+                  );
                 }
-              },
-            ),
+              }
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

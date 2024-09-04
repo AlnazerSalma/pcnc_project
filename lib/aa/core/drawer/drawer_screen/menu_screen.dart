@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/ApiService/api_service.dart';
-import 'package:pcnc/cache/cache_controller.dart';
-import 'package:pcnc/enums.dart';
-import 'package:pcnc/extensions/sized_box_extension.dart';
-import 'package:pcnc/providers/page_provider.dart';
+import 'package:pcnc/aa/core/cache/cache_controller.dart';
+import 'package:pcnc/aa/core/enums.dart';
+import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
+import 'package:pcnc/aa/core/drawer/page_provider.dart';
 import 'package:pcnc/screens/signin_signup_screens/auth.dart';
 import 'package:pcnc/widgets/profile_widgets/user_avatar.dart';
 import 'package:provider/provider.dart';

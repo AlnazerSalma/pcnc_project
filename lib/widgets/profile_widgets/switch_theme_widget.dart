@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:pcnc/util/color_palette.dart';
-import 'package:pcnc/util/theme.dart';
-import 'package:pcnc/providers/theme_provider.dart';
+import 'package:pcnc/aa/core/constant/color_palette.dart';
+import 'package:pcnc/aa/core/theme/app_theme.dart';
+import 'package:pcnc/aa/core/theme/theme_provider.dart';
 
 class SwitchThemeWidget extends StatefulWidget {
   @override
@@ -14,7 +14,7 @@ class _SwitchThemeWidgetState extends State<SwitchThemeWidget> {
 
   @override
   void initState() {
-    _value = Provider.of<ThemeProvider>(context, listen: false).themeDataStyle == ThemeDataStyle.dark;
+    _value = Provider.of<ThemeProvider>(context, listen: false).themeDataStyle == AppTheme.dark;
     super.initState();
   }
 

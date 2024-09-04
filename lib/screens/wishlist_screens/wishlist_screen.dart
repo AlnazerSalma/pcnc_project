@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/providers/wishlist_provider.dart';
-import 'package:pcnc/util/color_palette.dart';
+import 'package:pcnc/aa/core/constant/color_palette.dart';
 import 'package:pcnc/widgets/card_widgets/product_card_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

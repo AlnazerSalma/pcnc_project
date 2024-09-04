@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/ApiService/api_service.dart';
-import 'package:pcnc/extensions/sized_box_extension.dart';
+import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
 import 'package:pcnc/screens/category_screens/all_categories_screen.dart';
 import 'package:pcnc/screens/category_screens/category_products_screen.dart';
-import 'package:pcnc/util/color_palette.dart';
-import 'package:pcnc/util/font_sizes.dart';
+import 'package:pcnc/aa/core/constant/color_palette.dart';
+import 'package:pcnc/aa/core/constant/font_sizes.dart';
 import 'package:pcnc/widgets/card_widgets/product_card_widget.dart';
 import 'package:pcnc/widgets/button_widgets/show_all_button_widget.dart';
 
@@ -32,9 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: Size(375, 790));
 
-    return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: FutureBuilder<List<dynamic>>(
+    return Container(
+      child: FutureBuilder<List<dynamic>>(
         future: Future.wait([categories, products]),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -48,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
           } else {
             final categoryList = snapshot.data![0] as List<dynamic>;
             final productList = snapshot.data![1] as List<dynamic>;
-
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,7 +92,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             categoryList[index] as Map<String, dynamic>;
                         final categoryName = category['name'] ?? 'Unknown';
                         final categoryImage = category['image'];
-
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(

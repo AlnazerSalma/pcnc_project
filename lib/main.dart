@@ -1,15 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pcnc/aa/core/constant/strings.dart';
+import 'package:pcnc/aa/core/theme/theme_provider.dart';
 import 'package:pcnc/bloc/state_observer_bloc.dart';
-import 'package:pcnc/cache/cache_controller.dart';
-import 'package:pcnc/enums.dart';
-import 'package:pcnc/helpers/restart_app.dart';
+import 'package:pcnc/aa/core/cache/cache_controller.dart';
+import 'package:pcnc/aa/core/enums.dart';
+import 'package:pcnc/aa/core/helper/restart_app.dart';
 import 'package:pcnc/providers/cart_provider.dart';
 import 'package:pcnc/providers/wishlist_provider.dart';
 import 'package:pcnc/providers/lang_provider.dart';
-import 'package:pcnc/providers/page_provider.dart';
+import 'package:pcnc/aa/core/drawer/page_provider.dart';
 import 'package:pcnc/screens/splash_screen.dart';
-import 'package:pcnc/util/theme.dart';
-import 'package:pcnc/providers/theme_provider.dart';
+import 'package:pcnc/aa/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ void main() async {
   Bloc.observer = StateObserverBloc();
   String? theme = CacheController().getter(key: CacheKeys.theme);
   ThemeData initialThemeMode =
-      theme == 'dark' ? ThemeDataStyle.dark : ThemeDataStyle.light;
+      theme == 'dark' ? AppTheme.dark : AppTheme.light;
 
   runApp(
     provider.ChangeNotifierProvider(
@@ -86,7 +87,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             child: Consumer<ThemeProvider>(
               builder: (context, themeProvider, child) {
                 return MaterialApp(
-                  title: 'pcnc',
+                  title: appTitle,
                   debugShowCheckedModeBanner: false,
                   theme: themeProvider.themeDataStyle,
                   localizationsDelegates:

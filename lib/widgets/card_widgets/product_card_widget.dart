@@ -3,11 +3,11 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/extensions/sized_box_extension.dart';
+import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
 import 'package:pcnc/providers/cart_provider.dart';
 import 'package:pcnc/providers/wishlist_provider.dart';
-import 'package:pcnc/util/color_palette.dart';
-import 'package:pcnc/util/font_sizes.dart';
+import 'package:pcnc/aa/core/constant/color_palette.dart';
+import 'package:pcnc/aa/core/constant/font_sizes.dart';
 import 'package:provider/provider.dart';
 
 class ProductCardWidget extends StatelessWidget {
