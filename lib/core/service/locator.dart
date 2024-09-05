@@ -1,31 +1,31 @@
 import 'package:get_it/get_it.dart';
 import 'package:pcnc/core/app_service/api_service.dart';
-import 'package:pcnc/features/cart/data/repository/cart_repository.dart';
-import 'package:pcnc/features/cart/domain/usecase/add_to_cart_use_case.dart';
-import 'package:pcnc/features/category/data/repository/category_repository.dart';
-import 'package:pcnc/features/category/domain/usecases/get_categories_use_case.dart';
-import 'package:pcnc/features/product/data/repository/product_repository.dart';
-import 'package:pcnc/features/product/domain/usecase/get_products_use_case.dart';
+import 'package:pcnc/features/cart/data/repository/cart_repository_impl.dart';
+import 'package:pcnc/features/cart/domain/usecase/add_to_cart_usecase.dart';
+import 'package:pcnc/features/category/data/repository/category_repository_impl.dart';
+import 'package:pcnc/features/category/domain/usecases/get_categories_usecase.dart';
+import 'package:pcnc/features/product/data/repository/product_repository_impl.dart';
+import 'package:pcnc/features/product/domain/usecase/get_products_usecase.dart';
 
 final GetIt locator = GetIt.instance;
 
 void setupLocator() {
   locator.registerLazySingleton<ApiService>(() => ApiService());
 
-  locator.registerLazySingleton<CategoryRepository>(
-      () => CategoryRepository(locator<ApiService>()));
+  locator.registerLazySingleton<CategoryRepositoryImpl>(
+      () => CategoryRepositoryImpl(locator<ApiService>()));
   locator.registerLazySingleton<GetCategoriesUseCase>(
-      () => GetCategoriesUseCase(locator<CategoryRepository>()));
+      () => GetCategoriesUseCase(locator<CategoryRepositoryImpl>()));
 //========================================================================
-  locator.registerLazySingleton<ProductRepository>(
-      () => ProductRepository(locator<ApiService>()));
+  locator.registerLazySingleton<ProductRepositoryImpl>(
+      () => ProductRepositoryImpl(locator<ApiService>()));
   locator.registerLazySingleton<GetProductsUseCase>(
-      () => GetProductsUseCase(locator<ProductRepository>()));
+      () => GetProductsUseCase(locator<ProductRepositoryImpl>()));
 //=====================================================================
-  locator.registerLazySingleton<CartRepository>(() => CartRepository(locator<ApiService>()));
-  locator.registerLazySingleton(() => AddToCartUseCase(locator<CartRepository>()));
-  locator.registerLazySingleton(() => RemoveFromCartUseCase(locator<CartRepository>()));
-  locator.registerLazySingleton(() => UpdateQuantityUseCase(locator<CartRepository>()));
-  locator.registerLazySingleton(() => GetCartItemsUseCase(locator<CartRepository>()));
-  locator.registerLazySingleton(() => GetTotalPriceUseCase(locator<CartRepository>()));
+  locator.registerLazySingleton<CartRepositoryImpl>(() => CartRepositoryImpl(locator<ApiService>()));
+  locator.registerLazySingleton(() => AddToCartUseCase(locator<CartRepositoryImpl>()));
+  locator.registerLazySingleton(() => RemoveFromCartUseCase(locator<CartRepositoryImpl>()));
+  locator.registerLazySingleton(() => UpdateQuantityUseCase(locator<CartRepositoryImpl>()));
+  locator.registerLazySingleton(() => GetCartItemsUseCase(locator<CartRepositoryImpl>()));
+  locator.registerLazySingleton(() => GetTotalPriceUseCase(locator<CartRepositoryImpl>()));
 }

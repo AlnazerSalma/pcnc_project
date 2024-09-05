@@ -1,7 +1,7 @@
 import 'package:pcnc/core/cache/cache_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../core/enums.dart';
+import '../../enums.dart';
 
 class LanguageProvider extends ChangeNotifier {
   String lang = CacheController().getter(key: CacheKeys.language) ?? 'en';

@@ -1,9 +1,9 @@
 import 'package:pcnc/core/extension/sized_box_extension.dart';
 import 'package:pcnc/core/helper/navigator_helper.dart';
 import 'package:pcnc/core/theme/theme_provider.dart';
-import 'package:pcnc/providers/lang_provider.dart';
+import 'package:pcnc/core/language/provider/lang_provider.dart';
 import 'package:pcnc/core/constant/font_sizes.dart';
-import 'package:pcnc/features/other_features/profile/presentation/widget/list_tile_item.dart';
+import 'package:pcnc/features/other_features/profile/presentation/widget/list_tile_item_widget.dart';
 import 'package:pcnc/features/other_features/profile/presentation/widget/switch_theme_widget.dart';
 import 'package:pcnc/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> with NavigatorHelper {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          ListTileItem(
+                          ListTileItemWidget(
                             title: themeProvider.themeDataStyle ==
                                     AppTheme.dark
                                 ? appLocale.darkMode
@@ -66,7 +66,7 @@ class _ProfileScreenState extends State<ProfileScreen> with NavigatorHelper {
                             toggle: SwitchThemeWidget(),
                           ),
                           20.height,
-                          ListTileItem(
+                          ListTileItemWidget(
                             title: appLocale.language,
                             icon: Icons.language,
                             onTap: () => _showLanguages(lang),

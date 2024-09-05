@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pcnc/core/drawer/page_provider.dart';
 import 'package:pcnc/features/cart/presentation/screen/cart_screen.dart';
 import 'package:pcnc/features/product/presentation/view/wishlist_screen.dart';
 import 'package:pcnc/features/dashboard/screen/home_screen.dart';
@@ -8,10 +9,10 @@ import 'package:pcnc/features/product/presentation/view/search_screen.dart';
 import 'package:pcnc/features/other_features/settings/settings_screen.dart';
 import 'package:pcnc/core/constant/color_palette.dart';
 import 'package:pcnc/features/dashboard/widget/bottom_nav_bar_widget.dart';
-import 'package:pcnc/features/other_features/profile/presentation/widget/user_avatar.dart';
+import 'package:pcnc/features/other_features/profile/presentation/widget/user_avatar_widget.dart';
 import 'package:pcnc/core/helper/navigator_helper.dart';
 import 'package:provider/provider.dart';
-import 'package:pcnc/core/drawer/page_provider.dart';
+
 
 class SelectedScreen extends StatefulWidget with NavigatorHelper {
   const SelectedScreen({
@@ -72,7 +73,7 @@ class _SelectedScreenState extends State<SelectedScreen> {
         ),
         actions: [
           IconButton(
-            icon: UserAvatar(),
+            icon: UserAvatarWidget(),
             color: kWhiteColor,
             iconSize: 24.sp,
             onPressed: () => widget.jumpTo(context, to: const ProfileScreen()),

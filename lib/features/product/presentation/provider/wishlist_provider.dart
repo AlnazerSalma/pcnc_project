@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pcnc/features/product/domain/entity/product.dart';
-import 'package:pcnc/features/product/domain/usecase/get_products_use_case.dart';
+import 'package:pcnc/features/product/domain/usecase/get_products_usecase.dart';
 
 class WishListProvider extends ChangeNotifier {
   final GetProductsUseCase getProductsUseCase;

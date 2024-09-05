@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/core/constant/font_sizes.dart';
 
-class ListTileItem extends StatefulWidget {
+class ListTileItemWidget extends StatefulWidget {
   final String title;
   final IconData icon;
   final Function()? onTap;
   final Widget? toggle;
 
-  const ListTileItem({
+  const ListTileItemWidget({
     required this.title,
     required this.icon,
     this.onTap,
@@ -19,10 +19,10 @@ class ListTileItem extends StatefulWidget {
   });
 
   @override
-  State<ListTileItem> createState() => _ListTileItemState();
+  State<ListTileItemWidget> createState() => _ListTileItemState();
 }
 
-class _ListTileItemState extends State<ListTileItem> {
+class _ListTileItemState extends State<ListTileItemWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(

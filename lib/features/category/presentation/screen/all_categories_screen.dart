@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/features/category/domain/entity/category.dart';
-import 'package:pcnc/features/category/domain/usecases/get_categories_use_case.dart';
+import 'package:pcnc/features/category/domain/usecases/get_categories_usecase.dart';
 import 'package:pcnc/features/product/presentation/view/category_products_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/core/constant/color_palette.dart';

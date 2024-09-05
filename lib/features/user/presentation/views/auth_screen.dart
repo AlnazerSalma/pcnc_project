@@ -5,6 +5,7 @@ import 'package:pcnc/core/cache/cache_controller.dart';
 import 'package:pcnc/core/drawer/zoom_drawer.dart';
 import 'package:pcnc/core/enums.dart';
 import 'package:pcnc/core/extension/sized_box_extension.dart';
+import 'package:pcnc/features/user/data/repository/user_repository_impl.dart';
 import 'package:pcnc/features/user/presentation/views/forgot_pass_screen.dart';
 import 'package:pcnc/core/constant/color_palette.dart';
 import 'package:pcnc/core/constant/font_sizes.dart';
@@ -32,10 +33,10 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
   var _enteredEmail = '';
   var _enteredPassword = '';
   var _reenteredPassword = '';
+  
 
   bool hidden = true;
-
-  Future<void> _submit() async {
+Future<void> _submit() async {
     if (_form.currentState!.validate()) {
       _form.currentState!.save();
 
@@ -46,31 +47,29 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
       }
 
       try {
-        final apiService = ApiService();
+        final apiRepository = ApiRepositoryImpl(apiService: ApiService());
         if (_isLogin) {
-          final response = await apiService.loginUser(
+          final user = await apiRepository.loginUser(
             _enteredUsernameOrEmail,
             _enteredPassword,
           );
           await CacheController()
-              .setter(key: CacheKeys.token, value: response['access_token']);
-          print('Login successful: ${response['access_token']}');
+              .setter(key: CacheKeys.token, value: user.id);
           _navigateToHome();
         } else {
-          final response = await apiService.registerUser(
+          final user = await apiRepository.registerUser(
             _enteredUsernameOrEmail,
             _enteredEmail,
             _enteredPassword,
           );
-          print('Registration successful: ${response['id']}');
           _navigateToLogin();
         }
       } catch (error) {
-        print('Operation failed: $error');
         CustomSnackBarWidget.show(context, appLocale.operationFailed, isError: true);
       }
     }
   }
+
 
   Future<void> _navigateToHome() async {
     jumpTo(context, to: ZoomDrawerAnimation());
@@ -79,11 +78,11 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
   Future<void> _navigateToLogin() async {
     setState(() {
       _isLogin = true;
+      _form.currentState?.reset(); 
       _enteredUsernameOrEmail = '';
       _enteredEmail = '';
       _enteredPassword = '';
       _reenteredPassword = '';
-      // _emailError = '';
     });
   }
 

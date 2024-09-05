@@ -5,10 +5,10 @@ import 'package:pcnc/core/constant/color_palette.dart';
 import 'package:pcnc/core/constant/font_sizes.dart';
 import 'package:pcnc/core/service/locator.dart';
 import 'package:pcnc/features/category/domain/entity/category.dart';
-import 'package:pcnc/features/category/domain/usecases/get_categories_use_case.dart';
+import 'package:pcnc/features/category/domain/usecases/get_categories_usecase.dart';
 import 'package:pcnc/features/product/presentation/widgets/search_widget.dart';
 import 'package:pcnc/features/product/domain/entity/product.dart';
-import 'package:pcnc/features/product/domain/usecase/get_products_use_case.dart';
+import 'package:pcnc/features/product/domain/usecase/get_products_usecase.dart';
 import 'package:pcnc/features/product/presentation/widgets/card/product_card_widget.dart';
 
 class CategoryProductsScreen extends StatefulWidget {

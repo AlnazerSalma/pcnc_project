@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:pcnc/core/constant/strings.dart';
 import 'package:pcnc/features/category/data/model/category_model.dart';
 import 'package:pcnc/features/product/data/model/product_model.dart';
+import 'package:pcnc/features/user/data/model/user_model.dart';
 
 class ApiService {
   final String baseUrl = baseUrll;
@@ -37,27 +38,32 @@ class ApiService {
       throw Exception('Failed to load products');
     }
   }
-  Future<Map<String, dynamic>> loginUser(String email, String password) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl/auth/login'),
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({
-        'email': email,
-        'password': password,
-      }),
-    );
-    if (response.statusCode == 201 || response.statusCode == 200) {
-      final data = json.decode(response.body);
-      return data;
+ 
+Future<UserModel> loginUser(String email, String password) async {
+  final response = await http.post(
+    Uri.parse('$baseUrl/auth/login'),
+    headers: {'Content-Type': 'application/json'},
+    body: json.encode({
+      'email': email,
+      'password': password,
+    }),
+  );
+
+  if (response.statusCode == 200 || response.statusCode == 201) {
+    final data = json.decode(response.body);
+    print('Response data: $data');
+    if (data is Map<String, dynamic>) {
+      return UserModel.fromJson(data);
     } else {
-      throw Exception('Failed to login');
+      throw Exception('Unexpected response format');
     }
+  } else {
+    final responseBody = json.decode(response.body);
+    throw Exception('Failed to login: ${responseBody['message']}');
   }
-  Future<Map<String, dynamic>> registerUser(String name, String email, String password) async {
-  final passwordRegExp = RegExp(r'^[a-zA-Z0-9]+$');
-  if (!passwordRegExp.hasMatch(password)) {
-    throw Exception('Password must contain only letters and numbers.');
-  }
+}
+
+Future<UserModel> registerUser(String name, String email, String password) async {
   final response = await http.post(
     Uri.parse('$baseUrl/users/'),
     headers: {'Content-Type': 'application/json'},
@@ -65,16 +71,23 @@ class ApiService {
       'name': name,
       'email': email,
       'password': password,
-      'avatar': 'https://picsum.photos/800',
+      'avatar': 'https://imgur.com/LDOO4Qs',
     }),
   );
+
   if (response.statusCode == 201) {
     final data = json.decode(response.body);
-    return data;
+    print('Response data: $data');
+    if (data['id'] is String || data['id'] is int) {
+      return UserModel.fromJson(data);
+    } else {
+      throw Exception('Unexpected response format');
+    }
   } else {
     final responseBody = json.decode(response.body);
-    print('Failed to register user: ${responseBody}');
     throw Exception('Failed to register user: ${responseBody['message']}');
   }
 }
 }
+
+

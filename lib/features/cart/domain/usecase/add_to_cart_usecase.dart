@@ -1,8 +1,8 @@
 import 'package:pcnc/features/cart/data/model/cart_model.dart';
-import 'package:pcnc/features/cart/data/repository/cart_repository.dart';
+import 'package:pcnc/features/cart/data/repository/cart_repository_impl.dart';
 
 class AddToCartUseCase {
-  final CartRepository cartRepository;
+  final CartRepositoryImpl cartRepository;
 
   AddToCartUseCase(this.cartRepository);
 
@@ -12,7 +12,7 @@ class AddToCartUseCase {
 }
 
 class RemoveFromCartUseCase {
-  final CartRepository cartRepository;
+  final CartRepositoryImpl cartRepository;
 
   RemoveFromCartUseCase(this.cartRepository);
 
@@ -22,7 +22,7 @@ class RemoveFromCartUseCase {
 }
 
 class UpdateQuantityUseCase {
-  final CartRepository cartRepository;
+  final CartRepositoryImpl cartRepository;
 
   UpdateQuantityUseCase(this.cartRepository);
 
@@ -32,7 +32,7 @@ class UpdateQuantityUseCase {
 }
 
 class GetCartItemsUseCase {
-  final CartRepository cartRepository;
+  final CartRepositoryImpl cartRepository;
 
   GetCartItemsUseCase(this.cartRepository);
 
@@ -42,7 +42,7 @@ class GetCartItemsUseCase {
 }
 
 class GetTotalPriceUseCase {
-  final CartRepository cartRepository;
+  final CartRepositoryImpl cartRepository;
 
   GetTotalPriceUseCase(this.cartRepository);
 

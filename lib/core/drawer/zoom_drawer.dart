@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pcnc/core/drawer/drawer_screen/menu_screen.dart';
+import 'package:pcnc/core/drawer/drawer_screen/selected_screen.dart';
 import 'package:pcnc/core/drawer/main_drawer.dart';
+import 'package:pcnc/core/drawer/page_provider.dart';
 import 'package:pcnc/features/product/presentation/view/wishlist_screen.dart';
 import 'package:pcnc/features/dashboard/screen/home_screen.dart';
 import 'package:pcnc/features/other_features/profile/presentation/screen/profile_screen.dart';
 import 'package:pcnc/features/other_features/settings/settings_screen.dart';
-import 'package:pcnc/core/drawer/page_provider.dart';
-import 'package:pcnc/core/drawer/drawer_screen/menu_screen.dart';
-import 'package:pcnc/core/drawer/drawer_screen/selected_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ZoomDrawerAnimation extends StatefulWidget {

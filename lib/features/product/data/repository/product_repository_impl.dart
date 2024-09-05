@@ -1,10 +1,10 @@
 import 'package:pcnc/core/app_service/api_service.dart';
 import 'package:pcnc/features/product/domain/entity/product.dart';
 
-class ProductRepository {
+class ProductRepositoryImpl {
   final ApiService apiService;
 
-  ProductRepository(this.apiService);
+  ProductRepositoryImpl(this.apiService);
    Future<List<Product>> getProductsByCategory(int categoryId) async {
     final data = await apiService.getProductsByCategory(categoryId);
     return data.map((model) => model.toEntity()).toList();

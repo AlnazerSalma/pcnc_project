@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/core/app_service/api_service.dart';
 import 'package:pcnc/core/cache/cache_controller.dart';
-import 'package:pcnc/core/enums.dart';
-import 'package:pcnc/core/extension/sized_box_extension.dart';
 import 'package:pcnc/core/drawer/page_provider.dart';
-import 'package:pcnc/features/user/presentation/views/auth.dart';
-import 'package:pcnc/features/other_features/profile/presentation/widget/user_avatar.dart';
+import 'package:pcnc/features/user/presentation/views/auth_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

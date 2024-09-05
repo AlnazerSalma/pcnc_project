@@ -1,9 +1,9 @@
 
-import 'package:pcnc/features/product/data/repository/product_repository.dart';
+import 'package:pcnc/features/product/data/repository/product_repository_impl.dart';
 import 'package:pcnc/features/product/domain/entity/product.dart';
 
 class GetProductsUseCase {
-  final ProductRepository productRepository;
+  final ProductRepositoryImpl productRepository;
 
   GetProductsUseCase(this.productRepository);
 

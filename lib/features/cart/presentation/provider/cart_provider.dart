@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pcnc/features/cart/data/model/cart_model.dart';
-import 'package:pcnc/features/cart/domain/usecase/add_to_cart_use_case.dart';
+import 'package:pcnc/features/cart/domain/usecase/add_to_cart_usecase.dart';
 
 class CartProvider with ChangeNotifier {
   final AddToCartUseCase addToCartUseCase;
