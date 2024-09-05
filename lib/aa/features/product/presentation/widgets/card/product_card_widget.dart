@@ -1,29 +1,21 @@
-import 'dart:async';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
+import 'package:pcnc/aa/features/cart/data/model/cart_model.dart';
+import 'package:pcnc/aa/features/product/domain/entity/product.dart';
 import 'package:pcnc/aa/features/product/presentation/widgets/dialog/full_image_dialog.dart';
 import 'package:pcnc/aa/features/product/presentation/widgets/dialog/product_details_dialog.dart';
-import 'package:pcnc/providers/cart_provider.dart';
-import 'package:pcnc/providers/wishlist_provider.dart';
+import 'package:pcnc/aa/features/cart/presentation/provider/cart_provider.dart';
+import 'package:pcnc/aa/features/product/presentation/provider/wishlist_provider.dart';
 import 'package:pcnc/aa/core/constant/color_palette.dart';
 import 'package:pcnc/aa/core/constant/font_sizes.dart';
 import 'package:provider/provider.dart';
 
 class ProductCardWidget extends StatelessWidget {
-  final int id;
-  final String title;
-  final String price;
-  final String description;
-  final List<String> images;
+  final Product product;
 
   ProductCardWidget({
-    required this.id,
-    required this.title,
-    required this.price,
-    required this.description,
-    required this.images,
+    required this.product,
   });
 
   @override
@@ -33,10 +25,7 @@ class ProductCardWidget extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) => ProductDetailsDialog(
-            title: title,
-            description: description,
-            price: price,
-            images: images,
+            product: product,
           ),
         );
       },
@@ -61,20 +50,20 @@ class ProductCardWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (images.isNotEmpty)
+            if (product.images.isNotEmpty)
               GestureDetector(
                 onTap: () {
                   showDialog(
                     context: context,
                     builder: (context) =>
-                        FullImageDialog(imageUrl: images.first),
+                        FullImageDialog(imageUrl: product.images.first),
                   );
                 },
                 child: ClipRRect(
                   borderRadius:
                       BorderRadius.vertical(top: Radius.circular(12.0)),
                   child: Image.network(
-                    images.first,
+                    product.images.first,
                     width: double.infinity,
                     height: 120.h,
                     fit: BoxFit.fill,
@@ -106,7 +95,7 @@ class ProductCardWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(7.w),
               child: Text(
-                title,
+                product.title,
                 maxLines: 2,
                 style: TextStyle(
                   fontSize: textMedium.sp,
@@ -117,7 +106,7 @@ class ProductCardWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(7.w),
               child: Text(
-                description,
+                product.description,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(
@@ -128,7 +117,7 @@ class ProductCardWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.w),
               child: Text(
-                '\$${price}',
+                '\$${product.price}',
                 style: TextStyle(
                   fontSize: textExtraLarge.sp,
                   color: Theme.of(context).colorScheme.surface,
@@ -136,6 +125,7 @@ class ProductCardWidget extends StatelessWidget {
                 ),
               ),
             ),
+            Spacer(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 2.w),
               child: Row(
@@ -144,8 +134,9 @@ class ProductCardWidget extends StatelessWidget {
                   Row(
                     children: [
                       Consumer<WishListProvider>(
-                        builder: (context, WishListProvider, child) {
-                          final isFavorite = WishListProvider.isFavorite(id);
+                        builder: (context, wishListProvider, child) {
+                          final isFavorite =
+                              wishListProvider.isFavorite(product.id);
                           return IconButton(
                             icon: Icon(
                               isFavorite
@@ -157,13 +148,7 @@ class ProductCardWidget extends StatelessWidget {
                               size: 20.w,
                             ),
                             onPressed: () {
-                              WishListProvider.toggleFavorite({
-                                'id': id,
-                                'title': title,
-                                'price': price,
-                                'description': description,
-                                'images': images,
-                              });
+                              wishListProvider.toggleFavorite(product);
                             },
                           );
                         },
@@ -180,8 +165,7 @@ class ProductCardWidget extends StatelessWidget {
                   ),
                   Consumer<CartProvider>(
                     builder: (context, cartProvider, child) {
-                      final isInCart = cartProvider.isInCart(id);
-
+                      final isInCart = cartProvider.isInCart(product.id);
                       return IconButton(
                         icon: Icon(
                           isInCart
@@ -194,15 +178,11 @@ class ProductCardWidget extends StatelessWidget {
                         ),
                         onPressed: () {
                           if (isInCart) {
-                            cartProvider.removeFromCart(id);
+                            cartProvider.removeFromCart(product.id);
                           } else {
-                            cartProvider.addToCart({
-                              'id': id,
-                              'title': title,
-                              'price': price,
-                              'description': description,
-                              'images': images,
-                            });
+                            cartProvider.addToCart(
+                              CartItemModel.fromProduct(product),
+                            );
                           }
                         },
                       );

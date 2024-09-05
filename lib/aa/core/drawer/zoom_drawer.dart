@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pcnc/aa/core/drawer/main_drawer.dart';
-import 'package:pcnc/screens/wishlist_screens/wishlist_screen.dart';
+import 'package:pcnc/aa/features/product/presentation/view/wishlist_screen.dart';
 import 'package:pcnc/aa/features/dashboard/screen/home_screen.dart';
 import 'package:pcnc/screens/profile_screens/profile_screen.dart';
 import 'package:pcnc/screens/settings_screens/settings_screen.dart';
@@ -99,7 +99,7 @@ class _ZoomDrawerAnimationState extends State<ZoomDrawerAnimation>
       case 0:
         return HomeScreen();
       case 1:
-        return wishlistScreen();
+        return WishlistScreen();
       case 2:
         return SettingsScreen();
       case 3:

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/ApiService/api_service.dart';
 import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
 import 'package:pcnc/aa/core/constant/font_sizes.dart';
-import 'package:pcnc/aa/features/dashboard/widget/search_widget.dart';
+import 'package:pcnc/aa/features/product/presentation/widgets/search_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/aa/features/product/presentation/widgets/card/product_card_widget.dart';
 
@@ -93,14 +93,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     itemCount: filteredProducts.length,
                     itemBuilder: (context, index) {
                       final product = filteredProducts[index];
-                      return ProductCardWidget(
-                        id: product['id'] ?? 0,
-                        title: product['title'] ?? 'No Title',
-                        price: product['price']?.toString() ?? '0.00',
-                        description:
-                            product['description'] ?? 'No Description',
-                        images: List<String>.from(product['images'] ?? []),
-                      );
+                      return ProductCardWidget(product: product);
                     },
                   );
                 }

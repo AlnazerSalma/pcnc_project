@@ -3,23 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
 import 'package:pcnc/aa/core/constant/color_palette.dart';
 import 'package:pcnc/aa/core/constant/font_sizes.dart';
+import 'package:pcnc/aa/features/cart/data/model/cart_model.dart';
 import 'package:provider/provider.dart';
-import 'package:pcnc/providers/cart_provider.dart';
+import 'package:pcnc/aa/features/cart/presentation/provider/cart_provider.dart';
 
 class CartCardWidget extends StatelessWidget {
-  final int id;
-  final String title;
-  final String price;
-  final String description;
-  final String imageUrl;
+ final CartItemModel cartItem;
 
-  CartCardWidget({
-    required this.id,
-    required this.title,
-    required this.price,
-    required this.description,
-    required this.imageUrl,
-  });
+ CartCardWidget({required this.cartItem});
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +29,10 @@ class CartCardWidget extends StatelessWidget {
           height: 120.h,
           child: Row(
             children: [
-              imageUrl.isNotEmpty
+               cartItem.imageUrl.isNotEmpty
                   ? ClipOval(
                       child: Image.network(
-                        imageUrl,
+                         cartItem.imageUrl,
                         width: 80.w,
                         height: 100.h,
                         fit: BoxFit.cover,
@@ -78,7 +69,7 @@ class CartCardWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      title,
+                       cartItem.title,
                       style: TextStyle(
                         fontSize: textMedium.sp,
                         fontWeight: FontWeight.bold,
@@ -90,7 +81,7 @@ class CartCardWidget extends StatelessWidget {
                           true,
                     ),
                     Text(
-                      '\$${price}',
+                      '\$${cartItem.price}',
                       style: TextStyle(
                         fontSize: textMedium.sp,
                         color: Theme.of(context).colorScheme.surface,
@@ -115,12 +106,12 @@ class CartCardWidget extends StatelessWidget {
                               color: kWhiteColor, size: 16.sp),
                         ),
                         onPressed: () {
-                          cartProvider.decreaseQuantity(id);
+                          cartProvider.updateQuantity(cartItem.id, false);
                         },
                       ),
                       4.width,
                       Text(
-                        '${cartProvider.getItemQuantity(id)}',
+                         '${cartItem.quantity}',
                         style: TextStyle(
                             fontSize: textMedium.sp,
                             color: Theme.of(context).colorScheme.surface),
@@ -134,7 +125,7 @@ class CartCardWidget extends StatelessWidget {
                               Icon(Icons.add, color: kWhiteColor, size: 16.sp),
                         ),
                         onPressed: () {
-                          cartProvider.increaseQuantity(id);
+                          cartProvider.updateQuantity(cartItem.id, true);
                         },
                       ),
                     ],
@@ -143,7 +134,7 @@ class CartCardWidget extends StatelessWidget {
                   IconButton(
                     icon: Icon(Icons.delete, color: kRed),
                     onPressed: () {
-                      cartProvider.removeFromCart(id);
+                      cartProvider.removeFromCart(cartItem.id);
                     },
                   ),
                 ],

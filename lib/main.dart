@@ -1,13 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pcnc/aa/core/constant/strings.dart';
 import 'package:pcnc/aa/core/theme/theme_provider.dart';
+import 'package:pcnc/aa/features/cart/domain/usecase/add_to_cart_use_case.dart';
+import 'package:pcnc/aa/features/product/domain/usecase/get_products_use_case.dart';
 import 'package:pcnc/bloc/state_observer_bloc.dart';
 import 'package:pcnc/aa/core/cache/cache_controller.dart';
 import 'package:pcnc/aa/core/enums.dart';
 import 'package:pcnc/aa/core/helper/restart_app.dart';
 import 'package:pcnc/aa/core/service/locator.dart';
-import 'package:pcnc/providers/cart_provider.dart';
-import 'package:pcnc/providers/wishlist_provider.dart';
+import 'package:pcnc/aa/features/cart/presentation/provider/cart_provider.dart';
+import 'package:pcnc/aa/features/product/presentation/provider/wishlist_provider.dart';
 import 'package:pcnc/providers/lang_provider.dart';
 import 'package:pcnc/aa/core/drawer/page_provider.dart';
 import 'package:pcnc/screens/splash_screen.dart';
@@ -82,8 +84,16 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             providers: [
               ChangeNotifierProvider(create: (_) => LanguageProvider()),
               ChangeNotifierProvider(create: (context) => PageProvider()),
-              ChangeNotifierProvider(create: (_) => WishListProvider()),
-              ChangeNotifierProvider(create: (_) => CartProvider()),
+              ChangeNotifierProvider(create: (_) => WishListProvider(locator<GetProductsUseCase>())),
+              ChangeNotifierProvider(
+            create: (_) => CartProvider(
+              addToCartUseCase: locator<AddToCartUseCase>(),
+              removeFromCartUseCase: locator<RemoveFromCartUseCase>(),
+              updateQuantityUseCase: locator<UpdateQuantityUseCase>(),
+              getCartItemsUseCase: locator<GetCartItemsUseCase>(),
+              getTotalPriceUseCase: locator<GetTotalPriceUseCase>(),
+            ),
+          ),
             ],
             child: Consumer<ThemeProvider>(
               builder: (context, themeProvider, child) {

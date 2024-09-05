@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
 import 'package:pcnc/aa/core/constant/font_sizes.dart';
+import 'package:pcnc/aa/features/category/domain/entity/category.dart';
 
 class CategoryCardWidget extends StatelessWidget {
-  final String name;
-  final String? imageUrl;
+  final Category category;
   final VoidCallback onTap;
 
   CategoryCardWidget({
-    required this.name,
-    this.imageUrl,
+    required this.category,
     required this.onTap,
   });
 
@@ -40,9 +39,9 @@ class CategoryCardWidget extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 height: 140.h,
-                child: imageUrl != null
+                child: category.image != null
                     ? Image.network(
-                        imageUrl!,
+                        category.image!,
                         fit: BoxFit.fill,
                         errorBuilder: (context, error, stackTrace) {
                           return Center(
@@ -73,7 +72,7 @@ class CategoryCardWidget extends StatelessWidget {
             ),
             8.height,
             Text(
-              name,
+              category.name,
               style: TextStyle(
                 fontSize: textMedium.sp,
                 fontWeight:FontWeight.bold,

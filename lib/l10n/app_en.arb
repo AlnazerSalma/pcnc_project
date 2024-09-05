@@ -58,6 +58,9 @@
     "error":"Error",
     "noProductsAvailable":"No products available",
     "noProductsMatchYourSearch": "No products match your search",
-    "noDataAvailable":"No data available"
+    "noDataAvailable":"No data available",
+    "errorLoadingImage":"Error loading image",
+    "close":"Close",
+    "noFavoritesMessage": "You have no favorite items yet!"
 
 }

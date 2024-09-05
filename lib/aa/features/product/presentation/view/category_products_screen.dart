@@ -6,7 +6,7 @@ import 'package:pcnc/aa/core/constant/font_sizes.dart';
 import 'package:pcnc/aa/core/service/locator.dart';
 import 'package:pcnc/aa/features/category/domain/entity/category.dart';
 import 'package:pcnc/aa/features/category/domain/usecases/get_categories_use_case.dart';
-import 'package:pcnc/aa/features/dashboard/widget/search_widget.dart';
+import 'package:pcnc/aa/features/product/presentation/widgets/search_widget.dart';
 import 'package:pcnc/aa/features/product/domain/entity/product.dart';
 import 'package:pcnc/aa/features/product/domain/usecase/get_products_use_case.dart';
 import 'package:pcnc/aa/features/product/presentation/widgets/card/product_card_widget.dart';
@@ -22,7 +22,7 @@ class CategoryProductsScreen extends StatefulWidget {
 
 class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
   AppLocalizations get appLocale => AppLocalizations.of(context)!;
-  late Future<List<ProductEntity>> products;
+  late Future<List<Product>> products;
   late Future<Category> category;
   String searchQuery = '';
   late final GetCategoriesUseCase _getCategoriesUseCase;
@@ -103,7 +103,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
             },
           ),
           Expanded(
-            child: FutureBuilder<List<ProductEntity>>(
+            child: FutureBuilder<List<Product>>(
               future: products,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -135,13 +135,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
                     itemCount: filteredProducts.length,
                     itemBuilder: (context, index) {
                       final product = filteredProducts[index];
-                      return ProductCardWidget(
-                        id: product.id,
-                        title: product.title,
-                        price: product.price.toString(),
-                        description: product.description,
-                        images: product.images,
-                      );
+                      return ProductCardWidget(product: product);
                     },
                   );
                 }

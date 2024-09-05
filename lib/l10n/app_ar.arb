@@ -60,6 +60,9 @@
     "error":"يوجد خلل",
     "noProductsAvailable":"لا يوجد منتج",
     "noProductsMatchYourSearch": "لا يوجد منتج يتوافق مع بحثك",
-    "noDataAvailable":"لا يوجد بيانات حاليا"
+    "noDataAvailable":"لا يوجد بيانات حاليا",
+    "errorLoadingImage":"خلل في تحميل الصورة",
+    "close":"اغلاق",
+    "noFavoritesMessage": "ليس لديك عناصر مفضلة بعد!"
 
     }

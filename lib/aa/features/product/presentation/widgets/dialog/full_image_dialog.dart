@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:ui';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class FullImageDialog extends StatelessWidget {
   final String imageUrl;
 
@@ -10,6 +10,7 @@ class FullImageDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return Dialog(
       insetPadding: EdgeInsets.all(0),
       backgroundColor: Colors.transparent,
@@ -31,7 +32,7 @@ class FullImageDialog extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    'Error loading image',
+                    appLocale.errorLoadingImage,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.error,
                       fontSize: 20.sp,

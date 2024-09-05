@@ -7,10 +7,11 @@ class GetProductsUseCase {
 
   GetProductsUseCase(this.productRepository);
 
-  Future<List<ProductEntity>> execute(int categoryId) async {
+  Future<List<Product>> execute(int categoryId) async {
     return await productRepository.getProductsByCategory(categoryId);
   }
-  Future<List<ProductEntity>> getProducts({int offset = 0, int limit = 10}) async {
+  Future<List<Product>> getProducts({int offset = 0, int limit = 10}) async {
     return await productRepository.getProducts(offset: offset, limit: limit);
   }
+  
 }

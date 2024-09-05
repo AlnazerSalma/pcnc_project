@@ -7,7 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/aa/core/constant/color_palette.dart';
 import 'package:pcnc/aa/core/constant/font_sizes.dart';
 import 'package:pcnc/aa/features/category/presentation/widget/category_card_widget.dart';
-import 'package:pcnc/aa/features/dashboard/widget/search_widget.dart';
+import 'package:pcnc/aa/features/product/presentation/widgets/search_widget.dart';
 
 class AllCategoriesScreen extends StatefulWidget {
   final GetCategoriesUseCase getCategoriesUseCase;
@@ -50,7 +50,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(child: Text('${appLocale.error} ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return Center(child: Text(appLocale.noCategoriesFound));
           } else {
@@ -85,8 +85,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                         final category = filteredCategories[index];
 
                         return CategoryCardWidget(
-                          name: category.name,
-                          imageUrl: category.image,
+                          category: category,
                           onTap: () {
                             Navigator.push(
                               context,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/screens/cart_screens/cart_screen.dart';
-import 'package:pcnc/screens/wishlist_screens/wishlist_screen.dart';
+import 'package:pcnc/aa/features/cart/presentation/screen/cart_screen.dart';
+import 'package:pcnc/aa/features/product/presentation/view/wishlist_screen.dart';
 import 'package:pcnc/aa/features/dashboard/screen/home_screen.dart';
 import 'package:pcnc/screens/profile_screens/profile_screen.dart';
-import 'package:pcnc/screens/search_screens/search_screen.dart';
+import 'package:pcnc/aa/features/product/presentation/view/search_screen.dart';
 import 'package:pcnc/screens/settings_screens/settings_screen.dart';
 import 'package:pcnc/aa/core/constant/color_palette.dart';
 import 'package:pcnc/aa/features/dashboard/widget/bottom_nav_bar_widget.dart';
@@ -31,7 +31,7 @@ class _SelectedScreenState extends State<SelectedScreen> {
     final selectedIndex = context.watch<PageProvider>().selectedIndex;
     final List<Widget> _screens = [
       HomeScreen(),
-      wishlistScreen(),
+      WishlistScreen(),
       SearchScreen(),
       SettingsScreen(),
     ];

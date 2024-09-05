@@ -3,22 +3,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
 import 'package:pcnc/aa/core/constant/font_sizes.dart';
 import 'package:pcnc/aa/core/constant/color_palette.dart';
-
+import 'package:pcnc/aa/features/product/domain/entity/product.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class ProductDetailsDialog extends StatelessWidget {
-  final String title;
-  final String description;
-  final String price;
-  final List<String> images;
+  final Product product;
 
   const ProductDetailsDialog({
-    required this.title,
-    required this.description,
-    required this.price,
-    required this.images,
+    required this.product,
   });
 
   @override
   Widget build(BuildContext context) {
+    final appLocale = AppLocalizations.of(context)!;
     return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0.r),
@@ -32,11 +28,11 @@ class ProductDetailsDialog extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (images.isNotEmpty)
+              if (product.images.isNotEmpty)
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Image.network(
-                    images.first,
+                    product.images.first,
                     width: double.infinity,
                     height: 200.h,
                     fit: BoxFit.cover,
@@ -52,7 +48,7 @@ class ProductDetailsDialog extends StatelessWidget {
                 ),
               10.height,
               Text(
-                title,
+                product.title,
                 style: TextStyle(
                   fontSize: textXExtraLarge.sp,
                   fontWeight: FontWeight.bold,
@@ -60,14 +56,14 @@ class ProductDetailsDialog extends StatelessWidget {
               ),
               10.height,
               Text(
-                description,
+                product.description,
                 style: TextStyle(
                   fontSize: textMedium.sp,
                 ),
               ),
               10.height,
               Text(
-                '\$${price}',
+                '\$${product.price}',
                 style: TextStyle(
                   fontSize: textXExtraLarge.sp,
                   fontWeight: FontWeight.bold,
@@ -84,7 +80,7 @@ class ProductDetailsDialog extends StatelessWidget {
             Navigator.of(context).pop();
           },
           child: Text(
-            'Close',
+            appLocale.close,
             style: TextStyle(
               fontSize: textMedium.sp,
               color: kbuttoncolorColor,

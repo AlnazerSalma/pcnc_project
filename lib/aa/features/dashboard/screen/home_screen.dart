@@ -21,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late Future<List<Category>> categories;
-  late Future<List<ProductEntity>> products;
+  late Future<List<Product>> products;
 
   @override
   void initState() {
@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
             return Center(child: Text(appLocale.noDataAvailable));
           } else {
             final categoryList = snapshot.data![0] as List<Category>;
-            final productList = snapshot.data![1] as List<ProductEntity>;
+            final productList = snapshot.data![1] as List<Product>;
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -186,13 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: productList.length,
                     itemBuilder: (context, index) {
                       final product = productList[index];
-                      return ProductCardWidget(
-                        id: product.id,
-                        title: product.title,
-                        price: product.price.toString(),
-                        description: product.description,
-                        images: product.images,
-                      );
+                      return ProductCardWidget(product: product);
                     },
                   ),
                 ],
