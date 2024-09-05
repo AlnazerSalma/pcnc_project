@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pcnc/ApiService/api_service.dart';
 import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
-import 'package:pcnc/screens/category_screens/all_categories_screen.dart';
-import 'package:pcnc/screens/category_screens/category_products_screen.dart';
+import 'package:pcnc/aa/features/category/domain/usecases/get_categories_use_case.dart';
+import 'package:pcnc/aa/features/category/presentation/screen/all_categories_screen.dart';
+import 'package:pcnc/aa/features/product/domain/entity/product.dart';
+import 'package:pcnc/aa/features/product/domain/usecase/get_products_use_case.dart';
+import 'package:pcnc/aa/features/product/presentation/widgets/card/product_card_widget.dart';
+import 'package:pcnc/aa/core/service/locator.dart';
+import 'package:pcnc/aa/features/product/presentation/view/category_products_screen.dart';
 import 'package:pcnc/aa/core/constant/color_palette.dart';
 import 'package:pcnc/aa/core/constant/font_sizes.dart';
-import 'package:pcnc/widgets/card_widgets/product_card_widget.dart';
-import 'package:pcnc/widgets/button_widgets/show_all_button_widget.dart';
+import 'package:pcnc/aa/features/dashboard/widget/show_all_button_widget.dart';
+import 'package:pcnc/aa/features/category/domain/entity/category.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -16,14 +20,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late Future<List<dynamic>> categories;
-  late Future<List<dynamic>> products;
+  late Future<List<Category>> categories;
+  late Future<List<ProductEntity>> products;
 
   @override
   void initState() {
     super.initState();
-    categories = ApiService().getCategories();
-    products = ApiService().getProducts(offset: 0, limit: 10);
+    final getCategoriesUseCase = locator<GetCategoriesUseCase>();
+    categories = getCategoriesUseCase.execute();
+    final getProductsUseCase = locator<GetProductsUseCase>();
+    products = getProductsUseCase.getProducts();
   }
 
   AppLocalizations get appLocale => AppLocalizations.of(context)!;
@@ -31,7 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context, designSize: Size(375, 790));
-
     return Container(
       child: FutureBuilder<List<dynamic>>(
         future: Future.wait([categories, products]),
@@ -39,14 +44,14 @@ class _HomeScreenState extends State<HomeScreen> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(child: Text('${appLocale.error}  ${snapshot.error}'));
           } else if (!snapshot.hasData ||
               snapshot.data![0].isEmpty ||
               snapshot.data![1].isEmpty) {
-            return Center(child: Text('No data available'));
+            return Center(child: Text(appLocale.noDataAvailable));
           } else {
-            final categoryList = snapshot.data![0] as List<dynamic>;
-            final productList = snapshot.data![1] as List<dynamic>;
+            final categoryList = snapshot.data![0] as List<Category>;
+            final productList = snapshot.data![1] as List<ProductEntity>;
             return SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,7 +77,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => AllCategoriesScreen(
-                                  categories: categoryList,
+                                  getCategoriesUseCase:
+                                      locator<GetCategoriesUseCase>(),
                                 ),
                               ),
                             );
@@ -88,17 +94,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       scrollDirection: Axis.horizontal,
                       itemCount: categoryList.length,
                       itemBuilder: (context, index) {
-                        final category =
-                            categoryList[index] as Map<String, dynamic>;
-                        final categoryName = category['name'] ?? 'Unknown';
-                        final categoryImage = category['image'];
+                        final category = categoryList[index];
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => CategoryProductsScreen(
-                                  categoryId: category['id'],
+                                  categoryId: category.id,
                                 ),
                               ),
                             );
@@ -113,9 +116,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                   child: SizedBox(
                                     width: 80.w,
                                     height: 80.h,
-                                    child: categoryImage != null
+                                    child: category.image != null
                                         ? Image.network(
-                                            categoryImage,
+                                            category.image!,
                                             width: 80.w,
                                             height: 80.h,
                                             fit: BoxFit.cover,
@@ -156,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 SizedBox(height: 8.h),
                                 Text(
-                                  categoryName,
+                                  category.name,
                                   style: TextStyle(
                                     fontSize: textSmall.sp,
                                     fontWeight: FontWeight.w600,
@@ -182,14 +185,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     itemCount: productList.length,
                     itemBuilder: (context, index) {
-                      final product =
-                          productList[index] as Map<String, dynamic>;
+                      final product = productList[index];
                       return ProductCardWidget(
-                        id: product['id'] ?? 0,
-                        title: product['title'] ?? 'No Title',
-                        price: product['price']?.toString() ?? '0.00',
-                        description: product['description'] ?? 'No Description',
-                        images: List<String>.from(product['images'] ?? []),
+                        id: product.id,
+                        title: product.title,
+                        price: product.price.toString(),
+                        description: product.description,
+                        images: product.images,
                       );
                     },
                   ),

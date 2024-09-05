@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pcnc/aa/core/drawer/main_drawer.dart';
 import 'package:pcnc/screens/wishlist_screens/wishlist_screen.dart';
-import 'package:pcnc/screens/home_screens/home_screen.dart';
+import 'package:pcnc/aa/features/dashboard/screen/home_screen.dart';
 import 'package:pcnc/screens/profile_screens/profile_screen.dart';
 import 'package:pcnc/screens/settings_screens/settings_screen.dart';
 import 'package:pcnc/aa/core/drawer/page_provider.dart';

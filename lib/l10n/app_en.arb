@@ -52,6 +52,12 @@
     "operationFailed": "Operation failed",
     "cart":"Cart",
     "yourCartIsEmpty":"Your cart is empty",
-    "totalPrice":"total price"
+    "totalPrice":"total price",
+    "noCategoriesFound":"No categories found",
+    "unknown":"Unknown",
+    "error":"Error",
+    "noProductsAvailable":"No products available",
+    "noProductsMatchYourSearch": "No products match your search",
+    "noDataAvailable":"No data available"
 
 }

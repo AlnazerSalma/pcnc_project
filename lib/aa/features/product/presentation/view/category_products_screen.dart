@@ -1,12 +1,15 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/aa/core/constant/color_palette.dart';
 import 'package:pcnc/aa/core/constant/font_sizes.dart';
-import 'package:pcnc/widgets/card_widgets/product_card_widget.dart';
-import 'package:pcnc/widgets/search_widget.dart';
+import 'package:pcnc/aa/core/service/locator.dart';
+import 'package:pcnc/aa/features/category/domain/entity/category.dart';
+import 'package:pcnc/aa/features/category/domain/usecases/get_categories_use_case.dart';
+import 'package:pcnc/aa/features/dashboard/widget/search_widget.dart';
+import 'package:pcnc/aa/features/product/domain/entity/product.dart';
+import 'package:pcnc/aa/features/product/domain/usecase/get_products_use_case.dart';
+import 'package:pcnc/aa/features/product/presentation/widgets/card/product_card_widget.dart';
 
 class CategoryProductsScreen extends StatefulWidget {
   final int categoryId;
@@ -19,38 +22,28 @@ class CategoryProductsScreen extends StatefulWidget {
 
 class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
   AppLocalizations get appLocale => AppLocalizations.of(context)!;
-  late Future<List<dynamic>> products;
-  late Future<String> categoryName;
+  late Future<List<ProductEntity>> products;
+  late Future<Category> category;
   String searchQuery = '';
-
+  late final GetCategoriesUseCase _getCategoriesUseCase;
+  late final GetProductsUseCase _getProductsUseCase;
   @override
   void initState() {
     super.initState();
-    products = fetchProducts(widget.categoryId);
-    categoryName = fetchCategoryName(widget.categoryId);
+    _getProductsUseCase = locator<GetProductsUseCase>();
+    _getCategoriesUseCase = locator<GetCategoriesUseCase>();
+    products = _getProductsUseCase.execute(widget.categoryId);
+    category = fetchCategory(widget.categoryId);
   }
 
-  Future<String> fetchCategoryName(int categoryId) async {
-    final response = await http.get(
-        Uri.parse('https://api.escuelajs.co/api/v1/categories/$categoryId'));
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      return data['name'] ?? 'Unknown Category';
-    } else {
-      throw Exception('Failed to load category');
-    }
-  }
+  Future<Category> fetchCategory(int categoryId) async {
+    final categories = await _getCategoriesUseCase.execute();
 
-  Future<List<dynamic>> fetchProducts(int categoryId) async {
-    final response = await http.get(Uri.parse(
-        'https://api.escuelajs.co/api/v1/categories/$categoryId/products'));
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      return data;
-    } else {
-      throw Exception('Failed to load products');
-    }
+    return categories.firstWhere(
+      (category) => category.id == categoryId,
+      orElse: () =>
+          Category(id: categoryId, name: appLocale.unknown, image: null),
+    );
   }
 
   @override
@@ -60,8 +53,8 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: FutureBuilder<String>(
-          future: categoryName,
+        title: FutureBuilder<Category>(
+          future: category,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
@@ -76,7 +69,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
               );
             } else if (snapshot.hasError) {
               return Text(
-                'Error',
+                appLocale.error,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: textExtraLarge.sp,
@@ -84,8 +77,9 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
                 ),
               );
             } else {
+              final category = snapshot.data!;
               return Text(
-                snapshot.data ?? 'Unknown Category',
+                category.name,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: textExtraLarge.sp,
@@ -109,27 +103,25 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
             },
           ),
           Expanded(
-            child: FutureBuilder<List<dynamic>>(
+            child: FutureBuilder<List<ProductEntity>>(
               future: products,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
+                  return Center(child: Text('${appLocale.error} ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text('No products available'));
+                  return Center(child: Text(appLocale.noProductsAvailable));
                 } else {
                   final productList = snapshot.data!;
-
-                  // Filter products based on search query
                   final filteredProducts = productList.where((product) {
-                    final title = product['title']?.toLowerCase() ?? '';
+                    final title = product.title.toLowerCase();
                     return title.contains(searchQuery.toLowerCase());
                   }).toList();
 
                   if (filteredProducts.isEmpty) {
                     return Center(
-                        child: Text('No products match your search.'));
+                        child: Text(appLocale.noProductsMatchYourSearch));
                   }
 
                   return GridView.builder(
@@ -143,21 +135,12 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
                     itemCount: filteredProducts.length,
                     itemBuilder: (context, index) {
                       final product = filteredProducts[index];
-                      final productId = product['id'] ?? 0;
-                      final productTitle = product['title'] ?? 'Unknown';
-                      final productPrice =
-                          product['price']?.toString() ?? '0.0';
-                      final productDescription =
-                          product['description'] ?? 'No description available';
-                      final productImages =
-                          List<String>.from(product['images'] ?? []);
-
                       return ProductCardWidget(
-                        id: productId,
-                        title: productTitle,
-                        price: productPrice,
-                        description: productDescription,
-                        images: productImages,
+                        id: product.id,
+                        title: product.title,
+                        price: product.price.toString(),
+                        description: product.description,
+                        images: product.images,
                       );
                     },
                   );

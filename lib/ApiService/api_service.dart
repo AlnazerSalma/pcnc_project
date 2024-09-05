@@ -1,38 +1,38 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:pcnc/aa/core/constant/strings.dart';
+import 'package:pcnc/aa/features/category/data/model/category_model.dart';
+import 'package:pcnc/aa/features/product/data/model/product_model.dart';
 
 class ApiService {
-  final String baseUrl = 'https://api.escuelajs.co/api/v1';
-  // Future<List> getCategories() async {
-  Future<List<dynamic>> getCategories() async {
+  final String baseUrl = baseUrll;
+
+ Future<List<CategoryModel>> getCategories() async {
     final response = await http.get(Uri.parse('$baseUrl/categories'));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      return data;
+      return (data as List).map((json) => CategoryModel.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load categories');
     }
   }
-  //get all products
-//   Future<List<dynamic>> getProduct() async {
-//     final response = await http.get(Uri.parse('$baseUrl/products'));
-
-//     if (response.statusCode == 200) {
-//       final data = json.decode(response.body);
-//       return data;
-//     } else {
-//       throw Exception('Failed to load products');
-//     }
-//   }
-// }
-Future<List<dynamic>> getProducts({int offset = 0, int limit = 10}) async {
+ Future<List<ProductModel>> getProducts({int offset = 0, int limit = 10}) async {
     final response = await http.get(
       Uri.parse('$baseUrl/products?offset=$offset&limit=$limit'),
     );
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      return data;
+      return (data as List).map((json) => ProductModel.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load products');
+    }
+  }
+ Future<List<ProductModel>> getProductsByCategory(int categoryId) async {
+    final response = await http.get(Uri.parse('$baseUrl/categories/$categoryId/products'));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      return (data as List).map((json) => ProductModel.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load products');
     }

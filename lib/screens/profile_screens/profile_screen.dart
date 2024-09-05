@@ -6,7 +6,6 @@ import 'package:pcnc/aa/core/constant/font_sizes.dart';
 import 'package:pcnc/widgets/profile_widgets/list_tile_item.dart';
 import 'package:pcnc/widgets/profile_widgets/switch_theme_widget.dart';
 import 'package:pcnc/aa/core/theme/app_theme.dart';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

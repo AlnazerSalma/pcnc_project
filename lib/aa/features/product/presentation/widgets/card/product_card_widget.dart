@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
+import 'package:pcnc/aa/features/product/presentation/widgets/dialog/full_image_dialog.dart';
+import 'package:pcnc/aa/features/product/presentation/widgets/dialog/product_details_dialog.dart';
 import 'package:pcnc/providers/cart_provider.dart';
 import 'package:pcnc/providers/wishlist_provider.dart';
 import 'package:pcnc/aa/core/constant/color_palette.dart';
@@ -29,7 +30,15 @@ class ProductCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _showProductDetailsDialog(context);
+        showDialog(
+          context: context,
+          builder: (context) => ProductDetailsDialog(
+            title: title,
+            description: description,
+            price: price,
+            images: images,
+          ),
+        );
       },
       child: Container(
         width: double.infinity,
@@ -55,7 +64,11 @@ class ProductCardWidget extends StatelessWidget {
             if (images.isNotEmpty)
               GestureDetector(
                 onTap: () {
-                  _showFullImage(context, images.first);
+                  showDialog(
+                    context: context,
+                    builder: (context) =>
+                        FullImageDialog(imageUrl: images.first),
+                  );
                 },
                 child: ClipRRect(
                   borderRadius:
@@ -202,176 +215,5 @@ class ProductCardWidget extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  void _showProductDetailsDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0.r),
-          ),
-          content: Container(
-            width: MediaQuery.of(context).size.width * 0.9.w,
-            constraints: BoxConstraints(
-              maxHeight: MediaQuery.of(context).size.height * 0.6.h,
-            ),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  if (images.isNotEmpty)
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Image.network(
-                        images.first,
-                        width: double.infinity,
-                        height: 200.h,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Image.asset(
-                            'assets/images/image-not-available.png',
-                            width: double.infinity,
-                            height: 200.h,
-                            fit: BoxFit.cover,
-                          );
-                        },
-                      ),
-                    ),
-                  10.height,
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: textXExtraLarge.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  10.height,
-                  Text(
-                    description,
-                    style: TextStyle(
-                      fontSize: textMedium.sp,
-                    ),
-                  ),
-                  10.height,
-                  Text(
-                    '\$${price}',
-                    style: TextStyle(
-                      fontSize: textXExtraLarge.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text(
-                'Close',
-                style: TextStyle(
-                  fontSize: textMedium.sp,
-                  color: kbuttoncolorColor,
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _showFullImage(BuildContext context, String imageUrl) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          insetPadding: EdgeInsets.all(0),
-          backgroundColor: Colors.transparent,
-          child: FutureBuilder(
-            future: _getImageSize(imageUrl),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Stack(
-                  children: [
-                    Positioned.fill(
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                        child: Container(
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'Error loading image',
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: textExtraLarge.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              } else {
-                final imageSize = snapshot.data as Size?;
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Stack(
-                    children: [
-                      Positioned.fill(
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                          child: Container(
-                            color: Colors.black.withOpacity(0.5),
-                          ),
-                        ),
-                      ),
-                      Center(
-                        child: Image.network(
-                          imageUrl,
-                          width: imageSize?.width ?? double.infinity,
-                          height: imageSize?.height ?? double.infinity,
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }
-            },
-          ),
-        );
-      },
-    );
-  }
-
-  Future<Size?> _getImageSize(String imageUrl) async {
-    final Completer<Size> completer = Completer();
-    final Image image = Image.network(imageUrl);
-    image.image.resolve(ImageConfiguration()).addListener(
-          ImageStreamListener(
-            (ImageInfo info, bool synchronousCall) {
-              completer.complete(Size(
-                info.image.width.toDouble(),
-                info.image.height.toDouble(),
-              ));
-            },
-            onError: (dynamic error, StackTrace? stackTrace) {
-              completer.completeError(error);
-            },
-          ),
-        );
-    return completer.future;
   }
 }

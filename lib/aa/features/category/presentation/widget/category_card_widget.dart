@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
 import 'package:pcnc/aa/core/constant/font_sizes.dart';
 
@@ -17,7 +16,6 @@ class CategoryCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appLocale = AppLocalizations.of(context)!;
 
     return GestureDetector(
       onTap: onTap,
@@ -38,14 +36,14 @@ class CategoryCardWidget extends StatelessWidget {
         child: Column(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)), 
+              borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
               child: SizedBox(
                 width: double.infinity,
-                height: 140.h, 
+                height: 140.h,
                 child: imageUrl != null
                     ? Image.network(
                         imageUrl!,
-                        fit: BoxFit.fill, 
+                        fit: BoxFit.fill,
                         errorBuilder: (context, error, stackTrace) {
                           return Center(
                             child: Icon(
@@ -79,7 +77,7 @@ class CategoryCardWidget extends StatelessWidget {
               style: TextStyle(
                 fontSize: textMedium.sp,
                 fontWeight:FontWeight.bold,
-                color: Theme.of(context).colorScheme.surface, 
+                color: Theme.of(context).colorScheme.surface,
               ),
               textAlign: TextAlign.center,
             ),

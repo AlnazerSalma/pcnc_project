@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/ApiService/api_service.dart';
 import 'package:pcnc/aa/core/extension/sized_box_extension.dart';
 import 'package:pcnc/aa/core/constant/font_sizes.dart';
-import 'package:pcnc/widgets/card_widgets/product_card_widget.dart';
-import 'package:pcnc/widgets/search_widget.dart';
+import 'package:pcnc/aa/features/dashboard/widget/search_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pcnc/aa/features/product/presentation/widgets/card/product_card_widget.dart';
 
 class SearchScreen extends StatefulWidget {
   @override

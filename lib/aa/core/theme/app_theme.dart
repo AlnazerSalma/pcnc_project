@@ -22,6 +22,7 @@ class AppTheme {
       primary: Color.fromARGB(255, 30, 30, 30),
       surface: kWhiteColor,
       onInverseSurface: Color.fromARGB(255, 232, 230, 230),
+      error: kRed,
     ),
     
   );

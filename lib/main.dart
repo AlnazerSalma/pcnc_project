@@ -5,6 +5,7 @@ import 'package:pcnc/bloc/state_observer_bloc.dart';
 import 'package:pcnc/aa/core/cache/cache_controller.dart';
 import 'package:pcnc/aa/core/enums.dart';
 import 'package:pcnc/aa/core/helper/restart_app.dart';
+import 'package:pcnc/aa/core/service/locator.dart';
 import 'package:pcnc/providers/cart_provider.dart';
 import 'package:pcnc/providers/wishlist_provider.dart';
 import 'package:pcnc/providers/lang_provider.dart';
@@ -26,7 +27,7 @@ void main() async {
   String? theme = CacheController().getter(key: CacheKeys.theme);
   ThemeData initialThemeMode =
       theme == 'dark' ? AppTheme.dark : AppTheme.light;
-
+ setupLocator();
   runApp(
     provider.ChangeNotifierProvider(
       create: (context) => ThemeProvider(initialThemeMode),
