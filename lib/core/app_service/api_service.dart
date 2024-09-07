@@ -6,10 +6,9 @@ import 'package:pcnc/features/product/data/model/product_model.dart';
 import 'package:pcnc/features/user/data/model/user_model.dart';
 
 class ApiService {
-  final String baseUrl = baseUrll;
 
  Future<List<CategoryModel>> getCategories() async {
-    final response = await http.get(Uri.parse('$baseUrl/categories'));
+    final response = await http.get(Uri.parse(categoriesUrl));
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -20,7 +19,7 @@ class ApiService {
   }
  Future<List<ProductModel>> getProducts({int offset = 0, int limit = 10}) async {
     final response = await http.get(
-      Uri.parse('$baseUrl/products?offset=$offset&limit=$limit'),
+      Uri.parse('$productsUrl?offset=$offset&limit=$limit'),
     );
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -30,7 +29,7 @@ class ApiService {
     }
   }
  Future<List<ProductModel>> getProductsByCategory(int categoryId) async {
-    final response = await http.get(Uri.parse('$baseUrl/categories/$categoryId/products'));
+    final response = await http.get(Uri.parse('$categoriesUrl/$categoryId/products'));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       return (data as List).map((json) => ProductModel.fromJson(json)).toList();
@@ -41,31 +40,25 @@ class ApiService {
  
 Future<UserModel> loginUser(String email, String password) async {
   final response = await http.post(
-    Uri.parse('$baseUrl/auth/login'),
+    Uri.parse(loginUrl),
     headers: {'Content-Type': 'application/json'},
     body: json.encode({
       'email': email,
       'password': password,
     }),
   );
-
-  if (response.statusCode == 200 || response.statusCode == 201) {
-    final data = json.decode(response.body);
-    print('Response data: $data');
-    if (data is Map<String, dynamic>) {
+if (response.statusCode == 201) {
+      final data = json.decode(response.body);
       return UserModel.fromJson(data);
-    } else {
-      throw Exception('Unexpected response format');
     }
-  } else {
-    final responseBody = json.decode(response.body);
-    throw Exception('Failed to login: ${responseBody['message']}');
+   else {
+      throw Exception('Failed to load products');
   }
 }
 
 Future<UserModel> registerUser(String name, String email, String password) async {
   final response = await http.post(
-    Uri.parse('$baseUrl/users/'),
+    Uri.parse(registerUrl),
     headers: {'Content-Type': 'application/json'},
     body: json.encode({
       'name': name,
@@ -74,20 +67,11 @@ Future<UserModel> registerUser(String name, String email, String password) async
       'avatar': 'https://imgur.com/LDOO4Qs',
     }),
   );
-
   if (response.statusCode == 201) {
-    final data = json.decode(response.body);
-    print('Response data: $data');
-    if (data['id'] is String || data['id'] is int) {
-      return UserModel.fromJson(data);
-    } else {
-      throw Exception('Unexpected response format');
-    }
+     final data = json.decode(response.body);
+    return UserModel.fromJson(data);
   } else {
-    final responseBody = json.decode(response.body);
-    throw Exception('Failed to register user: ${responseBody['message']}');
+    throw Exception('Failed to register user');
   }
 }
 }
-
-

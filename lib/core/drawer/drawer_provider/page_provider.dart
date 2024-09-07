@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 class PageProvider extends ChangeNotifier {
   int selectedIndex = 0;
 
-  onTappedIndex(index) {
-    selectedIndex = index;
+  void onTappedIndex(int? index) {
+    selectedIndex = index ?? 0;
     notifyListeners();
   }
 }
-

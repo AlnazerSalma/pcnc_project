@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/features/product/presentation/widgets/card/product_card_widget.dart';
-import 'package:pcnc/features/product/presentation/provider/wishlist_provider.dart';
+import 'package:pcnc/features/product/presentation/provider/favourite_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class WishlistScreen extends StatelessWidget {
+class FavouriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-    final favoritesProvider = Provider.of<WishListProvider>(context);
+    final favoritesProvider = Provider.of<FavouriteProvider>(context);
     return Scaffold(
       body: favoritesProvider.favorites.isEmpty
           ? Center(

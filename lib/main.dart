@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pcnc/core/constant/strings.dart';
-import 'package:pcnc/core/drawer/page_provider.dart';
+import 'package:pcnc/core/drawer/drawer_provider/page_provider.dart';
 import 'package:pcnc/core/theme/theme_provider.dart';
 import 'package:pcnc/features/cart/domain/usecase/add_to_cart_usecase.dart';
 import 'package:pcnc/features/product/domain/usecase/get_products_usecase.dart';
@@ -10,7 +10,8 @@ import 'package:pcnc/core/enums.dart';
 import 'package:pcnc/core/helper/restart_app.dart';
 import 'package:pcnc/core/service/locator.dart';
 import 'package:pcnc/features/cart/presentation/provider/cart_provider.dart';
-import 'package:pcnc/features/product/presentation/provider/wishlist_provider.dart';
+import 'package:pcnc/features/product/domain/usecase/manage_favorites_usecase.dart';
+import 'package:pcnc/features/product/presentation/provider/favourite_provider.dart';
 import 'package:pcnc/core/language/provider/lang_provider.dart';
 import 'package:pcnc/features/other_features/splash/splash_screen.dart';
 import 'package:pcnc/core/theme/app_theme.dart';
@@ -84,7 +85,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             providers: [
               ChangeNotifierProvider(create: (_) => LanguageProvider()),
               ChangeNotifierProvider(create: (context) => PageProvider()),
-              ChangeNotifierProvider(create: (_) => WishListProvider(locator<GetProductsUseCase>())),
+              ChangeNotifierProvider(create: (_) => FavouriteProvider(locator<ManageFavoritesUseCase>())),
               ChangeNotifierProvider(
             create: (_) => CartProvider(
               addToCartUseCase: locator<AddToCartUseCase>(),

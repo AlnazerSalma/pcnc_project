@@ -6,7 +6,7 @@ import 'package:pcnc/features/product/domain/entity/product.dart';
 import 'package:pcnc/features/product/presentation/widgets/dialog/full_image_dialog.dart';
 import 'package:pcnc/features/product/presentation/widgets/dialog/product_details_dialog.dart';
 import 'package:pcnc/features/cart/presentation/provider/cart_provider.dart';
-import 'package:pcnc/features/product/presentation/provider/wishlist_provider.dart';
+import 'package:pcnc/features/product/presentation/provider/favourite_provider.dart';
 import 'package:pcnc/core/constant/color_palette.dart';
 import 'package:pcnc/core/constant/font_sizes.dart';
 import 'package:provider/provider.dart';
@@ -133,7 +133,7 @@ class ProductCardWidget extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Consumer<WishListProvider>(
+                      Consumer<FavouriteProvider>(
                         builder: (context, wishListProvider, child) {
                           final isFavorite =
                               wishListProvider.isFavorite(product.id);

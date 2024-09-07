@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/core/drawer/page_provider.dart';
+import 'package:pcnc/core/drawer/drawer_provider/page_provider.dart';
 import 'package:pcnc/features/cart/presentation/screen/cart_screen.dart';
-import 'package:pcnc/features/product/presentation/view/wishlist_screen.dart';
+import 'package:pcnc/features/product/presentation/view/favourite_screen.dart';
 import 'package:pcnc/features/dashboard/screen/home_screen.dart';
 import 'package:pcnc/features/other_features/profile/presentation/screen/profile_screen.dart';
 import 'package:pcnc/features/product/presentation/view/search_screen.dart';
@@ -32,7 +32,7 @@ class _SelectedScreenState extends State<SelectedScreen> {
     final selectedIndex = context.watch<PageProvider>().selectedIndex;
     final List<Widget> _screens = [
       HomeScreen(),
-      WishlistScreen(),
+      FavouriteScreen(),
       SearchScreen(),
       SettingsScreen(),
     ];

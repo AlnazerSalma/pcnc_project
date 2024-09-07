@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:pcnc/features/product/domain/entity/product.dart';
-import 'package:pcnc/features/product/domain/usecase/get_products_usecase.dart';
+import 'package:pcnc/features/product/domain/usecase/manage_favorites_usecase.dart';
 
-class WishListProvider extends ChangeNotifier {
-  final GetProductsUseCase getProductsUseCase;
+class FavouriteProvider extends ChangeNotifier {
+  final ManageFavoritesUseCase manageFavoritesUseCase;
   List<Product> _favorites = [];
-  String? _token;
-  WishListProvider(this.getProductsUseCase);
+
+  FavouriteProvider(this.manageFavoritesUseCase);
+
   List<Product> get favorites => _favorites;
-  Future<void> initialize(String token) async {
-    _token = token;
-    await _fetchUserFavorites();
+
+  Future<void> initialize() async {
+    await _getUserFavorites();
   }
 
-  Future<void> _fetchUserFavorites() async {
-    if (_token == null) return;
-
+  Future<void> _getUserFavorites() async {
     try {
-      final products = await getProductsUseCase.getProducts();
+      final products = await manageFavoritesUseCase.getFavoriteProducts();
 
       _favorites = products;
 
@@ -27,10 +26,12 @@ class WishListProvider extends ChangeNotifier {
     }
   }
 
-  void toggleFavorite(Product product) {
+  Future<void> toggleFavorite(Product product) async {
     if (_favorites.any((item) => item.id == product.id)) {
+      await manageFavoritesUseCase.removeFavoriteProduct(product);
       _favorites.removeWhere((item) => item.id == product.id);
     } else {
+      await manageFavoritesUseCase.addFavoriteProduct(product);
       _favorites.add(product);
     }
     notifyListeners();
