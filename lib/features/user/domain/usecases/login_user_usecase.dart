@@ -1,4 +1,4 @@
-import 'package:pcnc/features/user/domain/entities/user_entity.dart';
+import 'package:pcnc/features/user/data/model/user_model.dart';
 import 'package:pcnc/features/user/domain/repository/user_repository.dart';
 
 class LoginUserUseCase {
@@ -6,7 +6,7 @@ class LoginUserUseCase {
 
   LoginUserUseCase(this.repository);
 
-  Future<User> call(String email, String password) async {
+  Future<UserModel> call(String email, String password) async {
     return await repository.loginUser(email, password);
   }
 }

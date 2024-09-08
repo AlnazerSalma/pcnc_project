@@ -35,7 +35,6 @@ class CartScreen extends StatelessWidget {
               ),
             );
           }
-
           return Column(
             children: [
               Expanded(

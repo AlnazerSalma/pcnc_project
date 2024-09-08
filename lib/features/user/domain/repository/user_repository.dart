@@ -1,6 +1,6 @@
-import 'package:pcnc/features/user/domain/entities/user_entity.dart';
+import 'package:pcnc/features/user/data/model/user_model.dart';
 
 abstract class UserRepository {
-  Future<User> loginUser(String email, String password);
-  Future<User> registerUser(String name, String email, String password);
+  Future<UserModel> loginUser(String email, String password);
+  Future<UserModel> registerUser(String name, String email, String password);
 }

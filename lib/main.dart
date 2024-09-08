@@ -7,7 +7,7 @@ import 'package:pcnc/features/product/domain/usecase/get_products_usecase.dart';
 import 'package:pcnc/core/bloc/state_observer_bloc.dart';
 import 'package:pcnc/core/cache/cache_controller.dart';
 import 'package:pcnc/core/enums.dart';
-import 'package:pcnc/core/helper/restart_app.dart';
+import 'package:pcnc/core/widget/restart_app.dart';
 import 'package:pcnc/core/service/locator.dart';
 import 'package:pcnc/features/cart/presentation/provider/cart_provider.dart';
 import 'package:pcnc/features/product/domain/usecase/manage_favorites_usecase.dart';

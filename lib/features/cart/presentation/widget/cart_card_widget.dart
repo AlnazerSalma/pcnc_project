@@ -8,9 +8,9 @@ import 'package:provider/provider.dart';
 import 'package:pcnc/features/cart/presentation/provider/cart_provider.dart';
 
 class CartCardWidget extends StatelessWidget {
- final CartItemModel cartItem;
+  final CartItemModel cartItem;
 
- CartCardWidget({required this.cartItem});
+  CartCardWidget({required this.cartItem});
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +29,10 @@ class CartCardWidget extends StatelessWidget {
           height: 120.h,
           child: Row(
             children: [
-               cartItem.imageUrl.isNotEmpty
+              cartItem.imageUrl.isNotEmpty
                   ? ClipOval(
                       child: Image.network(
-                         cartItem.imageUrl,
+                        cartItem.imageUrl,
                         width: 80.w,
                         height: 100.h,
                         fit: BoxFit.cover,
@@ -69,16 +69,14 @@ class CartCardWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                       cartItem.title,
+                      cartItem.title,
                       style: TextStyle(
                         fontSize: textMedium.sp,
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).colorScheme.surface,
                       ),
-                      overflow: TextOverflow
-                          .visible,
-                      softWrap:
-                          true,
+                      overflow: TextOverflow.visible,
+                      softWrap: true,
                     ),
                     Text(
                       '\$${cartItem.price}',
@@ -111,7 +109,7 @@ class CartCardWidget extends StatelessWidget {
                       ),
                       4.width,
                       Text(
-                         '${cartItem.quantity}',
+                        '${cartItem.quantity}',
                         style: TextStyle(
                             fontSize: textMedium.sp,
                             color: Theme.of(context).colorScheme.surface),

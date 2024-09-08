@@ -47,7 +47,7 @@ Future<void> _submit() async {
       }
 
       try {
-        final apiRepository = ApiRepositoryImpl(apiService: ApiService());
+        final apiRepository = UserRepositoryImpl(apiService: ApiService());
         if (_isLogin) {
           final user = await apiRepository.loginUser(
             _enteredUsernameOrEmail,

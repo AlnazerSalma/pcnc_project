@@ -83,7 +83,6 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                       itemCount: filteredCategories.length,
                       itemBuilder: (context, index) {
                         final category = filteredCategories[index];
-
                         return CategoryCardWidget(
                           category: category,
                           onTap: () {
