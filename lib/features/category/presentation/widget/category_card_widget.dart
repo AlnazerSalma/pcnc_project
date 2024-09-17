@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/core/extension/sized_box_ext.dart';
-import 'package:pcnc/core/presentation/style/font_sizes.dart';
+import 'package:pcnc/generated/assets.dart';
 import 'package:pcnc/features/category/domain/entity/category.dart';
+import 'package:pcnc/presentation/widget/images/card_image.dart';
+import 'package:pcnc/presentation/widget/text_widget/custom_text.dart';
 
 class CategoryCardWidget extends StatelessWidget {
   final Category category;
@@ -36,54 +38,20 @@ class CategoryCardWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(12.r)),
-              child: SizedBox(
-                width: double.infinity,
-                height: 140.h,
-                child: category.image != null
-                    ? Image.network(
-                        category.image!,
-                        fit: BoxFit.fill,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Center(
-                            child: Icon(
-                              Icons.error,
-                              color: Colors.red,
-                              size: 50.w,
-                            ),
-                          );
-                        },
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          } else {
-                            return Center(
-                              child: CircularProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes !=
-                                        null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        (loadingProgress.expectedTotalBytes ??
-                                            1)
-                                    : null,
-                              ),
-                            );
-                          }
-                        },
-                      )
-                    : Icon(Icons.category, size: 100.w),
-              ),
-            ),
+            category.image != null
+                ? CardImage(
+                    imageUrl: category.image!,
+                    width: double.infinity,
+                    height: 135.h,
+                    errorImage: Assets.imageNotAvailable,
+                    isCircular: false,
+                  )
+                : SizedBox(width: double.infinity, height: 130.h),
             8.height,
-            Text(
-              category.name,
-              style: TextStyle(
-                fontSize: textMedium.sp,
+            CustomText(
+                text: category.name,
                 fontWeight: FontWeight.bold,
-                color: Theme.of(context).colorScheme.surface,
-              ),
-              textAlign: TextAlign.center,
-            ),
+                textAlign: TextAlign.center)
           ],
         ),
       ),

@@ -37,6 +37,7 @@ class FavouriteScreen extends StatelessWidget {
                 return ProductCardWidget(product: product);
               },
             ),
+      backgroundColor: Theme.of(context).colorScheme.background,
     );
   }
 }

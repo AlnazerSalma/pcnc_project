@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/core/extension/sized_box_ext.dart';
-import 'package:pcnc/core/presentation/style/color_palette.dart';
-import 'package:pcnc/core/presentation/style/font_sizes.dart';
+import 'package:pcnc/presentation/style/color_palette.dart';
+import 'package:pcnc/presentation/style/font_sizes.dart';
 import 'package:pcnc/features/product/domain/entity/product.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/generated/assets.dart';
@@ -21,6 +21,7 @@ class ProductDetailsDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0.r),
       ),
+       backgroundColor: Theme.of(context).colorScheme.background,
       content: Container(
         width: MediaQuery.of(context).size.width * 0.9.w,
         constraints: BoxConstraints(

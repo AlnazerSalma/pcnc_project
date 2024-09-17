@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/core/presentation/mixins/navigator_helper.dart';
-import 'package:pcnc/core/presentation/style/color_palette.dart';
-import 'package:pcnc/core/presentation/style/font_sizes.dart';
-import 'package:pcnc/core/app_service/api_service.dart';
-import 'package:pcnc/core/presentation/controller/cache_controller.dart';
-import 'package:pcnc/core/presentation/widget/zoom_drawer.dart';
+import 'package:pcnc/presentation/mixins/navigator_helper.dart';
+import 'package:pcnc/presentation/style/color_palette.dart';
+import 'package:pcnc/presentation/style/font_sizes.dart';
+import 'package:pcnc/data/app_service/api_service.dart';
+import 'package:pcnc/presentation/controller/cache_controller.dart';
+import 'package:pcnc/presentation/widget/drawer_widget/zoom_drawer.dart';
 import 'package:pcnc/core/enum/cache_keys.dart';
 import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:pcnc/features/user/data/repository/user_repository_impl.dart';
@@ -295,6 +295,7 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
           ),
         ),
       ),
+      backgroundColor: Theme.of(context).colorScheme.background,
     );
   }
 }

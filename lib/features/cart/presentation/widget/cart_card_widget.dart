@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/core/extension/sized_box_ext.dart';
-import 'package:pcnc/core/presentation/style/color_palette.dart';
-import 'package:pcnc/core/presentation/style/font_sizes.dart';
+import 'package:pcnc/presentation/style/color_palette.dart';
 import 'package:pcnc/features/cart/data/model/cart_model.dart';
 import 'package:pcnc/generated/assets.dart';
+import 'package:pcnc/presentation/style/font_sizes.dart';
+import 'package:pcnc/presentation/widget/button/icon_button.dart';
+import 'package:pcnc/presentation/widget/images/card_image.dart';
+import 'package:pcnc/presentation/widget/text_widget/custom_text.dart';
 import 'package:provider/provider.dart';
 import 'package:pcnc/features/cart/presentation/provider/cart_provider.dart';
 
@@ -30,61 +33,31 @@ class CartCardWidget extends StatelessWidget {
           child: Row(
             children: [
               cartItem.imageUrl.isNotEmpty
-                  ? ClipOval(
-                      child: Image.network(
-                        cartItem.imageUrl,
-                        width: 80.w,
-                        height: 100.h,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Image.asset(
-                            Assets.imageNotAvailable,
-                            width: 80.w,
-                            height: 100.h,
-                            fit: BoxFit.cover,
-                          );
-                        },
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          } else {
-                            return Center(
-                              child: CircularProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes !=
-                                        null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        (loadingProgress.expectedTotalBytes ??
-                                            1)
-                                    : null,
-                              ),
-                            );
-                          }
-                        },
-                      ),
+                  ? CardImage(
+                      imageUrl: cartItem.imageUrl,
+                      width: 80,
+                      height: 100,
+                      errorImage: Assets.imageNotAvailable,
+                      isCircular: true,
                     )
                   : SizedBox(width: 80.w, height: 100.h),
-              SizedBox(width: 8.w),
+              8.width,
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      cartItem.title,
-                      style: TextStyle(
-                        fontSize: textMedium.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.surface,
-                      ),
+                    CustomText(
+                      text: cartItem.title,
+                      fontWeight: FontWeight.bold,
+                      fontSize: textmMedium,
                       overflow: TextOverflow.visible,
-                      softWrap: true,
                     ),
-                    Text(
-                      '\$${cartItem.price}',
-                      style: TextStyle(
-                        fontSize: textMedium.sp,
-                        color: Theme.of(context).colorScheme.surface,
-                      ),
-                      overflow: TextOverflow.ellipsis,
+                    Spacer(),
+                    CustomText(
+                      text: '\$${cartItem.price}',
+                      color: klightblueColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: textExtraLarge,
                     ),
                   ],
                 ),
@@ -96,32 +69,23 @@ class CartCardWidget extends StatelessWidget {
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      IconButton(
-                        icon: CircleAvatar(
-                          radius: 14.w,
-                          backgroundColor: kRed,
-                          child: Icon(Icons.remove,
-                              color: kWhiteColor, size: 16.sp),
-                        ),
+                      CustomIconButton(
+                        icon: Icons.remove,
+                        iconColor: kWhiteColor,
+                        backgroundColor: kRed,
+                        radius: 14,
                         onPressed: () {
                           cartProvider.updateQuantity(cartItem.id, false);
                         },
                       ),
                       4.width,
-                      Text(
-                        '${cartItem.quantity}',
-                        style: TextStyle(
-                            fontSize: textMedium.sp,
-                            color: Theme.of(context).colorScheme.surface),
-                      ),
+                      CustomText(text: '${cartItem.quantity}'),
                       4.width,
-                      IconButton(
-                        icon: CircleAvatar(
-                          radius: 14.w,
-                          backgroundColor: kgreen,
-                          child:
-                              Icon(Icons.add, color: kWhiteColor, size: 16.sp),
-                        ),
+                      CustomIconButton(
+                        icon: Icons.add,
+                        iconColor: kWhiteColor,
+                        backgroundColor: kgreen,
+                        radius: 14,
                         onPressed: () {
                           cartProvider.updateQuantity(cartItem.id, true);
                         },
@@ -129,8 +93,10 @@ class CartCardWidget extends StatelessWidget {
                     ],
                   ),
                   5.height,
-                  IconButton(
-                    icon: Icon(Icons.delete, color: kRed),
+                  CustomIconButton(
+                    icon: Icons.delete,
+                    iconColor: kRed,
+                    iconSize: 22,
                     onPressed: () {
                       cartProvider.removeFromCart(cartItem.id);
                     },

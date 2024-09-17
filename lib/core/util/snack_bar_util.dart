@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pcnc/core/presentation/style/color_palette.dart';
-import 'package:pcnc/core/presentation/style/font_sizes.dart';
+import 'package:pcnc/presentation/style/color_palette.dart';
+import 'package:pcnc/presentation/style/font_sizes.dart';
 
 SnackBar getSnackBar(String message, Color backgroundColor) {
   SnackBar snackBar = SnackBar(

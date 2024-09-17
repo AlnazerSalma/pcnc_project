@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pcnc/core/presentation/style/color_palette.dart';
+import 'package:pcnc/presentation/style/color_palette.dart';
 import 'package:pcnc/core/util/snack_bar_util.dart';
 
 class CustomSnackBarWidget {

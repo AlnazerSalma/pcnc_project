@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pcnc/core/presentation/style/font_sizes.dart';
+import 'package:pcnc/presentation/style/font_sizes.dart';
+import 'package:pcnc/presentation/widget/app_bar_widget/custom_app_bar.dart';
 import 'package:pcnc/features/cart/presentation/widget/cart_card_widget.dart';
+import 'package:pcnc/presentation/widget/text_widget/custom_text.dart';
 import 'package:provider/provider.dart';
 import 'package:pcnc/features/cart/presentation/provider/cart_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -11,27 +13,17 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          appLocale.cart,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: textExtraLarge.sp,
-          ),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.background,
-        foregroundColor: Theme.of(context).colorScheme.surface,
+      appBar: CustomAppBar(
+        title: appLocale.cart,
       ),
       body: Consumer<CartProvider>(
         builder: (context, cartProvider, child) {
           final cartItems = cartProvider.cartItems;
-
           if (cartItems.isEmpty) {
             return Center(
-              child: Text(
-                appLocale.yourCartIsEmpty,
-                style: TextStyle(fontSize: textExtraLarge.sp),
+              child: CustomText(
+                text: appLocale.yourCartIsEmpty,
+                fontSize: textExtraLarge,
               ),
             );
           }
@@ -53,20 +45,16 @@ class CartScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      appLocale.totalPrice,
-                      style: TextStyle(
-                        fontSize: textExtraLarge.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    CustomText(
+                      text: appLocale.totalPrice,
+                      fontSize: textExtraLarge,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Text(
-                      '\$${cartProvider.totalPrice.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: textExtraLarge.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
+                    CustomText(
+                      text: '\$${cartProvider.totalPrice.toStringAsFixed(2)}',
+                      fontSize: textExtraLarge,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ],
                 ),

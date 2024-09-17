@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pcnc/core/extension/navigator_ext.dart';
-import 'package:pcnc/core/presentation/mixins/navigator_helper.dart';
+import 'package:pcnc/presentation/mixins/navigator_helper.dart';
 
 class NavigationManager with NavigatorHelper {
   final BuildContext context;

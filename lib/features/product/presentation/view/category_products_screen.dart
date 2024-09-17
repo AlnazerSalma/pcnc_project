@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pcnc/core/presentation/style/color_palette.dart';
-import 'package:pcnc/core/presentation/style/font_sizes.dart';
-import 'package:pcnc/core/service/locator.dart';
+import 'package:pcnc/presentation/style/color_palette.dart';
+import 'package:pcnc/presentation/style/font_sizes.dart';
+import 'package:pcnc/data/service/locator.dart';
 import 'package:pcnc/features/category/domain/entity/category.dart';
 import 'package:pcnc/features/category/domain/usecases/get_categories_usecase.dart';
 import 'package:pcnc/features/product/presentation/widgets/search_widget.dart';
@@ -145,6 +145,7 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
           ),
         ],
       ),
+      backgroundColor: Theme.of(context).colorScheme.background,
     );
   }
 }

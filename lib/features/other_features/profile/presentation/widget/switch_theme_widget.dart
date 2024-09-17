@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pcnc/core/presentation/style/color_palette.dart';
+import 'package:pcnc/presentation/style/color_palette.dart';
 import 'package:provider/provider.dart';
-import 'package:pcnc/core/presentation/style/theme/app_theme.dart';
-import 'package:pcnc/core/presentation/provider/theme_provider.dart';
+import 'package:pcnc/presentation/style/theme/app_theme.dart';
+import 'package:pcnc/presentation/provider/theme_provider.dart';
 
 class SwitchThemeWidget extends StatefulWidget {
   @override

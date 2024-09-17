@@ -53,7 +53,7 @@
     "cart":"Cart",
     "yourCartIsEmpty":"Your cart is empty",
     "totalPrice":"total price",
-    "noCategoriesFound":"No categories found",
+    "noCategoriesFound":"No matching categories found",
     "unknown":"Unknown",
     "error":"Error",
     "noProductsAvailable":"No products available",

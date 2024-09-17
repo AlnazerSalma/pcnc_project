@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/core/presentation/controller/cache_controller.dart';
-import 'package:pcnc/core/presentation/provider/page_provider.dart';
+import 'package:pcnc/presentation/controller/cache_controller.dart';
+import 'package:pcnc/presentation/provider/page_provider.dart';
 import 'package:pcnc/features/user/presentation/views/auth_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

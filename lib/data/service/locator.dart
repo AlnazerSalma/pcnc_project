@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:pcnc/core/app_service/api_service.dart';
+import 'package:pcnc/data/app_service/api_service.dart';
 import 'package:pcnc/features/cart/data/repository/cart_repository_impl.dart';
 import 'package:pcnc/features/cart/domain/usecase/add_to_cart_usecase.dart';
 import 'package:pcnc/features/category/data/repository/category_repository_impl.dart';

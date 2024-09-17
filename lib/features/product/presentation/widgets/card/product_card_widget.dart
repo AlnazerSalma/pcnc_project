@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/core/presentation/style/color_palette.dart';
-import 'package:pcnc/core/presentation/style/font_sizes.dart';
+import 'package:pcnc/presentation/style/color_palette.dart';
+import 'package:pcnc/presentation/style/font_sizes.dart';
 import 'package:pcnc/features/cart/data/model/cart_model.dart';
 import 'package:pcnc/features/product/domain/entity/product.dart';
 import 'package:pcnc/features/product/presentation/widgets/dialog/full_image_dialog.dart';
