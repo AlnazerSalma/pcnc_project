@@ -1,9 +1,10 @@
 import 'package:pcnc/core/enum/app_languages.dart';
 import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:pcnc/core/extension/navigator_ext.dart';
-import 'package:pcnc/core/presentation/style/theme/theme_provider.dart';
-import 'package:pcnc/core2/language/provider/lang_provider.dart';
-import 'package:pcnc/core/constant/font_sizes.dart';
+import 'package:pcnc/core/presentation/mixins/navigator_helper.dart';
+import 'package:pcnc/core/presentation/provider/theme_provider.dart';
+import 'package:pcnc/core/presentation/provider/lang_provider.dart';
+import 'package:pcnc/core/presentation/style/font_sizes.dart';
 import 'package:pcnc/features/other_features/profile/presentation/widget/list_tile_item_widget.dart';
 import 'package:pcnc/features/other_features/profile/presentation/widget/switch_theme_widget.dart';
 import 'package:pcnc/core/presentation/style/theme/app_theme.dart';
@@ -11,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pcnc/core/enum/cache_keys.dart';
 import 'dart:ui';
 
 class ProfileScreen extends StatefulWidget {

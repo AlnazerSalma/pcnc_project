@@ -1,7 +1,8 @@
 import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/core/constant/font_sizes.dart';
+import 'package:pcnc/core/presentation/style/font_sizes.dart';
+
 
 class ListTileItemWidget extends StatefulWidget {
   final String title;

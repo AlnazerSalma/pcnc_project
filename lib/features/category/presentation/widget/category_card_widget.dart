@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/core/extension/sized_box_ext.dart';
-import 'package:pcnc/core/constant/font_sizes.dart';
+import 'package:pcnc/core/presentation/style/font_sizes.dart';
 import 'package:pcnc/features/category/domain/entity/category.dart';
 
 class CategoryCardWidget extends StatelessWidget {

@@ -1,7 +1,8 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/core/constant/color_palette.dart';
 import 'package:flutter/material.dart';
-import 'package:pcnc/core/constant/font_sizes.dart';
+import 'package:pcnc/core/presentation/style/color_palette.dart';
+import 'package:pcnc/core/presentation/style/font_sizes.dart';
+
 
 class SignInSignUpButton extends StatelessWidget {
   final VoidCallback onTap;

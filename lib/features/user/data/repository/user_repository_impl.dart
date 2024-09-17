@@ -1,4 +1,4 @@
-import 'package:pcnc/core2/app_service/api_service.dart';
+import 'package:pcnc/core/app_service/api_service.dart';
 import 'package:pcnc/features/user/data/model/user_model.dart';
 
 abstract class UserRepository {

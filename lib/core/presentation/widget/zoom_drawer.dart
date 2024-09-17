@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pcnc/core2/drawer/drawer_screen/menu_screen.dart';
-import 'package:pcnc/core2/drawer/drawer_screen/selected_screen.dart';
-import 'package:pcnc/core2/drawer/widget/main_drawer.dart';
-import 'package:pcnc/core2/drawer/drawer_provider/page_provider.dart';
+import 'package:pcnc/core/drawer/menu_screen.dart';
+import 'package:pcnc/core/drawer/selected_screen.dart';
+import 'package:pcnc/core/presentation/widget/main_drawer.dart';
+import 'package:pcnc/core/presentation/provider/page_provider.dart';
 import 'package:pcnc/features/product/presentation/view/favourite_screen.dart';
 import 'package:pcnc/features/dashboard/screen/home_screen.dart';
 import 'package:pcnc/features/other_features/profile/presentation/screen/profile_screen.dart';

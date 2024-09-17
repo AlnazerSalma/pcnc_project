@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pcnc/core/constant/font_sizes.dart';
+import 'package:pcnc/core/presentation/style/font_sizes.dart';
 import 'package:pcnc/features/cart/presentation/widget/cart_card_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:pcnc/features/cart/presentation/provider/cart_provider.dart';
@@ -75,6 +75,7 @@ class CartScreen extends StatelessWidget {
           );
         },
       ),
+      backgroundColor: Theme.of(context).colorScheme.background,
     );
   }
 }

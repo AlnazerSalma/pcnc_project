@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/core/extension/sized_box_ext.dart';
-import 'package:pcnc/core/constant/font_sizes.dart';
-import 'package:pcnc/core/constant/color_palette.dart';
+import 'package:pcnc/core/presentation/style/color_palette.dart';
+import 'package:pcnc/core/presentation/style/font_sizes.dart';
 import 'package:pcnc/features/product/domain/entity/product.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/generated/assets.dart';

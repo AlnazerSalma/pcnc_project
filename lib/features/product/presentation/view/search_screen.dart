@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pcnc/core/constant/font_sizes.dart';
-import 'package:pcnc/core2/service/locator.dart';
+import 'package:pcnc/core/presentation/style/font_sizes.dart';
+import 'package:pcnc/core/service/locator.dart';
 import 'package:pcnc/features/product/domain/entity/product.dart';
 import 'package:pcnc/features/product/domain/usecase/get_products_usecase.dart';
 import 'package:pcnc/features/product/presentation/widgets/search_widget.dart';

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/core2/app_service/api_service.dart';
-import 'package:pcnc/core2/cache/cache_controller.dart';
-import 'package:pcnc/core2/drawer/widget/zoom_drawer.dart';
+import 'package:pcnc/core/presentation/mixins/navigator_helper.dart';
+import 'package:pcnc/core/presentation/style/color_palette.dart';
+import 'package:pcnc/core/presentation/style/font_sizes.dart';
+import 'package:pcnc/core/app_service/api_service.dart';
+import 'package:pcnc/core/presentation/controller/cache_controller.dart';
+import 'package:pcnc/core/presentation/widget/zoom_drawer.dart';
 import 'package:pcnc/core/enum/cache_keys.dart';
 import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:pcnc/features/user/data/repository/user_repository_impl.dart';
 import 'package:pcnc/features/user/presentation/views/forgot_pass_screen.dart';
-import 'package:pcnc/core/constant/color_palette.dart';
-import 'package:pcnc/core/constant/font_sizes.dart';
 import 'package:pcnc/features/user/presentation/widget/signin_signup_widget.dart';
 import 'package:pcnc/features/user/presentation/widget/form_field_widget.dart';
-import 'package:pcnc/core/extension/navigator_ext.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/features/user/presentation/widget/custom_snackbar_widget.dart';
 

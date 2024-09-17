@@ -1,4 +1,4 @@
-import 'package:pcnc/core2/cache/cache_controller.dart';
+import 'package:pcnc/core/presentation/controller/cache_controller.dart';
 import 'package:pcnc/core/enum/cache_keys.dart';
 import 'package:pcnc/core/presentation/style/theme/app_theme.dart';
 import 'package:flutter/material.dart';

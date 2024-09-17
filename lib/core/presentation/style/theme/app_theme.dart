@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../constant/color_palette.dart';
+import 'package:pcnc/core/presentation/style/color_palette.dart';
+
 
 class AppTheme {
   static ThemeData light = ThemeData(
