@@ -1,20 +1,20 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pcnc/core/constant/strings.dart';
-import 'package:pcnc/core/drawer/drawer_provider/page_provider.dart';
-import 'package:pcnc/core/theme/theme_provider.dart';
+import 'package:pcnc/core/enum/app_languages.dart';
+import 'package:pcnc/core2/drawer/drawer_provider/page_provider.dart';
+import 'package:pcnc/core/presentation/style/theme/theme_provider.dart';
 import 'package:pcnc/features/cart/domain/usecase/add_to_cart_usecase.dart';
-import 'package:pcnc/features/product/domain/usecase/get_products_usecase.dart';
-import 'package:pcnc/core/bloc/state_observer_bloc.dart';
-import 'package:pcnc/core/cache/cache_controller.dart';
-import 'package:pcnc/core/enums.dart';
-import 'package:pcnc/core/widget/restart_app.dart';
-import 'package:pcnc/core/service/locator.dart';
+import 'package:pcnc/core2/bloc/state_observer_bloc.dart';
+import 'package:pcnc/core2/cache/cache_controller.dart';
+import 'package:pcnc/core/enum/cache_keys.dart';
+import 'package:pcnc/core/presentation/widget/restart_app.dart';
+import 'package:pcnc/core2/service/locator.dart';
 import 'package:pcnc/features/cart/presentation/provider/cart_provider.dart';
 import 'package:pcnc/features/product/domain/usecase/manage_favorites_usecase.dart';
 import 'package:pcnc/features/product/presentation/provider/favourite_provider.dart';
-import 'package:pcnc/core/language/provider/lang_provider.dart';
+import 'package:pcnc/core2/language/provider/lang_provider.dart';
 import 'package:pcnc/features/other_features/splash/splash_screen.dart';
-import 'package:pcnc/core/theme/app_theme.dart';
+import 'package:pcnc/core/presentation/style/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -28,9 +28,8 @@ void main() async {
   await CacheController().initSharedPreferences();
   Bloc.observer = StateObserverBloc();
   String? theme = CacheController().getter(key: CacheKeys.theme);
-  ThemeData initialThemeMode =
-      theme == 'dark' ? AppTheme.dark : AppTheme.light;
- setupLocator();
+  ThemeData initialThemeMode = theme == 'dark' ? AppTheme.dark : AppTheme.light;
+  setupLocator();
   runApp(
     provider.ChangeNotifierProvider(
       create: (context) => ThemeProvider(initialThemeMode),
@@ -85,16 +84,18 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             providers: [
               ChangeNotifierProvider(create: (_) => LanguageProvider()),
               ChangeNotifierProvider(create: (context) => PageProvider()),
-              ChangeNotifierProvider(create: (_) => FavouriteProvider(locator<ManageFavoritesUseCase>())),
               ChangeNotifierProvider(
-            create: (_) => CartProvider(
-              addToCartUseCase: locator<AddToCartUseCase>(),
-              removeFromCartUseCase: locator<RemoveFromCartUseCase>(),
-              updateQuantityUseCase: locator<UpdateQuantityUseCase>(),
-              getCartItemsUseCase: locator<GetCartItemsUseCase>(),
-              getTotalPriceUseCase: locator<GetTotalPriceUseCase>(),
-            ),
-          ),
+                  create: (_) =>
+                      FavouriteProvider(locator<ManageFavoritesUseCase>())),
+              ChangeNotifierProvider(
+                create: (_) => CartProvider(
+                  addToCartUseCase: locator<AddToCartUseCase>(),
+                  removeFromCartUseCase: locator<RemoveFromCartUseCase>(),
+                  updateQuantityUseCase: locator<UpdateQuantityUseCase>(),
+                  getCartItemsUseCase: locator<GetCartItemsUseCase>(),
+                  getTotalPriceUseCase: locator<GetTotalPriceUseCase>(),
+                ),
+              ),
             ],
             child: Consumer<ThemeProvider>(
               builder: (context, themeProvider, child) {

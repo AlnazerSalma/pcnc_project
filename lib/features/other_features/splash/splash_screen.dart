@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/core/cache/cache_controller.dart';
+import 'package:pcnc/core2/cache/cache_controller.dart';
 import 'package:pcnc/features/user/presentation/views/auth_screen.dart';
-import 'package:pcnc/core/drawer/zoom_drawer.dart';
+import 'package:pcnc/core2/drawer/widget/zoom_drawer.dart';
 import 'dart:async';
+
+import 'package:pcnc/generated/assets.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -22,8 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _init() async {
-    await Future.delayed(
-        const Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
     _checkAuth();
   }
 
@@ -60,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
         color: Theme.of(context).colorScheme.background,
         child: Center(
           child: Image.asset(
-            'assets/images/pcnc.jpg',
+            Assets.pcnc,
             width: double.infinity,
             height: 300.h,
           ),

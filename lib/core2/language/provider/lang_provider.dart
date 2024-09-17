@@ -1,11 +1,11 @@
-import 'package:pcnc/core/cache/cache_controller.dart';
+import 'package:pcnc/core/enum/app_languages.dart';
+import 'package:pcnc/core2/cache/cache_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../enums.dart';
+import '../../../core/enum/cache_keys.dart';
 
 class LanguageProvider extends ChangeNotifier {
   String lang = CacheController().getter(key: CacheKeys.language) ?? 'en';
-
 
   String languageName({AppLanguages? locale}) {
     String _ = locale?.name ?? lang;
@@ -31,7 +31,6 @@ class LanguageProvider extends ChangeNotifier {
         appDirectionRtl = false;
         break;
     }
-
 
     await CacheController().setter(
       key: CacheKeys.language,

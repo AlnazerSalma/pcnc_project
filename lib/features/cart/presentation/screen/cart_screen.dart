@@ -43,7 +43,7 @@ class CartScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final cartItem = cartItems[index];
                     return CartCardWidget(
-                     cartItem: cartItem,
+                      cartItem: cartItem,
                     );
                   },
                 ),

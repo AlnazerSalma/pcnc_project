@@ -44,7 +44,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
         backgroundColor: Theme.of(context).colorScheme.background,
         foregroundColor: Theme.of(context).colorScheme.surface,
       ),
-      body:FutureBuilder<List<Category>>(
+      body: FutureBuilder<List<Category>>(
         future: _categoriesFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

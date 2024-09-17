@@ -1,4 +1,4 @@
-import 'package:pcnc/core/app_service/api_service.dart';
+import 'package:pcnc/core2/app_service/api_service.dart';
 import 'package:pcnc/features/cart/data/model/cart_model.dart';
 import 'package:pcnc/features/cart/domain/repository/cart_repository.dart';
 

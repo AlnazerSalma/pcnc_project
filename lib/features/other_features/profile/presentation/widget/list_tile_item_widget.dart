@@ -1,5 +1,4 @@
-import 'package:pcnc/core/extension/sized_box_extension.dart';
-import 'package:pcnc/core/constant/color_palette.dart';
+import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/core/constant/font_sizes.dart';

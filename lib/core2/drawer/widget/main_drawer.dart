@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key, required this.child, required this.borderRadius});
+  const MainScreen(
+      {super.key, required this.child, required this.borderRadius});
   final Widget child;
   final double borderRadius;
 

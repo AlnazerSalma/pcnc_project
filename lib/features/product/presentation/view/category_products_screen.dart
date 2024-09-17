@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/core/constant/color_palette.dart';
 import 'package:pcnc/core/constant/font_sizes.dart';
-import 'package:pcnc/core/service/locator.dart';
+import 'package:pcnc/core2/service/locator.dart';
 import 'package:pcnc/features/category/domain/entity/category.dart';
 import 'package:pcnc/features/category/domain/usecases/get_categories_usecase.dart';
 import 'package:pcnc/features/product/presentation/widgets/search_widget.dart';
@@ -109,7 +109,8 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
-                  return Center(child: Text('${appLocale.error} ${snapshot.error}'));
+                  return Center(
+                      child: Text('${appLocale.error} ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return Center(child: Text(appLocale.noProductsAvailable));
                 } else {

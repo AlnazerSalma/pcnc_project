@@ -9,6 +9,7 @@ import 'package:pcnc/features/cart/presentation/provider/cart_provider.dart';
 import 'package:pcnc/features/product/presentation/provider/favourite_provider.dart';
 import 'package:pcnc/core/constant/color_palette.dart';
 import 'package:pcnc/core/constant/font_sizes.dart';
+import 'package:pcnc/generated/assets.dart';
 import 'package:provider/provider.dart';
 
 class ProductCardWidget extends StatelessWidget {
@@ -69,7 +70,7 @@ class ProductCardWidget extends StatelessWidget {
                     fit: BoxFit.fill,
                     errorBuilder: (context, error, stackTrace) {
                       return Image.asset(
-                        'assets/images/image-not-available.png',
+                        Assets.imageNotAvailable,
                         width: double.infinity,
                         height: 120.h,
                         fit: BoxFit.fill,

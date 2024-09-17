@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/core/util/Input_decoration_util.dart';
@@ -21,7 +20,7 @@ class CustomFormFieldWidget extends StatefulWidget {
     required this.icon,
     this.isPasswordField = false,
     this.keyboardType = TextInputType.text,
-    this.trailingText, 
+    this.trailingText,
     this.controller,
     super.key,
   });
@@ -45,7 +44,7 @@ class _CustomTextFormFieldState extends State<CustomFormFieldWidget> {
       textAlign: TextAlign.start,
       keyboardType: widget.keyboardType,
       decoration: widget.isPasswordField
-          ?  buildInputDecoration(
+          ? buildInputDecoration(
               context,
               widget.labelText,
               widget.icon,
@@ -71,15 +70,14 @@ class _CustomTextFormFieldState extends State<CustomFormFieldWidget> {
               context,
               widget.labelText,
               widget.icon,
-                ).copyWith(
+            ).copyWith(
               filled: true,
-              fillColor:Theme.of(context).colorScheme.primary,
+              fillColor: Theme.of(context).colorScheme.primary,
               suffix: Text(widget.trailingText ?? ''),
             ),
       validator: widget.validator,
       onSaved: widget.onSaved,
       controller: widget.controller,
-      
     );
   }
 }

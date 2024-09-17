@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../constant/color_palette.dart';
+import '../../../constant/color_palette.dart';
 
 class AppTheme {
   static ThemeData light = ThemeData(
@@ -24,6 +24,5 @@ class AppTheme {
       onInverseSurface: Color.fromARGB(255, 232, 230, 230),
       error: kRed,
     ),
-    
   );
 }

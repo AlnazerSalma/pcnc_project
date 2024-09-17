@@ -1,5 +1,4 @@
-
-import 'package:pcnc/core/enums.dart';
+import 'package:pcnc/core/enum/cache_keys.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheController {

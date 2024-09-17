@@ -1,4 +1,4 @@
-import 'package:pcnc/core/extension/sized_box_extension.dart';
+import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:pcnc/core/constant/color_palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,7 +27,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         title: Text(
           appLocale.forgotPasswordQ,
           style: TextStyle(
-              color: Theme.of(context).colorScheme.surface, fontSize: textExtraLarge.sp),
+              color: Theme.of(context).colorScheme.surface,
+              fontSize: textExtraLarge.sp),
         ),
         backgroundColor: Theme.of(context).colorScheme.background,
         foregroundColor: Theme.of(context).colorScheme.surface,
@@ -56,13 +57,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               20.height,
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 30.w),
-                child:
-                TextFormField(
+                child: TextFormField(
                   controller: forgetPasswordController,
-                  style: TextStyle(
-                      color: Theme.of(context).colorScheme.surface),
-                  decoration:buildInputDecoration(
-                    context, appLocale.email, Icons.email),
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.surface),
+                  decoration: buildInputDecoration(
+                      context, appLocale.email, Icons.email),
                   cursorColor: Theme.of(context).colorScheme.surface,
                 ),
               ),
@@ -105,8 +105,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         ],
                       ),
                       child: ElevatedButton(
-                        onPressed: () async {
-                        },
+                        onPressed: () async {},
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
                           shadowColor: Colors.transparent,

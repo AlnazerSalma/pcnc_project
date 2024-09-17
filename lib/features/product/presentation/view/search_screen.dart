@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pcnc/core/constant/color_palette.dart';
 import 'package:pcnc/core/constant/font_sizes.dart';
-import 'package:pcnc/core/service/locator.dart';
+import 'package:pcnc/core2/service/locator.dart';
 import 'package:pcnc/features/product/domain/entity/product.dart';
 import 'package:pcnc/features/product/domain/usecase/get_products_usecase.dart';
 import 'package:pcnc/features/product/presentation/widgets/search_widget.dart';
 import 'package:pcnc/features/product/presentation/widgets/card/product_card_widget.dart';
+import 'package:pcnc/generated/assets.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -49,14 +49,15 @@ class _SearchScreenState extends State<SearchScreen> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
-                  return Center(child: Text('${appLocale.error} ${snapshot.error}'));
+                  return Center(
+                      child: Text('${appLocale.error} ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
-                          'assets/images/noResultFound.png',
+                          Assets.noResultFound,
                           fit: BoxFit.fill,
                           height: 200.h,
                         ),
@@ -76,7 +77,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   if (searchQuery.isEmpty) {
                     return Center(
                       child: Image.asset(
-                        'assets/images/noResultFound.png',
+                        Assets.noResultFound,
                         fit: BoxFit.fill,
                         height: 200.h,
                       ),
@@ -94,7 +95,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset(
-                            'assets/images/noResultFound.png',
+                            Assets.noResultFound,
                             fit: BoxFit.fill,
                             height: 200.h,
                           ),

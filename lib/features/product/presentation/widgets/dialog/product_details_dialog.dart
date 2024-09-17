@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/core/extension/sized_box_extension.dart';
+import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:pcnc/core/constant/font_sizes.dart';
 import 'package:pcnc/core/constant/color_palette.dart';
 import 'package:pcnc/features/product/domain/entity/product.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pcnc/generated/assets.dart';
+
 class ProductDetailsDialog extends StatelessWidget {
   final Product product;
 
@@ -38,7 +40,7 @@ class ProductDetailsDialog extends StatelessWidget {
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
                       return Image.asset(
-                        'assets/images/image-not-available.png',
+                        Assets.imageNotAvailable,
                         width: double.infinity,
                         height: 200.h,
                         fit: BoxFit.cover,

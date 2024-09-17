@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:pcnc/core/drawer/drawer_screen/menu_screen.dart';
-import 'package:pcnc/core/drawer/drawer_screen/selected_screen.dart';
-import 'package:pcnc/core/drawer/main_drawer.dart';
-import 'package:pcnc/core/drawer/drawer_provider/page_provider.dart';
+import 'package:pcnc/core2/drawer/drawer_screen/menu_screen.dart';
+import 'package:pcnc/core2/drawer/drawer_screen/selected_screen.dart';
+import 'package:pcnc/core2/drawer/widget/main_drawer.dart';
+import 'package:pcnc/core2/drawer/drawer_provider/page_provider.dart';
 import 'package:pcnc/features/product/presentation/view/favourite_screen.dart';
 import 'package:pcnc/features/dashboard/screen/home_screen.dart';
 import 'package:pcnc/features/other_features/profile/presentation/screen/profile_screen.dart';
 import 'package:pcnc/features/other_features/settings/settings_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class ZoomDrawerAnimation extends StatefulWidget {
   const ZoomDrawerAnimation({super.key});
 
@@ -48,7 +49,8 @@ class _ZoomDrawerAnimationState extends State<ZoomDrawerAnimation>
   @override
   Widget build(BuildContext context) {
     var appLocale = AppLocalizations.of(context)!;
-    var textDirection = appLocale.localeName == 'ar' ? TextDirection.rtl : TextDirection.ltr;
+    var textDirection =
+        appLocale.localeName == 'ar' ? TextDirection.rtl : TextDirection.ltr;
 
     return Directionality(
       textDirection: textDirection,

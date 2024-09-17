@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pcnc/generated/assets.dart';
 
 class UserAvatarWidget extends StatelessWidget {
   @override
@@ -11,7 +12,7 @@ class UserAvatarWidget extends StatelessWidget {
     return Center(
       child: CircleAvatar(
         radius: 30.r,
-        backgroundImage: AssetImage('assets/images/avatar-account.jpg'),
+        backgroundImage: AssetImage(Assets.avatarAccount),
       ),
     );
   }

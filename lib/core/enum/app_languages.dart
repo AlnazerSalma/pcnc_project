@@ -1,0 +1,1 @@
+enum AppLanguages { en, ar }

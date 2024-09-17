@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/core/extension/sized_box_extension.dart';
+import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:pcnc/core/constant/font_sizes.dart';
 import 'package:pcnc/features/category/domain/entity/category.dart';
 
@@ -15,7 +15,6 @@ class CategoryCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -25,7 +24,10 @@ class CategoryCardWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12.r),
           boxShadow: [
             BoxShadow(
-              color: Theme.of(context).colorScheme.onInverseSurface.withOpacity(0.3),
+              color: Theme.of(context)
+                  .colorScheme
+                  .onInverseSurface
+                  .withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 5,
               offset: Offset(0, 3),
@@ -58,9 +60,11 @@ class CategoryCardWidget extends StatelessWidget {
                           } else {
                             return Center(
                               child: CircularProgressIndicator(
-                                value: loadingProgress.expectedTotalBytes != null
+                                value: loadingProgress.expectedTotalBytes !=
+                                        null
                                     ? loadingProgress.cumulativeBytesLoaded /
-                                      (loadingProgress.expectedTotalBytes ?? 1)
+                                        (loadingProgress.expectedTotalBytes ??
+                                            1)
                                     : null,
                               ),
                             );
@@ -75,7 +79,7 @@ class CategoryCardWidget extends StatelessWidget {
               category.name,
               style: TextStyle(
                 fontSize: textMedium.sp,
-                fontWeight:FontWeight.bold,
+                fontWeight: FontWeight.bold,
                 color: Theme.of(context).colorScheme.surface,
               ),
               textAlign: TextAlign.center,

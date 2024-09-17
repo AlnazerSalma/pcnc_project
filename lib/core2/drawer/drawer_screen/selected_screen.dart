@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/core/drawer/drawer_provider/page_provider.dart';
+import 'package:pcnc/core2/drawer/drawer_provider/page_provider.dart';
 import 'package:pcnc/features/cart/presentation/screen/cart_screen.dart';
 import 'package:pcnc/features/product/presentation/view/favourite_screen.dart';
 import 'package:pcnc/features/dashboard/screen/home_screen.dart';
@@ -10,14 +10,15 @@ import 'package:pcnc/features/other_features/settings/settings_screen.dart';
 import 'package:pcnc/core/constant/color_palette.dart';
 import 'package:pcnc/features/dashboard/widget/bottom_nav_bar_widget.dart';
 import 'package:pcnc/features/other_features/profile/presentation/widget/user_avatar_widget.dart';
-import 'package:pcnc/core/helper/navigator_helper.dart';
+import 'package:pcnc/core/extension/navigator_ext.dart';
+import 'package:pcnc/generated/assets.dart';
 import 'package:provider/provider.dart';
-
 
 class SelectedScreen extends StatefulWidget with NavigatorHelper {
   const SelectedScreen({
     super.key,
-    required this.controller, required Widget content,
+    required this.controller,
+    required Widget content,
   });
 
   final AnimationController controller;
@@ -57,7 +58,7 @@ class _SelectedScreenState extends State<SelectedScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
-                'assets/images/pcnc2.png',
+                Assets.pcnc2,
                 height: 40.h,
               ),
               Text(
@@ -87,7 +88,7 @@ class _SelectedScreenState extends State<SelectedScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.primary,
-      onPressed: () => widget.jumpTo(context, to: CartScreen()),
+        onPressed: () => widget.jumpTo(context, to: CartScreen()),
         child: Icon(
           Icons.shopping_cart_outlined,
           color: Theme.of(context).colorScheme.surface,

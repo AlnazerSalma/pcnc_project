@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/core/app_service/api_service.dart';
-import 'package:pcnc/core/cache/cache_controller.dart';
-import 'package:pcnc/core/drawer/zoom_drawer.dart';
-import 'package:pcnc/core/enums.dart';
-import 'package:pcnc/core/extension/sized_box_extension.dart';
+import 'package:pcnc/core2/app_service/api_service.dart';
+import 'package:pcnc/core2/cache/cache_controller.dart';
+import 'package:pcnc/core2/drawer/widget/zoom_drawer.dart';
+import 'package:pcnc/core/enum/cache_keys.dart';
+import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:pcnc/features/user/data/repository/user_repository_impl.dart';
 import 'package:pcnc/features/user/presentation/views/forgot_pass_screen.dart';
 import 'package:pcnc/core/constant/color_palette.dart';
 import 'package:pcnc/core/constant/font_sizes.dart';
 import 'package:pcnc/features/user/presentation/widget/signin_signup_widget.dart';
 import 'package:pcnc/features/user/presentation/widget/form_field_widget.dart';
-import 'package:pcnc/core/helper/navigator_helper.dart';
+import 'package:pcnc/core/extension/navigator_ext.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/features/user/presentation/widget/custom_snackbar_widget.dart';
 
@@ -33,10 +33,9 @@ class _AuthScreen extends State<AuthScreen> with NavigatorHelper {
   var _enteredEmail = '';
   var _enteredPassword = '';
   var _reenteredPassword = '';
-  
 
   bool hidden = true;
-Future<void> _submit() async {
+  Future<void> _submit() async {
     if (_form.currentState!.validate()) {
       _form.currentState!.save();
 
@@ -53,8 +52,7 @@ Future<void> _submit() async {
             _enteredUsernameOrEmail,
             _enteredPassword,
           );
-          await CacheController()
-              .setter(key: CacheKeys.token, value: user.id);
+          await CacheController().setter(key: CacheKeys.token, value: user.id);
           _navigateToHome();
         } else {
           final user = await apiRepository.registerUser(
@@ -65,11 +63,11 @@ Future<void> _submit() async {
           _navigateToLogin();
         }
       } catch (error) {
-        CustomSnackBarWidget.show(context, appLocale.operationFailed, isError: true);
+        CustomSnackBarWidget.show(context, appLocale.operationFailed,
+            isError: true);
       }
     }
   }
-
 
   Future<void> _navigateToHome() async {
     jumpTo(context, to: ZoomDrawerAnimation());
@@ -78,7 +76,7 @@ Future<void> _submit() async {
   Future<void> _navigateToLogin() async {
     setState(() {
       _isLogin = true;
-      _form.currentState?.reset(); 
+      _form.currentState?.reset();
       _enteredUsernameOrEmail = '';
       _enteredEmail = '';
       _enteredPassword = '';
