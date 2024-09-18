@@ -1,4 +1,4 @@
-import 'package:pcnc/core/enum/app_languages.dart';
+import 'package:pcnc/core/enum/e_app_languages.dart';
 import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:pcnc/core/extension/navigator_ext.dart';
 import 'package:pcnc/presentation/mixins/navigator_helper.dart';

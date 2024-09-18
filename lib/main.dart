@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pcnc/core/constant/strings.dart';
-import 'package:pcnc/core/enum/app_languages.dart';
+import 'package:pcnc/core/enum/e_app_languages.dart';
 import 'package:pcnc/features/category/domain/manager/category_manager.dart';
 import 'package:pcnc/features/category/domain/usecases/get_categories_usecase.dart';
 import 'package:pcnc/features/product/domain/manager/product_data_manager.dart';
@@ -10,7 +10,7 @@ import 'package:pcnc/presentation/provider/theme_provider.dart';
 import 'package:pcnc/features/cart/domain/usecase/add_to_cart_usecase.dart';
 import 'package:pcnc/presentation/bloc/state_observer_bloc.dart';
 import 'package:pcnc/presentation/controller/cache_controller.dart';
-import 'package:pcnc/core/enum/cache_keys.dart';
+import 'package:pcnc/core/enum/e_cache_keys.dart';
 import 'package:pcnc/presentation/widget/restart_app.dart';
 import 'package:pcnc/data/service/locator.dart';
 import 'package:pcnc/features/cart/presentation/provider/cart_provider.dart';
