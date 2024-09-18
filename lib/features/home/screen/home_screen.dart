@@ -114,14 +114,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        category.image != null
-                            ? CardImage(
+                             CardImage(
                                 imageUrl: category.image!,
                                 width: 80.h,
                                 height: 80.h,
                                 errorImage: Assets.imageNotAvailable,
-                              )
-                            : SizedBox(width: 80.h, height: 80.h),
+                              ),
                         8.height,
                         CustomText(
                           text: category.name,
@@ -142,10 +140,6 @@ class _HomeScreenState extends State<HomeScreen> {
               items: productList,
               itemBuilder: (context, product) =>
                   ProductCardWidget(product: product),
-              crossAxisCount: 2,
-              crossAxisSpacing: 7.w,
-              mainAxisSpacing: 7.h,
-              childAspectRatio: 0.54,
             ),
           ),
         ],

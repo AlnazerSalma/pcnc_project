@@ -2,7 +2,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 import 'package:pcnc/presentation/style/color_palette.dart';
 import 'package:pcnc/presentation/style/font_sizes.dart';
-
+import 'package:pcnc/presentation/widget/text_widget/custom_text.dart';
 
 class SignInSignUpButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -14,6 +14,7 @@ class SignInSignUpButton extends StatelessWidget {
   final double fontSize;
 
   const SignInSignUpButton({
+    super.key,
     required this.onTap,
     required this.text,
     this.width = double.infinity,
@@ -21,8 +22,7 @@ class SignInSignUpButton extends StatelessWidget {
     this.color = const Color(0xFFF89939),
     this.textColor = kWhiteColor,
     this.fontSize = textExtraLarge,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +41,8 @@ class SignInSignUpButton extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text(
-                text,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: textColor,
-                      fontSize: fontSize.sp,
-                    ),
+              child: CustomText(
+                text: text,
               ),
             ),
             Transform(

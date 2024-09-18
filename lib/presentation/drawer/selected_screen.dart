@@ -4,7 +4,7 @@ import 'package:pcnc/presentation/mixins/navigator_helper.dart';
 import 'package:pcnc/presentation/provider/page_provider.dart';
 import 'package:pcnc/presentation/style/color_palette.dart';
 import 'package:pcnc/features/cart/presentation/screen/cart_screen.dart';
-import 'package:pcnc/features/product/presentation/view/favourite_screen.dart';
+import 'package:pcnc/features/favorite/presentation/screen/favourite_screen.dart';
 import 'package:pcnc/features/home/screen/home_screen.dart';
 import 'package:pcnc/features/other_features/profile/presentation/screen/profile_screen.dart';
 import 'package:pcnc/features/product/presentation/view/search_screen.dart';

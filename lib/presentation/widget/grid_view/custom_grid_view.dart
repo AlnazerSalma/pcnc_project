@@ -13,9 +13,10 @@ class CustomGridView<T> extends StatelessWidget {
     required this.items,
     required this.itemBuilder,
     this.crossAxisCount = 2,
-    this.crossAxisSpacing = 10.0,
-    this.mainAxisSpacing = 10.0,
-    this.childAspectRatio = 0.8,
+    this.crossAxisSpacing = 7.0,
+    this.mainAxisSpacing = 7.0,
+    this.childAspectRatio =  0.54,
+
   });
 
   @override

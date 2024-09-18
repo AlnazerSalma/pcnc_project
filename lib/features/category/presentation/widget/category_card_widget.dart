@@ -38,15 +38,13 @@ class CategoryCardWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            category.image != null
-                ? CardImage(
-                    imageUrl: category.image!,
-                    width: double.infinity,
-                    height: 135.h,
-                    errorImage: Assets.imageNotAvailable,
-                    isCircular: false,
-                  )
-                : SizedBox(width: double.infinity, height: 130.h),
+            CardImage(
+              imageUrl: category.image!,
+              width: double.infinity,
+              height: 135.h,
+              errorImage: Assets.imageNotAvailable,
+              isCircular: false,
+            ),
             8.height,
             CustomText(
                 text: category.name,

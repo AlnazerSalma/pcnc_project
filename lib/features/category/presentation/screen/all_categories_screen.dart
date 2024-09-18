@@ -11,7 +11,7 @@ import 'package:pcnc/features/category/domain/usecases/get_categories_usecase.da
 import 'package:pcnc/features/product/presentation/view/category_products_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/features/category/presentation/widget/category_card_widget.dart';
-import 'package:pcnc/features/product/presentation/widgets/search_widget.dart';
+import 'package:pcnc/presentation/widget/search_widget.dart';
 import 'package:pcnc/presentation/widget/app_bar_widget/custom_app_bar.dart';
 
 class AllCategoriesScreen extends StatefulWidget {
@@ -91,6 +91,10 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                                 },
                               );
                             },
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10.w,
+                            mainAxisSpacing: 10.h,
+                            childAspectRatio: 0.8,
                           ),
                         ),
                 ),

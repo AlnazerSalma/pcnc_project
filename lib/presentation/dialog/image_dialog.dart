@@ -3,14 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:ui';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-class FullImageDialog extends StatelessWidget {
+import 'package:pcnc/core/application_manager/navigation_manager.dart';
+import 'package:pcnc/presentation/style/font_sizes.dart';
+import 'package:pcnc/presentation/widget/text_widget/custom_text.dart';
+class ImageDialog extends StatelessWidget {
   final String imageUrl;
 
-  const FullImageDialog({required this.imageUrl});
+  const ImageDialog({required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
+    final navigationManager = NavigationManager(context);
     return Dialog(
       insetPadding: EdgeInsets.all(0),
       backgroundColor: Colors.transparent,
@@ -31,13 +35,11 @@ class FullImageDialog extends StatelessWidget {
                   ),
                 ),
                 Center(
-                  child: Text(
+                  child: CustomText(text: 
                     appLocale.errorLoadingImage,
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.error,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    fontSize: textXExtraLarge.sp,
+                     color: Theme.of(context).colorScheme.error,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
@@ -46,7 +48,7 @@ class FullImageDialog extends StatelessWidget {
             final imageSize = snapshot.data;
             return GestureDetector(
               onTap: () {
-                Navigator.of(context).pop();
+               navigationManager.popScreen();
               },
               child: Stack(
                 children: [

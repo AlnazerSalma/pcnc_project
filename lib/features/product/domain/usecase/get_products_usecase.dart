@@ -10,7 +10,13 @@ class GetProductsUseCase {
   Future<List<Product>> execute(int categoryId) async {
     return await productRepository.getProductsByCategory(categoryId);
   }
-  Future<List<Product>> getProducts({int offset = 0, int limit = 10}) async {
+  // Future<List<Product>> getProducts({int offset = 0, int limit = 10}) async {
+  //   return await productRepository.getProducts(offset: offset, limit: limit);
+  // }
+  Future<List<Product>> getProducts({int offset = 0, int limit = 10, int? categoryId}) async {
+    if (categoryId != null) {
+      return await productRepository.getProductsByCategory(categoryId);
+    }
     return await productRepository.getProducts(offset: offset, limit: limit);
   }
   

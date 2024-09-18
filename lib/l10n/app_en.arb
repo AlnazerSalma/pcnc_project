@@ -33,7 +33,7 @@
     "homelabel": "home",
     "enterYourEmailAddress": "Enter your email address",
     "email": "Email",
-    "weWillSendYouMessageToSetOrResetYourNewPassword": "We will send you a message to set or reset your new password",
+    "weWillSendYouMessageToSetOrResetYourNewPassword": "We will send you a message to set or reset your \n new password",
     "sendCode": "Send code",
     "darkMode": "Dark Mode",
     "lightMode": "Light Mode",

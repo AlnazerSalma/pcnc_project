@@ -2,9 +2,12 @@ import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pcnc/features/user/presentation/widget/form_field_widget.dart';
 import 'package:pcnc/presentation/style/color_palette.dart';
 import 'package:pcnc/presentation/style/font_sizes.dart';
-import 'package:pcnc/core/util/Input_decoration_util.dart';
+import 'package:pcnc/presentation/widget/app_bar_widget/custom_app_bar.dart';
+import 'package:pcnc/presentation/widget/button/circle_button.dart';
+import 'package:pcnc/presentation/widget/text_widget/custom_text.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -15,63 +18,46 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   AppLocalizations get appLocale => AppLocalizations.of(context)!;
-
   TextEditingController forgetPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, designSize: Size(375, 790));
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          appLocale.forgotPasswordQ,
-          style: TextStyle(
-              color: Theme.of(context).colorScheme.surface,
-              fontSize: textExtraLarge.sp),
-        ),
-        backgroundColor: Theme.of(context).colorScheme.background,
-        foregroundColor: Theme.of(context).colorScheme.surface,
+      appBar: CustomAppBar(
+        title: appLocale.forgotPasswordQ,
       ),
-      body: Center(
-        child: Container(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.0.w),
+        child: Center(
           child: Column(
             children: [
-              Container(
-                alignment: Alignment.center,
-                height: 40.h,
-              ),
-              10.height,
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.0.w),
-                child: Text(
-                  appLocale.enterYourEmailAddress,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.surface,
-                    fontSize: textMedium.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
+              40.height,
+              CustomText(
+                text: appLocale.enterYourEmailAddress,
+                fontWeight: FontWeight.bold,
+                fontSize: textExtraLarge,
+                textAlign: TextAlign.left,
               ),
               20.height,
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 30.w),
-                child: TextFormField(
-                  controller: forgetPasswordController,
-                  style:
-                      TextStyle(color: Theme.of(context).colorScheme.surface),
-                  decoration: buildInputDecoration(
-                      context, appLocale.email, Icons.email),
-                  cursorColor: Theme.of(context).colorScheme.surface,
-                ),
+              CustomFormFieldWidget(
+                validator: (value) {
+                  if (value == null ||
+                      value.trim().isEmpty ||
+                      !value.contains('@')) {
+                    return appLocale.pleaseEnterValidEmailAddress;
+                  }
+                  return null;
+                },
+                labelText: appLocale.emailAddress,
+                icon: Icons.email,
+                keyboardType: TextInputType.emailAddress,
               ),
               14.height,
-              Text(
-                '• ${appLocale.weWillSendYouMessageToSetOrResetYourNewPassword}',
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.surface,
-                    fontSize: textTiny.sp),
+              CustomText(
+                text:
+                    '• ${appLocale.weWillSendYouMessageToSetOrResetYourNewPassword}',
+                fontSize: textmMedium.sp,
+                textAlign: TextAlign.start,
               ),
               40.height,
               Row(
@@ -79,45 +65,16 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 children: [
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 35.0.w),
-                    child: Text(
-                      appLocale.sendCode,
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.surface,
-                        fontSize: textMedium.sp,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: CustomText(
+                      text: appLocale.sendCode,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 35.0.w),
-                    child: Container(
-                      width: 50.0.w,
-                      height: 50.0.h,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: kbuttoncolorColor.withOpacity(0.8),
-                            spreadRadius: 5.r,
-                            blurRadius: 7.r,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: ElevatedButton(
-                        onPressed: () async {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          shadowColor: Colors.transparent,
-                          shape: CircleBorder(),
-                          padding: EdgeInsets.zero,
-                        ),
-                        child: Icon(
-                          Icons.arrow_forward,
-                          color: Theme.of(context).colorScheme.surface,
-                          size: 20.dm,
-                        ),
-                      ),
+                  CircleButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.arrow_forward,
+                      color: kWhiteColor,
                     ),
                   ),
                 ],

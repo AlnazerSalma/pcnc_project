@@ -1,5 +1,5 @@
 import 'package:pcnc/features/product/domain/entity/product.dart';
-import 'package:pcnc/features/product/domain/repository/favorite_repository.dart';
+import 'package:pcnc/features/favorite/domain/repository/favorite_repository.dart';
 
 class FavoriteRepositoryImpl implements FavoriteRepository {
   final List<Product> _favorites = [];

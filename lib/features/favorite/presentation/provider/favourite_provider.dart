@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pcnc/features/product/domain/entity/product.dart';
-import 'package:pcnc/features/product/domain/usecase/manage_favorites_usecase.dart';
+import 'package:pcnc/features/favorite/domain/usecases/manage_favorites_usecase.dart';
 
 class FavouriteProvider extends ChangeNotifier {
   final ManageFavoritesUseCase manageFavoritesUseCase;

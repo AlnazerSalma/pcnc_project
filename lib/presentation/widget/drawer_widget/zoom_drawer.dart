@@ -3,7 +3,7 @@ import 'package:pcnc/presentation/drawer/menu_screen.dart';
 import 'package:pcnc/presentation/drawer/selected_screen.dart';
 import 'package:pcnc/presentation/widget/drawer_widget/main_drawer.dart';
 import 'package:pcnc/presentation/provider/page_provider.dart';
-import 'package:pcnc/features/product/presentation/view/favourite_screen.dart';
+import 'package:pcnc/features/favorite/presentation/screen/favourite_screen.dart';
 import 'package:pcnc/features/home/screen/home_screen.dart';
 import 'package:pcnc/features/other_features/profile/presentation/screen/profile_screen.dart';
 import 'package:pcnc/features/other_features/settings/settings_screen.dart';

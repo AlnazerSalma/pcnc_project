@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pcnc/features/category/domain/manager/category_manager.dart';
+import 'package:pcnc/features/product/domain/manager/product_data_manager.dart';
 import 'package:pcnc/presentation/style/color_palette.dart';
-import 'package:pcnc/presentation/style/font_sizes.dart';
-import 'package:pcnc/data/service/locator.dart';
 import 'package:pcnc/features/category/domain/entity/category.dart';
-import 'package:pcnc/features/category/domain/usecases/get_categories_usecase.dart';
-import 'package:pcnc/features/product/presentation/widgets/search_widget.dart';
+import 'package:pcnc/presentation/widget/search_widget.dart';
 import 'package:pcnc/features/product/domain/entity/product.dart';
-import 'package:pcnc/features/product/domain/usecase/get_products_usecase.dart';
 import 'package:pcnc/features/product/presentation/widgets/card/product_card_widget.dart';
+import 'package:pcnc/presentation/widget/app_bar_widget/custom_app_bar.dart';
+import 'package:pcnc/presentation/widget/grid_view/custom_grid_view.dart';
+import 'package:pcnc/presentation/widget/text_widget/custom_text.dart';
+import 'package:provider/provider.dart';
 
 class CategoryProductsScreen extends StatefulWidget {
   final int categoryId;
@@ -22,23 +24,29 @@ class CategoryProductsScreen extends StatefulWidget {
 
 class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
   AppLocalizations get appLocale => AppLocalizations.of(context)!;
-  late Future<List<Product>> products;
+
   late Future<Category> category;
-  String searchQuery = '';
-  late final GetCategoriesUseCase _getCategoriesUseCase;
-  late final GetProductsUseCase _getProductsUseCase;
+  late String searchQuery;
+
   @override
   void initState() {
     super.initState();
-    _getProductsUseCase = locator<GetProductsUseCase>();
-    _getCategoriesUseCase = locator<GetCategoriesUseCase>();
-    products = _getProductsUseCase.execute(widget.categoryId);
+    searchQuery = '';
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final productDataManager =
+          Provider.of<ProductDataManager>(context, listen: false);
+      productDataManager.loadData(); // Fetch products initially
+
+    });
+    // Fetch category based on provided ID
     category = fetchCategory(widget.categoryId);
   }
 
   Future<Category> fetchCategory(int categoryId) async {
-    final categories = await _getCategoriesUseCase.execute();
-
+    final categoryDataManager =
+        Provider.of<CategoryDataManager>(context, listen: false);
+    final categories = await categoryDataManager.fetchData();
     return categories.firstWhere(
       (category) => category.id == categoryId,
       orElse: () =>
@@ -51,99 +59,63 @@ class _CategoryProductsScreenState extends State<CategoryProductsScreen> {
     ScreenUtil.init(context, designSize: Size(375, 790));
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: FutureBuilder<Category>(
-          future: category,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: SizedBox(
-                  width: 20.0,
-                  height: 20.0,
-                  child: CircularProgressIndicator(
-                    valueColor:
-                        AlwaysStoppedAnimation<Color>(kbuttoncolorColor),
-                  ),
-                ),
-              );
-            } else if (snapshot.hasError) {
-              return Text(
-                appLocale.error,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: textExtraLarge.sp,
-                  color: kbuttoncolorColor,
-                ),
-              );
-            } else {
-              final category = snapshot.data!;
-              return Text(
-                category.name,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: textExtraLarge.sp,
-                  color: kbuttoncolorColor,
-                ),
-              );
-            }
-          },
-        ),
+      appBar: CustomAppBar<Category>(
+        futureData: category,
+        dataToString: (category) => category.name,
         backgroundColor: Theme.of(context).colorScheme.background,
         foregroundColor: Theme.of(context).colorScheme.surface,
+        color: kbuttoncolorColor,
       ),
-      body: Column(
-        children: [
-          SearchWidget(
-            hintText: appLocale.searchProduct,
-            onChanged: (query) {
-              setState(() {
-                searchQuery = query;
-              });
-            },
-          ),
-          Expanded(
-            child: FutureBuilder<List<Product>>(
-              future: products,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(
-                      child: Text('${appLocale.error} ${snapshot.error}'));
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text(appLocale.noProductsAvailable));
-                } else {
-                  final productList = snapshot.data!;
-                  final filteredProducts = productList.where((product) {
-                    final title = product.title.toLowerCase();
-                    return title.contains(searchQuery.toLowerCase());
-                  }).toList();
+      body: Consumer<ProductDataManager>(
+        builder: (context, productDataManager, child) {
+          return Column(
+            children: [
+              SearchWidget(
+                hintText: appLocale.searchProduct,
+                onChanged: (query) {
+                  // Use a post-frame callback to update the search query
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    setState(() {
+                      searchQuery = query;
+                      productDataManager.updateSearchQuery(searchQuery);
+                    });
+                  });
+                },
+              ),
+              Expanded(
+                child: Builder(
+                  builder: (context) {
+                    if (productDataManager.isLoading) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (productDataManager.error != null) {
+                      return Center(
+                          child: CustomText(
+                              text:
+                                  '${appLocale.error} ${productDataManager.error}'));
+                    } else if (productDataManager.filteredData.isEmpty) {
+                      return Center(
+                          child:
+                              CustomText(text: appLocale.noProductsAvailable));
+                    } else {
+                      final filteredProducts = productDataManager.filteredData;
 
-                  if (filteredProducts.isEmpty) {
-                    return Center(
-                        child: Text(appLocale.noProductsMatchYourSearch));
-                  }
-
-                  return GridView.builder(
-                    padding: EdgeInsets.all(10.w),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 7.w,
-                      mainAxisSpacing: 7.h,
-                      childAspectRatio: 0.54,
-                    ),
-                    itemCount: filteredProducts.length,
-                    itemBuilder: (context, index) {
-                      final product = filteredProducts[index];
-                      return ProductCardWidget(product: product);
-                    },
-                  );
-                }
-              },
-            ),
-          ),
-        ],
+                      if (filteredProducts.isEmpty) {
+                        return Center(
+                            child: CustomText(
+                                text: appLocale.noProductsMatchYourSearch));
+                      }
+                      return CustomGridView<Product>(
+                        items: filteredProducts,
+                        itemBuilder: (context, product) =>
+                            ProductCardWidget(product: product),
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          );
+        },
       ),
       backgroundColor: Theme.of(context).colorScheme.background,
     );

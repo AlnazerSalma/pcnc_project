@@ -1,6 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pcnc/core/constant/strings.dart';
 import 'package:pcnc/core/enum/app_languages.dart';
+import 'package:pcnc/features/category/domain/manager/category_manager.dart';
+import 'package:pcnc/features/category/domain/usecases/get_categories_usecase.dart';
+import 'package:pcnc/features/product/domain/manager/product_data_manager.dart';
+import 'package:pcnc/features/product/domain/usecase/get_products_usecase.dart';
 import 'package:pcnc/presentation/provider/page_provider.dart';
 import 'package:pcnc/presentation/provider/theme_provider.dart';
 import 'package:pcnc/features/cart/domain/usecase/add_to_cart_usecase.dart';
@@ -10,8 +14,8 @@ import 'package:pcnc/core/enum/cache_keys.dart';
 import 'package:pcnc/presentation/widget/restart_app.dart';
 import 'package:pcnc/data/service/locator.dart';
 import 'package:pcnc/features/cart/presentation/provider/cart_provider.dart';
-import 'package:pcnc/features/product/domain/usecase/manage_favorites_usecase.dart';
-import 'package:pcnc/features/product/presentation/provider/favourite_provider.dart';
+import 'package:pcnc/features/favorite/domain/usecases/manage_favorites_usecase.dart';
+import 'package:pcnc/features/favorite/presentation/provider/favourite_provider.dart';
 import 'package:pcnc/presentation/provider/lang_provider.dart';
 import 'package:pcnc/features/other_features/splash/splash_screen.dart';
 import 'package:pcnc/presentation/style/theme/app_theme.dart';
@@ -95,6 +99,16 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                   getCartItemsUseCase: locator<GetCartItemsUseCase>(),
                   getTotalPriceUseCase: locator<GetTotalPriceUseCase>(),
                 ),
+              ),
+              ChangeNotifierProvider(
+                create: (context) =>
+                    ProductDataManager(locator<GetProductsUseCase>()),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => CategoryDataManager(fetchData: () async {
+                  final getCategoriesUseCase = locator<GetCategoriesUseCase>();
+                  return await getCategoriesUseCase.execute();
+                }),
               ),
             ],
             child: Consumer<ThemeProvider>(

@@ -1,13 +1,17 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pcnc/presentation/style/font_sizes.dart';
+import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:pcnc/data/service/locator.dart';
 import 'package:pcnc/features/product/domain/entity/product.dart';
+import 'package:pcnc/features/product/domain/manager/product_data_manager.dart';
 import 'package:pcnc/features/product/domain/usecase/get_products_usecase.dart';
-import 'package:pcnc/features/product/presentation/widgets/search_widget.dart';
+import 'package:pcnc/presentation/widget/search_widget.dart';
 import 'package:pcnc/features/product/presentation/widgets/card/product_card_widget.dart';
 import 'package:pcnc/generated/assets.dart';
+import 'package:pcnc/presentation/widget/grid_view/custom_grid_view.dart';
+import 'package:pcnc/presentation/widget/text_widget/custom_text.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -16,15 +20,16 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   AppLocalizations get appLocale => AppLocalizations.of(context)!;
-  late Future<List<Product>> products;
+  late ProductDataManager _productDataManager;
   String searchQuery = '';
-  late final GetProductsUseCase _getProductsUseCase;
+  late Future<List<Product>> productsFuture;
 
   @override
   void initState() {
     super.initState();
-    _getProductsUseCase = locator<GetProductsUseCase>();
-    products = _getProductsUseCase.getProducts();
+    final getProductsUseCase = locator<GetProductsUseCase>();
+    _productDataManager = ProductDataManager(getProductsUseCase);
+    productsFuture = _productDataManager.fetchData();
   }
 
   @override
@@ -44,13 +49,12 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           Expanded(
             child: FutureBuilder<List<Product>>(
-              future: products,
+              future: productsFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
-                  return Center(
-                      child: Text('${appLocale.error} ${snapshot.error}'));
+                  return Center(child: CustomText(text: '${appLocale.error} ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return Center(
                     child: Column(
@@ -61,14 +65,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           fit: BoxFit.fill,
                           height: 200.h,
                         ),
-                        SizedBox(height: 10.h),
-                        Text(
-                          appLocale.noProductFoundWithThisName,
-                          style: TextStyle(
-                            fontSize: textMedium.sp,
-                            color: Theme.of(context).colorScheme.surface,
-                          ),
-                        ),
+                        10.height,
+                        CustomText(text: appLocale.noProductFoundWithThisName),
                       ],
                     ),
                   );
@@ -83,7 +81,6 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     );
                   }
-
                   final filteredProducts = productList.where((product) {
                     final title = product.title.toLowerCase();
                     return title.contains(searchQuery.toLowerCase());
@@ -100,31 +97,15 @@ class _SearchScreenState extends State<SearchScreen> {
                             height: 200.h,
                           ),
                           SizedBox(height: 10.h),
-                          Text(
-                            appLocale.noProductFoundWithThisName,
-                            style: TextStyle(
-                              fontSize: textMedium.sp,
-                              color: Theme.of(context).colorScheme.surface,
-                            ),
-                          ),
+                          CustomText(text: appLocale.noProductFoundWithThisName),
                         ],
                       ),
                     );
                   }
 
-                  return GridView.builder(
-                    padding: EdgeInsets.all(10.w),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 7.w,
-                      mainAxisSpacing: 7.h,
-                      childAspectRatio: 0.54,
-                    ),
-                    itemCount: filteredProducts.length,
-                    itemBuilder: (context, index) {
-                      final product = filteredProducts[index];
-                      return ProductCardWidget(product: product);
-                    },
+                  return CustomGridView<Product>(
+                    items: filteredProducts,
+                    itemBuilder: (context, product) => ProductCardWidget(product: product),
                   );
                 }
               },
