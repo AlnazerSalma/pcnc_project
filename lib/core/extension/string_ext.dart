@@ -13,11 +13,18 @@ extension ExtString on String {
     return nameRegExp.hasMatch(this);
   }
 
-  bool get isValidPassword{
-    final passwordRegExp =
-    RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\><*~]).{8,}/pre>');
-    return passwordRegExp.hasMatch(this);
-  }
+  // bool get isValidPassword{
+  //   final passwordRegExp =
+  //   RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\><*~]).{8,}/pre>');
+  //   return passwordRegExp.hasMatch(this);
+  // }
+  bool get isValidPassword {
+  final passwordRegExp = RegExp(
+    r'^(?=.*?[!@#\><*~]).{6,}$'
+  );
+  return passwordRegExp.hasMatch(this);
+}
+
 
   bool get isValidPasswordHasSpecialCharacter{
     final passwordRegExp =

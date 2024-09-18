@@ -5,7 +5,7 @@ import 'package:pcnc/features/category/domain/manager/category_manager.dart';
 import 'package:pcnc/features/category/domain/usecases/get_categories_usecase.dart';
 import 'package:pcnc/features/product/domain/manager/product_data_manager.dart';
 import 'package:pcnc/features/product/domain/usecase/get_products_usecase.dart';
-import 'package:pcnc/presentation/provider/page_provider.dart';
+import 'package:pcnc/presentation/drawer/provider/page_provider.dart';
 import 'package:pcnc/presentation/provider/theme_provider.dart';
 import 'package:pcnc/features/cart/domain/usecase/add_to_cart_usecase.dart';
 import 'package:pcnc/presentation/bloc/state_observer_bloc.dart';

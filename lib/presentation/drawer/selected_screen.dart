@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/presentation/mixins/navigator_helper.dart';
-import 'package:pcnc/presentation/provider/page_provider.dart';
+import 'package:pcnc/presentation/drawer/provider/page_provider.dart';
 import 'package:pcnc/presentation/style/color_palette.dart';
 import 'package:pcnc/features/cart/presentation/screen/cart_screen.dart';
 import 'package:pcnc/features/favorite/presentation/screen/favourite_screen.dart';

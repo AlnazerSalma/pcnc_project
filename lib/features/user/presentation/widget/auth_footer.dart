@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

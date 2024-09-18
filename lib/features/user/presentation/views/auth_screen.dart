@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pcnc/core/application_manager/navigation_manager.dart';
+import 'package:pcnc/core/application_manager/token_manager.dart';
+import 'package:pcnc/core/application_manager/user_info_manager.dart';
+import 'package:pcnc/core/enum/cache_keys.dart';
 import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:pcnc/data/app_service/api_service.dart';
 import 'package:pcnc/features/user/presentation/widget/auth_actions.dart';
 import 'package:pcnc/features/user/presentation/widget/auth_footer.dart';
+import 'package:pcnc/features/user/presentation/widget/auth_form_fields.dart';
 import 'package:pcnc/features/user/presentation/widget/auth_header.dart';
-import 'package:pcnc/presentation/controller/cache_controller.dart';
-import 'package:pcnc/presentation/widget/drawer_widget/zoom_drawer.dart';
-import 'package:pcnc/core/enum/cache_keys.dart';
-import 'package:pcnc/features/user/data/repository/user_repository_impl.dart';
+import 'package:pcnc/presentation/drawer/screen/zoom_drawer.dart';
 import 'package:pcnc/features/user/presentation/views/forgot_pass_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/features/user/presentation/widget/custom_snackbar_widget.dart';
+import 'package:pcnc/features/user/data/repository/user_repository_impl.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -33,6 +35,20 @@ class _AuthScreenState extends State<AuthScreen> {
 
   bool hidden = true;
 
+  final TokenManager _tokenManager = TokenManager();
+  final UserInfoManager _userInfoManager = UserInfoManager();
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeManagers();
+  }
+
+  Future<void> _initializeManagers() async {
+    await _tokenManager.init();
+    await _userInfoManager.init();
+  }
+
   Future<void> _submit() async {
     if (_form.currentState!.validate()) {
       _form.currentState!.save();
@@ -50,10 +66,11 @@ class _AuthScreenState extends State<AuthScreen> {
             _enteredUsernameOrEmail,
             _enteredPassword,
           );
-          await CacheController().setter(key: CacheKeys.token, value: user.id);
+          await _tokenManager.setToken(user.id);
+          await _userInfoManager.setUserInfo(CacheKeys.username, _enteredUsernameOrEmail);
           _navigateToHome();
         } else {
-          final user = await apiRepository.registerUser(
+          await apiRepository.registerUser(
             _enteredUsernameOrEmail,
             _enteredEmail,
             _enteredPassword,

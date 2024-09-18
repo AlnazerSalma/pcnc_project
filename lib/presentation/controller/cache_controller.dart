@@ -36,6 +36,10 @@ class CacheController {
     await _shared.remove(CacheKeys.token.name);
   }
 
+   Future<void> remove({required CacheKeys key}) async {
+    await _shared.remove(key.name);
+  }
+
   bool get isLoggedIn {
     final token = getter(key: CacheKeys.token) as String?;
     return token != null && token.isNotEmpty;

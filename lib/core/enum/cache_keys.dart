@@ -1,5 +1,5 @@
 enum CacheKeys {
   theme,
   language,
-  token,
+  token, username, email,
 }
