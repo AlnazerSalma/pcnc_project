@@ -5,7 +5,7 @@ import 'package:pcnc/core/application_manager/token_manager.dart';
 import 'package:pcnc/core/application_manager/user_info_manager.dart';
 import 'package:pcnc/features/user/presentation/views/auth_screen.dart';
 import 'package:pcnc/generated/assets.dart';
-import 'package:pcnc/presentation/drawer/screen/zoom_drawer.dart';
+import 'package:pcnc/presentation/drawer/widget/zoom_drawer.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

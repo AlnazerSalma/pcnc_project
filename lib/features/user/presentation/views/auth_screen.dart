@@ -10,7 +10,7 @@ import 'package:pcnc/features/user/presentation/widget/auth_actions.dart';
 import 'package:pcnc/features/user/presentation/widget/auth_footer.dart';
 import 'package:pcnc/features/user/presentation/widget/auth_form_fields.dart';
 import 'package:pcnc/features/user/presentation/widget/auth_header.dart';
-import 'package:pcnc/presentation/drawer/screen/zoom_drawer.dart';
+import 'package:pcnc/presentation/drawer/widget/zoom_drawer.dart';
 import 'package:pcnc/features/user/presentation/views/forgot_pass_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pcnc/features/user/presentation/widget/custom_snackbar_widget.dart';

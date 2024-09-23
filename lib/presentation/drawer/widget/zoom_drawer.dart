@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pcnc/presentation/drawer/menu_screen.dart';
-import 'package:pcnc/presentation/drawer/selected_screen.dart';
-import 'package:pcnc/presentation/drawer/screen/main_drawer.dart';
+import 'package:pcnc/presentation/drawer/screen/menu_screen.dart';
+import 'package:pcnc/presentation/drawer/screen/selected_screen.dart';
+import 'package:pcnc/presentation/drawer/widget/main_drawer.dart';
 import 'package:pcnc/presentation/drawer/provider/page_provider.dart';
 import 'package:pcnc/features/favorite/presentation/screen/favourite_screen.dart';
 import 'package:pcnc/features/home/screen/home_screen.dart';

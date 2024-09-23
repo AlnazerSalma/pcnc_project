@@ -7,63 +7,48 @@ import 'package:pcnc/features/product/data/model/product_model.dart';
 import 'package:pcnc/features/user/data/model/user_model.dart';
 
 class ApiService {
+  final http.Client httpClient = http.Client();
+
   Future<List<CategoryModel>> getCategories() async {
     final response = await _makeRequest(ApiPath.categoriesUrl, HTTP_GET);
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      return (data as List)
-          .map((json) => CategoryModel.fromJson(json))
-          .toList();
-    } else {
-      throw Exception('Failed to load categories');
-    }
+    return _handleResponse<List<CategoryModel>>(
+      response,
+      (data) => (data as List).map((json) => CategoryModel.fromJson(json)).toList(),
+    );
   }
 
-  Future<List<ProductModel>> getProducts(
-      {int offset = 0, int limit = 10}) async {
-    final response = await _makeRequest(
-      '${ApiPath.productsUrl}?offset=$offset&limit=$limit',
-      HTTP_GET,
+  Future<List<ProductModel>> getProducts({int offset = 0, int limit = 10}) async {
+    final url = '${ApiPath.productsUrl}?offset=$offset&limit=$limit';
+    final response = await _makeRequest(url, HTTP_GET);
+    return _handleResponse<List<ProductModel>>(
+      response,
+      (data) => (data as List).map((json) => ProductModel.fromJson(json)).toList(),
     );
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      return (data as List).map((json) => ProductModel.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to load products');
-    }
   }
 
   Future<List<ProductModel>> getProductsByCategory(int categoryId) async {
-    final response = await _makeRequest(
-        '${ApiPath.categoriesUrl}/$categoryId/products', HTTP_GET);
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      return (data as List).map((json) => ProductModel.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to load products');
-    }
+    final url = '${ApiPath.categoriesUrl}/$categoryId/products';
+    final response = await _makeRequest(url, HTTP_GET);
+    return _handleResponse<List<ProductModel>>(
+      response,
+      (data) => (data as List).map((json) => ProductModel.fromJson(json)).toList(),
+    );
   }
 
   Future<UserModel> loginUser(String email, String password) async {
     final response = await _makeRequest(
       ApiPath.loginUrl,
-      HTTP_POST,
+     HTTP_POST,
       headers: jsonHeader,
       body: json.encode({
         'email': email,
         'password': password,
       }),
     );
-    if (response.statusCode == 201) {
-      final data = json.decode(response.body);
-      return UserModel.fromJson(data);
-    } else {
-      throw Exception('Failed to load products');
-    }
+    return _handleResponse<UserModel>(response, (data) => UserModel.fromJson(data));
   }
 
-  Future<UserModel> registerUser(
-      String name, String email, String password) async {
+  Future<UserModel> registerUser(String name, String email, String password) async {
     final response = await _makeRequest(
       ApiPath.registerUrl,
       HTTP_POST,
@@ -75,12 +60,7 @@ class ApiService {
         'avatar': 'https://imgur.com/LDOO4Qs',
       }),
     );
-    if (response.statusCode == 201) {
-      final data = json.decode(response.body);
-      return UserModel.fromJson(data);
-    } else {
-      throw Exception('Failed to register user');
-    }
+    return _handleResponse<UserModel>(response, (data) => UserModel.fromJson(data));
   }
 
   Future<http.Response> _makeRequest(
@@ -89,11 +69,22 @@ class ApiService {
     Map<String, String>? headers,
     String? body,
   }) async {
-    final request = http.Request(method, Uri.parse(url))
-      ..headers.addAll(headers ?? {})
-      ..body = body ?? '';
+    switch (method) {
+      case HTTP_GET:
+        return await httpClient.get(Uri.parse(url), headers: headers);
+      case HTTP_POST:
+        return await httpClient.post(Uri.parse(url), headers: headers, body: body);
+      default:
+        throw Exception('Unsupported HTTP method');
+    }
+  }
 
-    final response = await http.Response.fromStream(await request.send());
-    return response;
+  T _handleResponse<T>(http.Response response, T Function(dynamic) dataParser) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final data = json.decode(response.body);
+      return dataParser(data);
+    } else {
+      throw Exception('Failed to load data: ${response.body}');
+    }
   }
 }

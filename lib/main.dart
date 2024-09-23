@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:pcnc/core/constant/strings.dart';
 import 'package:pcnc/core/enum/e_app_languages.dart';
 import 'package:pcnc/features/category/domain/manager/category_manager.dart';
@@ -85,7 +86,8 @@ class _AppState extends State<App> with WidgetsBindingObserver {
       builder: (context, child) {
         return RestartApp(
           child: MultiProvider(
-            providers: [
+            providers:
+            [
               ChangeNotifierProvider(create: (_) => LanguageProvider()),
               ChangeNotifierProvider(create: (context) => PageProvider()),
               ChangeNotifierProvider(
@@ -113,7 +115,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
             ],
             child: Consumer<ThemeProvider>(
               builder: (context, themeProvider, child) {
-                return MaterialApp(
+                return GetMaterialApp(
                   title: appTitle,
                   debugShowCheckedModeBanner: false,
                   theme: themeProvider.themeDataStyle,
