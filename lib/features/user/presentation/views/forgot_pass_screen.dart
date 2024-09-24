@@ -2,7 +2,7 @@ import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pcnc/features/user/presentation/widget/form_field_widget.dart';
+import 'package:pcnc/presentation/widget/form_field/form_field_widget.dart';
 import 'package:pcnc/presentation/style/color_palette.dart';
 import 'package:pcnc/presentation/style/font_sizes.dart';
 import 'package:pcnc/presentation/widget/app_bar_widget/custom_app_bar.dart';

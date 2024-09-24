@@ -14,7 +14,7 @@ class ImageDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-    final navigationManager = NavigationManager(context);
+    final navigationManager = NavigationManager();
     return Dialog(
       insetPadding: EdgeInsets.all(0),
       backgroundColor: Colors.transparent,

@@ -10,7 +10,7 @@ abstract class BaseDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-    final navigationManager = NavigationManager(context);
+    final navigationManager = NavigationManager();
     return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),

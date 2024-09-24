@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:pcnc/presentation/mixins/navigator_helper.dart';
+import 'package:get/get.dart';
+import 'package:pcnc/core/application_manager/navigation_manager.dart';
 import 'package:pcnc/presentation/drawer/provider/page_provider.dart';
 import 'package:pcnc/presentation/style/color_palette.dart';
 import 'package:pcnc/features/cart/presentation/screen/cart_screen.dart';
@@ -14,7 +15,7 @@ import 'package:pcnc/features/other_features/profile/presentation/widget/user_av
 import 'package:pcnc/generated/assets.dart';
 import 'package:provider/provider.dart';
 
-class SelectedScreen extends StatefulWidget with NavigatorHelper {
+class SelectedScreen extends StatefulWidget {
   const SelectedScreen({
     super.key,
     required this.controller,
@@ -28,6 +29,7 @@ class SelectedScreen extends StatefulWidget with NavigatorHelper {
 }
 
 class _SelectedScreenState extends State<SelectedScreen> {
+  final NavigationManager navigationManager = NavigationManager();
   @override
   Widget build(BuildContext context) {
     final selectedIndex = context.watch<PageProvider>().selectedIndex;
@@ -77,7 +79,7 @@ class _SelectedScreenState extends State<SelectedScreen> {
             icon: UserAvatarWidget(),
             color: kWhiteColor,
             iconSize: 24.sp,
-            onPressed: () => widget.jumpTo(context, to: const ProfileScreen()),
+            onPressed: () => Get.to(() =>(ProfileScreen())),
           ),
         ],
       ),
@@ -88,7 +90,7 @@ class _SelectedScreenState extends State<SelectedScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        onPressed: () => widget.jumpTo(context, to: CartScreen()),
+        onPressed: () => navigationManager.navigateTo(CartScreen()),
         child: Icon(
           Icons.shopping_cart_outlined,
           color: Theme.of(context).colorScheme.surface,

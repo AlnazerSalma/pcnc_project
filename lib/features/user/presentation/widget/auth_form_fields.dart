@@ -1,8 +1,4 @@
-
-import 'package:flutter/material.dart';
-import 'package:pcnc/core/extension/sized_box_ext.dart';
-import 'package:pcnc/features/user/presentation/widget/form_field_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+part of '../views/auth_screen.dart';
 
 class AuthFormFields extends StatelessWidget {
   final bool isLogin;
@@ -41,11 +37,13 @@ class AuthFormFields extends StatelessWidget {
               labelText: appLocale.username,
               icon: Icons.person,
             ),
-           20.height,
+            20.height,
             CustomFormFieldWidget(
               onSaved: onEmailSaved,
               validator: (value) {
-                if (value == null || value.trim().isEmpty || !value.contains('@')) {
+                if (value == null ||
+                    value.trim().isEmpty ||
+                    !value.contains('@')) {
                   return appLocale.pleaseEnterValidEmailAddress;
                 }
                 return null;
@@ -54,7 +52,7 @@ class AuthFormFields extends StatelessWidget {
               icon: Icons.email,
               keyboardType: TextInputType.emailAddress,
             ),
-           20.height,
+            20.height,
           ],
           if (isLogin) ...[
             CustomFormFieldWidget(
@@ -69,7 +67,7 @@ class AuthFormFields extends StatelessWidget {
               icon: Icons.person,
               keyboardType: TextInputType.text,
             ),
-           20.height,
+            20.height,
           ],
           CustomFormFieldWidget(
             onSaved: onPasswordSaved,
@@ -84,7 +82,7 @@ class AuthFormFields extends StatelessWidget {
             isPasswordField: true,
           ),
           if (!isLogin) ...[
-           20.height,
+            20.height,
             CustomFormFieldWidget(
               onSaved: onReenteredPasswordSaved,
               validator: (value) {

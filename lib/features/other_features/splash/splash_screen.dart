@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen>{
   @override
   void initState() {
     super.initState();
-    _navigationManager = NavigationManager(context);
+    _navigationManager = NavigationManager();
     _initializeManagers();
   }
 
@@ -53,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen>{
   void _navigateToAuth() {
     if (!_navigated) {
       _navigated = true;
-      _navigationManager.replaceWith(const AuthScreen());
+      _navigationManager.replaceWith(AuthScreen());
     }
   }
 

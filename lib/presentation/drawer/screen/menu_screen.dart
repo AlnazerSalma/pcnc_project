@@ -109,7 +109,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           await CacheController().logout();
                           Navigator.of(context).pushAndRemoveUntil(
                             MaterialPageRoute(
-                                builder: (context) => const AuthScreen()),
+                                builder: (context) => AuthScreen()),
                             (Route<dynamic> route) => false,
                           );
                         },

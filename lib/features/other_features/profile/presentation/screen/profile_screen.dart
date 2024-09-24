@@ -1,7 +1,6 @@
 import 'package:pcnc/core/enum/e_app_languages.dart';
 import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:pcnc/core/extension/navigator_ext.dart';
-import 'package:pcnc/presentation/mixins/navigator_helper.dart';
 import 'package:pcnc/presentation/provider/theme_provider.dart';
 import 'package:pcnc/presentation/provider/lang_provider.dart';
 import 'package:pcnc/presentation/style/font_sizes.dart';
@@ -21,7 +20,7 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> with NavigatorHelper {
+class _ProfileScreenState extends State<ProfileScreen>{
   AppLocalizations get appLocale => AppLocalizations.of(context)!;
 
   @override

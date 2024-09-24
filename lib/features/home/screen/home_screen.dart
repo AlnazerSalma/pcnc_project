@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final navigationManager = NavigationManager(context);
+    final navigationManager = NavigationManager();
     ScreenUtil.init(context, designSize: Size(375, 790));
     if (_categoryDataManager.isLoading || _productDataManager.isLoading) {
       return Center(child: CircularProgressIndicator());

@@ -34,7 +34,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
       fetchData: () => widget.getCategoriesUseCase.execute(),
     );
     _categoryDataManager.loadData();
-    _navigationManager = NavigationManager(context);
+    _navigationManager = NavigationManager();
   }
 
   @override

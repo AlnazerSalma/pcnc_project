@@ -1,12 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:pcnc/core/extension/sized_box_ext.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:pcnc/features/user/presentation/widget/signin_signup_widget.dart';
-import 'package:pcnc/presentation/style/color_palette.dart';
-import 'package:pcnc/presentation/style/font_sizes.dart';
-import 'package:pcnc/presentation/widget/text_widget/rich_text_widget.dart';
-
+part of '../views/auth_screen.dart';
 class AuthFooter extends StatelessWidget {
   final bool isLogin;
   final VoidCallback onSubmit;
@@ -21,8 +13,6 @@ class AuthFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLocale = AppLocalizations.of(context)!;
-    ScreenUtil.init(context, designSize: const Size(375, 790));
-
     return Column(
       children: [
         if (!isLogin) ...[
@@ -31,7 +21,6 @@ class AuthFooter extends StatelessWidget {
             interactiveText: appLocale.register,
             secondPart: appLocale.agreeToPublicOffer,
             onInteractiveTextTap: () {
-              // Define the action for interactive text tap if needed
             },
           ),
         ],
