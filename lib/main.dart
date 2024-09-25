@@ -30,7 +30,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await CacheController().initSharedPreferences();
+   await Get.putAsync(() async => CacheController());
   Bloc.observer = StateObserverBloc();
   String? theme = CacheController().getter(key: CacheKeys.theme);
   ThemeData initialThemeMode = theme == 'dark' ? AppTheme.dark : AppTheme.light;
@@ -125,7 +125,7 @@ class _AppState extends State<App> with WidgetsBindingObserver {
                       .map((language) => Locale(language.name))
                       .toList(),
                   locale: Locale(Provider.of<LanguageProvider>(context).lang),
-                  home: const SplashScreen(),
+                  home:  SplashScreen(),
                 );
               },
             ),

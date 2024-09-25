@@ -41,7 +41,6 @@ class _SelectedScreenState extends State<SelectedScreen> {
     ];
 
     return Scaffold(
-      // resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.background,
         leading: IconButton(
@@ -79,7 +78,7 @@ class _SelectedScreenState extends State<SelectedScreen> {
             icon: UserAvatarWidget(),
             color: kWhiteColor,
             iconSize: 24.sp,
-            onPressed: () => Get.to(() =>(ProfileScreen())),
+            onPressed: () => Get.to(() => (ProfileScreen())),
           ),
         ],
       ),
@@ -90,7 +89,9 @@ class _SelectedScreenState extends State<SelectedScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        onPressed: () => navigationManager.navigateTo(CartScreen()),
+        onPressed: () {
+          Get.to(() => CartScreen());
+        },
         child: Icon(
           Icons.shopping_cart_outlined,
           color: Theme.of(context).colorScheme.surface,

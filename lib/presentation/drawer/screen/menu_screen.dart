@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:pcnc/core/enum/e_cache_keys.dart';
 import 'package:pcnc/presentation/controller/cache_controller.dart';
 import 'package:pcnc/presentation/drawer/provider/page_provider.dart';
 import 'package:pcnc/features/user/presentation/views/auth_screen.dart';
@@ -106,12 +108,8 @@ class _MenuScreenState extends State<MenuScreen> {
                           ),
                         ),
                         onTap: () async {
-                          await CacheController().logout();
-                          Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => AuthScreen()),
-                            (Route<dynamic> route) => false,
-                          );
+                          await CacheController().remove(key: CacheKeys.token);
+                          Get.offAll(() =>  AuthScreen());
                         },
                       ),
                     ],

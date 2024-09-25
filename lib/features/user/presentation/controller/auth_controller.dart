@@ -6,6 +6,7 @@ import 'package:pcnc/core/application_manager/user_info_manager.dart';
 import 'package:pcnc/core/enum/e_cache_keys.dart';
 import 'package:pcnc/data/app_service/api_service.dart';
 import 'package:pcnc/features/user/data/repository/user_repository_impl.dart';
+import 'package:pcnc/features/user/presentation/views/auth_screen.dart';
 import 'package:pcnc/presentation/drawer/widget/zoom_drawer.dart';
 
 class AuthController extends GetxController {
@@ -24,12 +25,6 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _initializeManagers();
-  }
-
-  Future<void> _initializeManagers() async {
-    await _tokenManager.init();
-    await _userInfoManager.init();
   }
 
   void toggleLoginMode() {
@@ -76,7 +71,11 @@ class AuthController extends GetxController {
       }
     }
   }
-
+Future<void> remove() async {
+    await _tokenManager.clearToken();
+    await _userInfoManager.clearUserInfo();
+    navigationManager.navigateAndRemoveUntil(AuthScreen());
+  }
   Future<void> _navigateToHome() async {
         navigationManager.navigateAndRemoveUntil(ZoomDrawerAnimation());
   }
