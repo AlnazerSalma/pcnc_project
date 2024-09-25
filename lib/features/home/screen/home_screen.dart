@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get/get.dart';
 import 'package:pcnc/core/application_manager/navigation_manager.dart';
 import 'package:pcnc/core/extension/sized_box_ext.dart';
 import 'package:pcnc/features/category/domain/manager/category_manager.dart';
@@ -82,8 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 ShowAllButtonWidget(
                   onPressed: () {
-                    navigationManager.navigateTo(
-                      AllCategoriesScreen(
+                     Get.to(() => AllCategoriesScreen(
                         getCategoriesUseCase: locator<GetCategoriesUseCase>(),
                       ),
                     );

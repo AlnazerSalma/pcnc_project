@@ -30,7 +30,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-   await Get.putAsync(() async => CacheController());
+   await CacheController().initSharedPreferences();
+  //  await Get.putAsync(() async => CacheController());
   Bloc.observer = StateObserverBloc();
   String? theme = CacheController().getter(key: CacheKeys.theme);
   ThemeData initialThemeMode = theme == 'dark' ? AppTheme.dark : AppTheme.light;
